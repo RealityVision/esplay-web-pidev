@@ -83,12 +83,12 @@ class Chat
         return $this;
     }
 
-    public function getDateMessage(): ?\DateTimeInterface
+    public function getDateMessage(): ?\DateTime
     {
         return $this->dateMessage;
     }
 
-    public function setDateMessage(\DateTimeInterface $dateMessage): self
+    public function setDateMessage(\DateTime $dateMessage): self
     {
         $this->dateMessage = $dateMessage;
 
