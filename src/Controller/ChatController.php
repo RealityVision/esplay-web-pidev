@@ -24,7 +24,7 @@ class ChatController extends AbstractController
             ->getRepository(Chat::class)
             ->findAll();
 
-        return $this->render('chat/index.html.twig', [
+        return $this->render('front/chat.html.twig', [
             'chats' => $chats,
         ]);
     }
@@ -39,6 +39,8 @@ class ChatController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $time = new \DateTime();
+            $chat->setDateMessage($time);
             $entityManager->persist($chat);
             $entityManager->flush();
 
