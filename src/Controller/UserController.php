@@ -24,7 +24,7 @@ class UserController extends AbstractController
             ->getRepository(User::class)
             ->findAll();
 
-        return $this->render('user/index.html.twig', [
+        return $this->render('admin/users.html.twig', [
             'users' => $users,
         ]);
     }
@@ -39,6 +39,8 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // $user->set
+
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -66,6 +68,7 @@ class UserController extends AbstractController
      */
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
+        $user->setPicture(null);
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
