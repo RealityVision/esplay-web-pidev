@@ -1,0 +1,39 @@
+{% extends 'admin/baseAdmin.html.twig' %}
+
+
+
+{% block title %}CategoryP index{% endblock %}
+
+{% block body %}
+    <h1>CategoryP index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for category_p in category_ps %}
+            <tr>
+                <td>{{ category_p.id }}</td>
+                <td>{{ category_p.name }}</td>
+                <td>{{ category_p.description }}</td>
+                <td>
+                    <a href="{{ path('app_category_p_show', {'id': category_p.id}) }}">show</a>
+                    <a href="{{ path('app_category_p_edit', {'id': category_p.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_category_p_new') }}">Create new</a>
+{% endblock %}
