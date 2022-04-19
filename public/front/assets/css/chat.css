@@ -26,6 +26,19 @@
     --chat-bubble-you: var(--colour-primary);
 }
 
+.fff {
+    color: gray;
+}
+
+.fff:hover {
+    color: red;
+}
+
+.gg {
+    margin-bottom: 15px;
+
+}
+
 .dark-mode {
     --bg-page: #1a1a1a;
     --bg-page-darker: #363636;

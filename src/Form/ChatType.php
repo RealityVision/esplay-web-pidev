@@ -14,11 +14,7 @@ class ChatType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('message')
-            ->add('picture')
-            ->add('username')
-            ->add('idUser', EntityType::class, ['class' => User::class, 'choice_label' => 'idUser'])
-            ->add('file');
+            ->add('message');
     }
 
     public function configureOptions(OptionsResolver $resolver): void
