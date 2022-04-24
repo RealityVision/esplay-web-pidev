@@ -114,15 +114,26 @@
 											<!--starttt convvvv-->
 											<div class="chat__content pt-4 px-3">
 												<ul class="chat__list-messages">
+													{% if app.request.get('bool') == true %}
+														<div class="alert alert-danger alert-dismissible fade show" role="alert">
+															<strong>Thanks for your report!
+															</strong><br>
+															Esplay admin will check this message
+															<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+													{% endif %}
 													{% for chat in chats %}
 														{% if (chat.idUser.idUser != 32) and (chat.message != null )    %}
 															<li>
 																<div class="chat__time">{{ chat.dateMessage ? chat.dateMessage|date('m-d H:i') : '' }}</div>
-																<div class="chat__bubble chat__bubble--you">
+																<div class="chat__bubble chat__bubble--you" id="idd">
 																	{{ chat.message }}
-																	<a href="#" class="fff" data-placement="top" title="report message" data-toggle="modal" data-target="#reportModal">
+																	<a href="#" class="fff" data-placement="top" title="report message" data-toggle="modal" data-id="{{chat.idMessage}}" data-target="#reportModal">
 																		<i class="fa fa-warning"></i>
 																	</a>
+
 																</div>
 
 															</li>
@@ -137,19 +148,20 @@
 															</li>
 														{% endif %}
 														<!--
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																												<li>
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																													<div class="chat__bubble chat__bubble--me">
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																														Hi! I just checked, your order went through and is on it's
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																											                                                            way home. Enjoy your new computer! 😃
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																													</div>
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																												</li>
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																														-->
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																														<li>
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																															<div class="chat__bubble chat__bubble--me">
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																Hi! I just checked, your order went through and is on it's
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																													                                                            way home. Enjoy your new computer! 😃
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																															</div>
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																														</li>
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																-->
 
 
 													{% endfor %}
 												</ul>
 											</div>
 											<!---modaaaaaaaaaaaaaaaaaaaaaaaalll deleetteee -->
+
 											<div class="modal fade" id="reportModal">
 												<div class="modal-dialog">
 													<div class="modal-content">
@@ -162,40 +174,47 @@
 														</div>
 														<div class="modal-body">
 
-															<div class="form-check gg">
-																<input type="checkbox" class="form-check-input" id="exampleCheck1">
-																<label class="form-check-label" for="exampleCheck1">Hate speech or symbols</label>
-															</div>
-															<div class="form-check gg ">
-																<input type="checkbox" class="form-check-input" id="exampleCheck1">
-																<label class="form-check-label" for="exampleCheck1">Violence or dangerous organizations</label>
-															</div>
-															<div class="form-check gg">
-																<input type="checkbox" class="form-check-input" id="exampleCheck1">
-																<label class="form-check-label" for="exampleCheck1">Sale of illegal or regulated goods</label>
-															</div>
-															<div class="form-check gg">
-																<input type="checkbox" class="form-check-input" id="exampleCheck1">
-																<label class="form-check-label" for="exampleCheck1">Bullying or harassment</label>
-															</div>
-															<div class="form-check gg">
-																<input type="checkbox" class="form-check-input" id="exampleCheck1">
-																<label class="form-check-label" for="exampleCheck1">Intellectual property violation</label>
-															</div>
-															<div class="form-check gg">
-																<input type="checkbox" class="form-check-input" id="exampleCheck1">
-																<label class="form-check-label" for="exampleCheck1">Suicide or self-injury</label>
-															</div>
-															<div class="form-check gg">
-																<input type="checkbox" class="form-check-input" id="exampleCheck1">
-																<label class="form-check-label" for="exampleCheck1">Spam</label>
-															</div>
+															<form method="post" action="{{path('reportcheckbox')}}">
+																<input type="number" name="id" class="IdMessage" hidden>
+																<div class="form-check gg">
+																	<input type="checkbox" class="form-check-input" id="exampleCheck1" name="1" value="Hate speech or symbols">
+																	<label class="form-check-label" for="exampleCheck1">Hate speech or symbols</label>
+																</div>
+																<div class="form-check gg ">
+																	<input type="checkbox" class="form-check-input" id="exampleCheck1" name="2" value="Violence or dangerous organizations">
+																	<label class="form-check-label" for="exampleCheck1">Violence or dangerous organizations</label>
+																</div>
+																<div class="form-check gg">
+																	<input type="checkbox" class="form-check-input" id="exampleCheck1" name="3" value="Sale of illegal or regulated goods">
+																	<label class="form-check-label" for="exampleCheck1">Sale of illegal or regulated goods</label>
+																</div>
+																<div class="form-check gg">
+																	<input type="checkbox" class="form-check-input" id="exampleCheck1" name="4" value="Bullying or harassment">
+																	<label class="form-check-label" for="exampleCheck1">Bullying or harassment</label>
+																</div>
+																<div class="form-check gg">
+																	<input type="checkbox" class="form-check-input" id="exampleCheck1" name="5" value="Intellectual property violation">
+																	<label class="form-check-label" for="exampleCheck1">Intellectual property violation</label>
+																</div>
+																<div class="form-check gg">
+																	<input type="checkbox" class="form-check-input" id="exampleCheck1" name="6" value="Suicide or self-injury">
+																	<label class="form-check-label" for="exampleCheck1">Suicide or self-injury</label>
+																</div>
+																<div class="form-check gg">
+																	<input type="checkbox" class="form-check-input" id="exampleCheck1" name="7" value="Spam">
+																	<label class="form-check-label" for="exampleCheck1">Spam</label>
+																</div>
 
 
-														</div>
-														<div class="modal-footer">
-															<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-															<button type="button" class="btn btn-danger btn-sm">Confirm</button>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+
+																<button class="btn btn-danger btn-sm" type="submit">
+																	Confirm
+																</button>
+
+															</form>
 														</div>
 													</div>
 												</div>
@@ -254,7 +273,7 @@
 										</div>
 										<div class="user-profile__description">
 											<p>Fly me to the moon 🌙 If you feel like your life is a routine, step back
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																								                                                and take a deep breath.</p>
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																												                                                and take a deep breath.</p>
 										</div>
 										<div class="user-profile__learning mt-4">
 											<span class="user-profile__label">Social Medias</span>
@@ -285,8 +304,6 @@
 							</div>
 						</div>
 					</div>
-
-
 					<div class="pagination-item">
 						<a href="#">
 							<span>1</span>
@@ -310,6 +327,18 @@
 	<script>
 		$(document).ready(function () {
 $('[data-toggle="tooltip"]').tooltip();
+});
+
+
+var myidMessage = 4;
+
+$('#idd a').click(function () {
+myidMessage = $(this).attr('data-id');
+
+});
+
+$('#reportModal').on('show.bs.modal', function (e) {
+$(this).find('.IdMessage').val(myidMessage);
 });
 	</script>
 {% endblock %}

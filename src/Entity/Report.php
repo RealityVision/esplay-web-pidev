@@ -38,15 +38,7 @@ class Report
      */
     private $idMessage;
 
-    /**
-     * @var \User
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_user", referencedColumnName="id_user")
-     * })
-     */
-    private $idUser;
+
 
     /**
      * @var \User
@@ -57,4 +49,47 @@ class Report
      * }) 
      */
     private $idSender;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getReason(): ?string
+    {
+        return $this->reason;
+    }
+
+    public function setReason(string $reason): self
+    {
+        $this->reason = $reason;
+
+        return $this;
+    }
+
+    public function getIdMessage(): ?Chat
+    {
+        return $this->idMessage;
+    }
+
+    public function setIdMessage(?Chat $idMessage): self
+    {
+        $this->idMessage = $idMessage;
+
+        return $this;
+    }
+
+
+
+    public function getIdSender(): ?User
+    {
+        return $this->idSender;
+    }
+
+    public function setIdSender(?User $idSender): self
+    {
+        $this->idSender = $idSender;
+
+        return $this;
+    }
 }
