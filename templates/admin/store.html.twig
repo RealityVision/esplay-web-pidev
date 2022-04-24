@@ -7,91 +7,44 @@
 
 		<div class="row" style="margin-top: 30px;">
 			<div class="col-11">
-				<a href="#" class="btn btn-success btn-xs pull-right" data-toggle="modal" data-target="#AddModal">Add new product</a>
+				<a href="{{ path('app_produit2_new') }}" class="btn btn-success btn-xs pull-right" data-toggle="modal" data-target="#AddModal">Add new product</a>
 			</div>
 		</div>
 		<div
 			class="row">
 			<!-- **********************data table start cardssssssssss-->
-			<div class="col-lg-4 col-md-6 mt-5">
-				<div class="card card-bordered">
-					<img class="card-img-top img-fluid" src="{{asset('/admin/assets/images/media/tetr.jpg')}}" alt="image">
-					<div class="card-body">
-						<h5 class="title">Tetris</h5>
-						<p class="card-text">Tetris is a puzzle game in which geometric shapes called
-														                                    "tetrominoes" fall down onto a playing field, and the player has to arrange them to
-														                                    form gapless lines.</p>
-						<a href="#" class="btn btn-outline-warning btn-xs" data-toggle="modal" data-target="#editModal">Update</a>
-						<a href="#" class="btn btn-outline-danger btn-xs" data-toggle="modal" data-target="#deleteModal">Delete</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 mt-5">
-				<div class="card card-bordered">
-					<img class="card-img-top img-fluid" src="{{asset('/admin/assets/images/media/tetr.jpg')}}" alt="image">
-					<div class="card-body">
-						<h5 class="title">Tetris</h5>
-						<p class="card-text">Tetris is a puzzle game in which geometric shapes called
-														                                    "tetrominoes" fall down onto a playing field, and the player has to arrange them to
-														                                    form gapless lines.</p>
-						<a href="#" class="btn btn-outline-warning btn-xs" data-toggle="modal" data-target="#editModal">Update</a>
-						<a href="#" class="btn btn-outline-danger btn-xs" data-toggle="modal" data-target="#deleteModal">Delete</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 mt-5">
-				<div class="card card-bordered">
-					<img class="card-img-top img-fluid" src="{{asset('/admin/assets/images/media/tetr.jpg')}}" alt="image">
-					<div class="card-body">
-						<h5 class="title">Tetris</h5>
-						<p class="card-text">Tetris is a puzzle game in which geometric shapes called
-														                                    "tetrominoes" fall down onto a playing field, and the player has to arrange them to
-														                                    form gapless lines.</p>
-						<a href="#" class="btn btn-outline-warning btn-xs" data-toggle="modal" data-target="#editModal">Update</a>
-						<a href="#" class="btn btn-outline-danger btn-xs" data-toggle="modal" data-target="#deleteModal">Delete</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 mt-5">
-				<div class="card card-bordered">
-					<img class="card-img-top img-fluid" src="{{asset('/admin/assets/images/media/tetr.jpg')}}" alt="image">
-					<div class="card-body">
-						<h5 class="title">Tetris</h5>
-						<p class="card-text">Tetris is a puzzle game in which geometric shapes called
-														                                    "tetrominoes" fall down onto a playing field, and the player has to arrange them to
-														                                    form gapless lines.</p>
-						<a href="#" class="btn btn-outline-warning btn-xs" data-toggle="modal" data-target="#editModal">Update</a>
-						<a href="#" class="btn btn-outline-danger btn-xs" data-toggle="modal" data-target="#deleteModal">Delete</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 mt-5">
-				<div class="card card-bordered">
-					<img class="card-img-top img-fluid" src="{{asset('/admin/assets/images/media/tetr.jpg')}}" alt="image">
-					<div class="card-body">
-						<h5 class="title">Tetris</h5>
-						<p class="card-text">Tetris is a puzzle game in which geometric shapes called
-														                                    "tetrominoes" fall down onto a playing field, and the player has to arrange them to
-														                                    form gapless lines.</p>
-						<a href="#" class="btn btn-outline-warning btn-xs" data-toggle="modal" data-target="#editModal">Update</a>
-						<a href="#" class="btn btn-outline-danger btn-xs" data-toggle="modal" data-target="#deleteModal">Delete</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 mt-5">
-				<div class="card card-bordered">
-					<img class="card-img-top img-fluid" src="{{asset('/admin/assets/images/media/tetr.jpg')}}" alt="image">
-					<div class="card-body">
-						<h5 class="title">Tetris</h5>
-						<p class="card-text">Tetris is a puzzle game in which geometric shapes called
-														                                    "tetrominoes" fall down onto a playing field, and the player has to arrange them to
-														                                    form gapless lines.</p>
-						<a href="#" class="btn btn-outline-warning btn-xs" data-toggle="modal" data-target="#editModal">Update</a>
-						<a href="#" class="btn btn-outline-danger btn-xs" data-toggle="modal" data-target="#deleteModal">Delete</a>
-					</div>
-				</div>
-			</div>
+			<div class="row">
 
+							{% for produit2 in produit2s %}
+				<div class="col-4 mt-4">
+								<div class="card card-bordered">
+									<img class="card-img-top img-fluid" src="{{asset('/admin/assets/images/media/tetr.jpg')}}" alt="image">
+									<div class="card-body">
+										<h5>
+											{{ produit2.nom }} </h5>
+											<h3>
+											{{ produit2.prix }} dt
+
+										</h3>
+										<p class="card-text">{{ produit2.description }}.</p>
+
+										<a href="{{ path('app_produit2_edit', {'idp2': produit2.idp2}) }}"class="btn btn-outline-warning btn-xs">edit</a>
+										<a href="#" class="btn btn-outline-danger btn-xs" data-toggle="modal" data-target="#deleteModal">Delete</a>
+
+
+										<a href="{{ path('cart_add', {'idp2': produit2.idp2}) }}" class="btn btn-success float-right">
+											<i class="fas fa-shopping-cart mr-1"></i>
+											Card
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+				{% endfor %}
+			</div>
 
 			<!---modaaaaaaaaaaaaaaaaaaaaaaaalll deleetteee -->
 			<div class="modal fade" id="deleteModal">

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Chat;
+use App\Entity\User;
 use App\Form\ChatType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,16 +17,42 @@ use Symfony\Component\Routing\Annotation\Route;
 class ChatController extends AbstractController
 {
     /**
-     * @Route("/", name="app_chat_index", methods={"GET"})
+     * @Route("/", name="app_chat_index", methods={"GET", "POST"})
      */
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $chat = new Chat();
+        $user = new User();
+        $form = $this->createForm(ChatType::class, $chat);
+        $form->handleRequest($request);
         $chats = $entityManager
             ->getRepository(Chat::class)
             ->findAll();
 
+        $user = $entityManager
+            ->getRepository(User::class)
+            ->find(32);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $time = new \DateTime();
+            $chat->setDateMessage($time);
+            $chat->setIdUser($user);
+            $chat->setUsername("khaled");
+            $entityManager->persist($chat);
+            $entityManager->flush();
+
+            $chats = $entityManager
+                ->getRepository(Chat::class)
+                ->findAll();
+        }
+
+
         return $this->render('front/chat.html.twig', [
             'chats' => $chats,
+            'form' => $form->createView(),
+            'bool' => false,
+
         ]);
     }
 

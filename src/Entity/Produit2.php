@@ -3,12 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Produit2
  *
- * @ORM\Table(name="produit2")
- * @ORM\Entity
+ * @ORM\Table(name="produit2", indexes={@ORM\Index(name="IDX_BFF6AE8A58E019E5", columns={"category_p_id"})})
+ * @ORM\Entity(repositoryClass="App\Repository\Produit2Repository")
  */
 class Produit2
 {
@@ -23,14 +24,19 @@ class Produit2
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message="non vide")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 100,
+     *      minMessage = "doit etre >=3 ",
+     *      maxMessage = "doit etre <=100" )
      * @ORM\Column(name="nom", type="string", length=250, nullable=false)
      */
     private $nom;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message="auteur   :doit etre non vide")
      * @ORM\Column(name="description", type="text", length=65535, nullable=false)
      */
     private $description;
@@ -69,6 +75,23 @@ class Produit2
      * @ORM\Column(name="stock_produit", type="integer", nullable=false)
      */
     private $stockProduit;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="produit2", type="string", length=255, nullable=false)
+     */
+    private $produit2;
+
+    /**
+     * @var \CategoryP
+     *
+     * @ORM\ManyToOne(targetEntity="CategoryP")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="category_p_id", referencedColumnName="id")
+     * })
+     */
+    private $categoryP;
 
     public function getIdp2(): ?int
     {
@@ -155,6 +178,30 @@ class Produit2
     public function setStockProduit(int $stockProduit): self
     {
         $this->stockProduit = $stockProduit;
+
+        return $this;
+    }
+
+    public function getProduit2(): ?string
+    {
+        return $this->produit2;
+    }
+
+    public function setProduit2(string $produit2): self
+    {
+        $this->produit2 = $produit2;
+
+        return $this;
+    }
+
+    public function getCategoryP(): ?CategoryP
+    {
+        return $this->categoryP;
+    }
+
+    public function setCategoryP(?CategoryP $categoryP): self
+    {
+        $this->categoryP = $categoryP;
 
         return $this;
     }

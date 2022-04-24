@@ -2,25 +2,27 @@
 
 namespace App\Form;
 
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use App\Entity\Chat;
-use App\Entity\User;
+use App\Entity\Report;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ChatType extends AbstractType
+class ReportType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('message');
+            ->add('reason')
+            ->add('idMessage')
+            ->add('idUser')
+            ->add('idSender')
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Chat::class,
+            'data_class' => Report::class,
         ]);
     }
 }
