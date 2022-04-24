@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpClient\HttpClient;
 
 /**
  * @Route("/user")
@@ -20,11 +21,75 @@ class UserController extends AbstractController
      */
     public function index(EntityManagerInterface $entityManager): Response
     {
+
+
+
+
         $users = $entityManager
             ->getRepository(User::class)
             ->findAll();
 
         return $this->render('admin/users.html.twig', [
+            'users' => $users,
+        ]);
+    }
+
+        /**
+     * @Route("/front", name="app_index", methods={"GET"})
+     */
+    public function indexfront(EntityManagerInterface $entityManager): Response
+    {
+
+        return $this->render('front/index.html.twig', [
+        ]);
+    }
+    /**
+     * @Route("/test", name="api", methods={"GET"})
+     */
+    public function indextest(EntityManagerInterface $entityManager): Response
+    {
+
+        //getSalt
+        $client = HttpClient::create();
+        $response = $client->request('GET', 'http://localhost:8080/getsalt');
+        $salt = $response->getContent();
+        var_dump($salt);
+
+        // Create a POST request psw crypté 
+        $response2 = $client->request('POST', 'http://localhost:8080/password', [
+            'headers' => [
+                'Content-Type' => 'application/json',
+            ],
+            'json' => 
+                [
+                'salt' => $salt,
+                'password' => 'azerty'
+        ],
+        ]);
+            
+        $crypted = $response2->getContent();
+        var_dump( $crypted);
+        // Create a POST request verifiépsw 
+        $response3 = $client->request('POST', 'http://localhost:8080/verify', [
+            'headers' => [
+                'Content-Type' => 'application/json',
+            ],
+            'json' => 
+                [
+                'salt' => 'nrykKc0qEVEMFrrAisrf'  ,
+                'securedPassword' => 'uv7WAARXAJkjm1vWXdcgdHGE',
+                'providedPassword' => 'azerty',
+        ],
+        ]);
+            
+        $verified = $response3->getContent();
+        var_dump( $verified);
+        
+        $users = $entityManager
+            ->getRepository(User::class)
+            ->findAll();
+
+        return $this->render('user/index.html.twig', [
             'users' => $users,
         ]);
     }
@@ -39,7 +104,8 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // $user->set
+             $user->setSalt("aaaaaaaaaaaa");
+             $user->setRole("Player");
 
             $entityManager->persist($user);
             $entityManager->flush();
