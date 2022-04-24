@@ -50,7 +50,9 @@ class ChatController extends AbstractController
 
         return $this->render('front/chat.html.twig', [
             'chats' => $chats,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'bool' => false,
+
         ]);
     }
 
