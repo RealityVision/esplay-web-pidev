@@ -16,9 +16,8 @@
 			{% endblock %}
 		</title>
 		{# Run `composer require symfony/webpack-encore-bundle`
-																																								           and uncomment the following Encore helpers to start using Symfony UX #}
+																																										           and uncomment the following Encore helpers to start using Symfony UX #}
 		{% block stylesheets %}
-
 			<!-- Css Styles -->
 			<link rel="stylesheet" href="{{asset('front/assets/css/chat.css')}}" type="text/css">
 			<link rel="stylesheet" href="{{asset('front/assets/css/bootstrap.min.css')}}" type="text/css">
@@ -32,9 +31,7 @@
 		{% endblock %}
 
 		{% block javascripts %}
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+			{#{{ encore_entry_script_tags('app') }}#}
 		{% endblock %}
 	</head>
 	<body>
@@ -189,7 +186,11 @@
 										Apr 08, 2022</li>
 									<li class="signup-switch signup-open">
 										<i class="fa fa-sign-out"></i>
-										Login / Sign up
+										Sign up
+									</li>
+									<li class="login-switch signup-open">
+										<i class="fa fa-sign-out"></i>
+										Login
 									</li>
 								</ul>
 							</div>
@@ -507,7 +508,7 @@
 										document.write(new Date().getFullYear());
 									</script>
 									All rights reserved | This
-																																																																								                                template is made with
+																																																																																	                                template is made with
 									<i class="fa fa-heart" aria-hidden="true"></i>
 									by
 									<a href="https://colorlib.com" target="_blank">Reality Vision</a>
@@ -562,7 +563,29 @@
 			</div>
 		</div>
 		<!-- Sign Up Section End -->
-
+		<!-- login Section Begin -->
+		<div class="login-section">
+			<div class="login-close">
+				<i class="fa fa-close"></i>
+			</div>
+			<div class="signup-text">
+				<div class="container">
+					<div class="signup-title">
+						<h2>Login</h2>
+						<p>Fill out the form below to recieve a free and confidential</p>
+					</div>
+					<form action="#" class="signup-form">
+						<div class="sf-input-list">
+							<input type="text" class="input-value" placeholder="User Name*">
+							<input type="text" class="input-value" placeholder="Password">
+						</div>
+						<button type="submit">
+							<span>LOGIN</span>
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
 		<!-- Search model Begin -->
 		<div class="search-model">
 			<div class="h-100 d-flex align-items-center justify-content-center">
@@ -582,7 +605,5 @@
 		<script src="{{asset('front/assets/js/jquery.slicknav.js')}}"></script>
 		<script src="{{asset('front/assets/js/owl.carousel.min.js')}}"></script>
 		<script src="{{asset('front/assets/js/main.js')}}"></script>
-		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
-
 	</body>
 </html>
