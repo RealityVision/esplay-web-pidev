@@ -14,20 +14,18 @@
             </tr>
         </thead>
         <tbody>
-        {% for report in reports %}
+
             <tr>
-                <td>{{ report.id }}</td>
-                <td>{{ report.reason }}</td>
+           =
                 <td>
-                    <a href="{{ path('app_report_show', {'id': report.id}) }}">show</a>
-                    <a href="{{ path('app_report_edit', {'id': report.id}) }}">edit</a>
+
                 </td>
             </tr>
-        {% else %}
+
             <tr>
                 <td colspan="3">no records found</td>
             </tr>
-        {% endfor %}
+
         </tbody>
     </table>
 

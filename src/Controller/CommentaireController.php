@@ -6,15 +6,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class StatController extends AbstractController
+class CommentaireController extends AbstractController
 {
     /**
-     * @Route("/stat", name="app_stat")
+     * @Route("/new", name="app_commentaire")
      */
     public function index(): Response
     {
-        return $this->render('admin/indexOne.html.twig', [
-            'controller_name' => 'StatController',
+        return $this->render('commentaire/indexOne.html.twig', [
+            'controller_name' => 'CommentaireController',
         ]);
     }
 }

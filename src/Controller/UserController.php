@@ -40,7 +40,7 @@ class UserController extends AbstractController
     public function indexfront(EntityManagerInterface $entityManager): Response
     {
 
-        return $this->render('front/index.html.twig', [
+        return $this->render('front/indexOne.html.twig', [
         ]);
     }
     /**
@@ -89,7 +89,7 @@ class UserController extends AbstractController
             ->getRepository(User::class)
             ->findAll();
 
-        return $this->render('user/index.html.twig', [
+        return $this->render('user/indexOne.html.twig', [
             'users' => $users,
         ]);
     }

@@ -1,4 +1,7 @@
 {
+    "blackknight467/star-rating-bundle": {
+        "version": "v2.0.1"
+    },
     "doctrine/annotations": {
         "version": "1.13",
         "recipe": {
@@ -96,6 +99,9 @@
     },
     "nikic/php-parser": {
         "version": "v4.13.2"
+    },
+    "nomaya/social-bundle": {
+        "version": "1.0-dev"
     },
     "phar-io/manifest": {
         "version": "2.0.3"
@@ -409,9 +415,6 @@
             "./tests/bootstrap.php"
         ]
     },
-    "symfony/polyfill-intl-grapheme": {
-        "version": "v1.25.0"
-    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.25.0"
     },
@@ -495,8 +498,8 @@
     "symfony/stopwatch": {
         "version": "v4.4.38"
     },
-    "symfony/string": {
-        "version": "v5.4.3"
+    "symfony/templating": {
+        "version": "v4.4.37"
     },
     "symfony/translation": {
         "version": "4.4",

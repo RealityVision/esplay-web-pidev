@@ -25,7 +25,7 @@ class GameController extends AbstractController
             ->getRepository(Game::class)
             ->findAll();
 
-        return $this->render('game/index.html.twig', [
+        return $this->render('game/indexOne.html.twig', [
             'games' => $games,
         ]);
     }

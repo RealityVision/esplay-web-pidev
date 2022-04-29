@@ -39,7 +39,9 @@
 			<link rel="stylesheet" href="{{asset('admin/assets/css/styles.css')}}"/>
 			<link
 			rel="stylesheet" href="{{asset('admin/assets/css/responsive.css')}}"/>
-		<!-- modernizr css -->
+			<link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}" />
+
+			<!-- modernizr css -->
 		{% endblock %}
 
 		{% block javascripts %}
@@ -105,6 +107,15 @@
 									<a href="orders.html" aria-expanded="true">
 										<i class="fa fa-credit-card"></i>
 										<span>Orders</span>
+									</a>
+
+								</li>
+
+								<li>
+									<!-- RECOMENDED GAMES -->
+									<a href="{{ path('app_recomendedg_index') }}" aria-expanded="true">
+										<i class="fa fa-credit-card"></i>
+										<span>Recomended Games</span>
 									</a>
 
 								</li>
@@ -628,6 +639,8 @@ ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3eda
 		<!-- others plugins -->
 		<script src="{{asset('admin/assets/js/plugins.js')}}"></script>
 		<script src="{{asset('admin/assets/js/scripts.js')}}"></script>
+		<script src="{{ asset('bundles/starrating/js/rating.js') }}"></script>
+
 
 	</body>
 </html>

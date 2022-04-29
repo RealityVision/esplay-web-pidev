@@ -26,7 +26,7 @@ class CartController extends AbstractController
             ];
         }
             dd($panierWithData);
-        return $this->render('cart/index.html.twig', []);
+        return $this->render('cart/indexOne.html.twig', []);
     }
 
 
