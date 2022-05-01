@@ -1,0 +1,47 @@
+{% extends 'admin/baseAdmin.html.twig' %}
+
+{% block title %}Game index{% endblock %}
+
+{% block body %}
+    <h1>Game index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdGame</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Size</th>
+                <th>DateG</th>
+                <th>ImageG</th>
+                <th>Rate</th>
+                <th>RateNbr</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for game in games %}
+            <tr>
+                <td>{{ game.idGame }}</td>
+                <td>{{ game.title }}</td>
+                <td>{{ game.description }}</td>
+                <td>{{ game.size }}</td>
+                <td>{{ game.dateG ? game.dateG|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ game.imageG }}</td>
+                <td>{{ game.rate }}</td>
+                <td>{{ game.rateNbr }}</td>
+                <td>
+                    <a href="{{ path('app_game_show', {'idGame': game.idGame}) }}">show</a>
+                    <a href="{{ path('app_game_edit', {'idGame': game.idGame}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_game_new') }}">Create new</a>
+{% endblock %}

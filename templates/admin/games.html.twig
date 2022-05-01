@@ -1,0 +1,194 @@
+{% extends 'admin/baseAdmin.html.twig' %}
+
+
+
+{% block body %}
+	<!-- page title area end -->
+	<div class="main-content-inner">
+
+		<div class="row" style="margin-top: 30px;">
+			<div class="col-11">
+				<a href="{{ path('app_game_new') }}" class="btn btn-success btn-xs pull-right"  data-target="#AddModal">Add new game
+				</a>
+			</div>
+		</div>
+		<div class="row">
+			<!-- **********************data table start cardssssssssss-->
+			{% for game in games %}
+			<div class="col-lg-4 col-md-6 mt-5">
+				<div class="card card-bordered">
+														<!-- //'. game.imageG.trim("C:\wamp64\www"))'-->
+					<img class="card-img-top img-fluid" src={{ vich_uploader_asset(game,'imageFile') }} alt="image">
+					<div class="card-body">
+						<h5 class="title">{{ game.title }}</h5>
+						<p class="card-text">{{ game.description }}</p>
+						<a href="{{ path('app_game_edit', {'idGame': game.idGame}) }}" class="btn btn-outline-warning btn-xs">Manage</a>
+					</div>
+				</div>
+			</div>
+			{% else %}
+				<tr>
+					<td colspan="9">no records found</td>
+				</tr>
+			{% endfor %}
+
+
+			<!--modaaaaaaaaaaaaaaaaaaaaaale edittt -->
+
+			<div class="modal fade" id="editModal">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Edit game</h5>
+							<button type="button" class="close" data-dismiss="modal">
+								<span>&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="form-row align-items-center">
+								<div class="col-sm-2 my-1"></div>
+								<div class="col-sm-2 my-1">
+
+									<label for="example-text-input" class="col-form-label">Title</label>
+								</div>
+								<div class="col-sm-6 my-1">
+									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
+								</div>
+							</div>
+							<div class="form-row align-items-center">
+								<div class="col-sm-2 my-1"></div>
+								<div class="col-sm-2 my-1">
+
+									<label for="example-text-input" class="col-form-label">Description</label>
+								</div>
+								<div class="col-sm-6 my-1">
+									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
+								</div>
+							</div>
+							<div class="form-row align-items-center">
+								<div class="col-sm-2 my-1"></div>
+								<div class="col-sm-2 my-1">
+
+									<label for="example-text-input" class="col-form-label">Size</label>
+								</div>
+								<div class="col-sm-6 my-1">
+									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
+								</div>
+							</div>
+							<div class="form-row align-items-center">
+								<div class="col-sm-2 my-1"></div>
+								<div class="col-sm-2 my-1">
+
+									<label for="example-text-input" class="col-form-label">Image</label>
+								</div>
+								<div class="col-sm-6 my-1">
+									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
+								</div>
+							</div>
+							<div class="form-row align-items-center">
+								<div class="col-sm-2 my-1"></div>
+
+								<div class="col-sm-2 my-1">
+									<label class="col-form-label">Category</label>
+								</div>
+								<div class="col-sm-6 my-1">
+									<select class="custom-select">
+										<option selected="selected" >Select</option>
+										<option value="admin">Arcade</option>
+
+									</select>
+								</div>
+
+							</div>
+						</div>
+
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary btn-xs" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-success btn-xs">Save changes</button>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<!--modaaaaaaaaaaaaaaaaaaaaale add -->
+			<div class="modal fade" id="AddModal">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">New Game</h5>
+							<button type="button" class="close" data-dismiss="modal">
+								<span>&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="form-row align-items-center">
+								<div class="col-sm-2 my-1"></div>
+								<div class="col-sm-2 my-1">
+
+									<label for="example-text-input" class="col-form-label">Title</label>
+								</div>
+								<div class="col-sm-6 my-1">
+									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
+								</div>
+							</div>
+							<div class="form-row align-items-center">
+								<div class="col-sm-2 my-1"></div>
+								<div class="col-sm-2 my-1">
+
+									<label for="example-text-input" class="col-form-label">Description</label>
+								</div>
+								<div class="col-sm-6 my-1">
+									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
+								</div>
+							</div>
+							<div class="form-row align-items-center">
+								<div class="col-sm-2 my-1"></div>
+								<div class="col-sm-2 my-1">
+
+									<label for="example-text-input" class="col-form-label">Size</label>
+								</div>
+								<div class="col-sm-6 my-1">
+									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
+								</div>
+							</div>
+							<div class="form-row align-items-center">
+								<div class="col-sm-2 my-1"></div>
+								<div class="col-sm-2 my-1">
+
+									<label for="example-text-input" class="col-form-label">Image</label>
+								</div>
+								<div class="col-sm-6 my-1">
+									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
+								</div>
+							</div>
+							<div class="form-row align-items-center">
+								<div class="col-sm-2 my-1"></div>
+
+								<div class="col-sm-2 my-1">
+									<label class="col-form-label">Category</label>
+								</div>
+								<div class="col-sm-6 my-1">
+									<select class="custom-select">
+										<option selected="selected" >Select</option>
+										<option value="admin">Arcade</option>
+
+									</select>
+								</div>
+
+							</div>
+						</div>
+
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary btn-xs" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-success btn-xs">Save changes</button>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+{% endblock %}
