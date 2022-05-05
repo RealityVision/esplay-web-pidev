@@ -136,3 +136,6 @@ fabric.properties
 .idea/codestream.xml
 
 # End of https://www.toptal.com/developers/gitignore/api/phpstorm
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###

@@ -3,13 +3,18 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Produit2
  *
  * @ORM\Table(name="produit2", indexes={@ORM\Index(name="IDX_BFF6AE8A58E019E5", columns={"category_p_id"})})
  * @ORM\Entity(repositoryClass="App\Repository\Produit2Repository")
+ * @Vich\Uploadable
  */
 class Produit2
 {
@@ -61,6 +66,13 @@ class Produit2
      * @ORM\Column(name="image", type="string", length=250, nullable=false)
      */
     private $image;
+
+    /**
+     * @var File|null
+
+     * @Vich\UploadableField(mapping="produit_image", fileNameProperty="image")
+     */
+    private $imageFile;
 
     /**
      * @var int
@@ -151,7 +163,7 @@ class Produit2
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage(?string $image): self
     {
         $this->image = $image;
 
@@ -203,6 +215,27 @@ class Produit2
     {
         $this->categoryP = $categoryP;
 
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File|null $imageFile
+     * @return Produit2
+     */
+    public function setImageFile(?File $imageFile): Produit2
+    {
+        $this->imageFile = $imageFile;
+        if ($this->imageFile instanceof UploadedFile ){
+            $this->date = new \DateTime('now');
+        }
         return $this;
     }
 

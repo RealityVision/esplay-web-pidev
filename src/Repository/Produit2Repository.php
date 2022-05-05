@@ -3,9 +3,13 @@
 namespace App\Repository;
 
 use App\Entity\Produit2;
+use App\Form\Produit2Type;
+use App\Form\ProduitSearchType;
+use App\Entity\ProduitSearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -43,6 +47,27 @@ class Produit2Repository extends ServiceEntityRepository
         if ($flush) {
             $this->_em->flush();
         }
+    }
+
+    /**
+     * @return Query
+     */
+    public function findAllVisibleQuery(ProduitSearch $search): Query
+    {
+        $query = $this->findVisibleQuery();
+        if($search->getMaxPrice()) {
+            $query =$query
+                -> where('p.prix <= :maxprice')
+                ->setParameter('maxprice', $search->getMaxPrice());
+        }
+        if($search->getMinStock()) {
+            $query =$query
+                -> where('p.stockProduit >= :minstock')
+                ->setParameter('stockProduit', $search->getMinStock());
+        }
+             return $query ->getquery();
+
+
     }
 
     // /**

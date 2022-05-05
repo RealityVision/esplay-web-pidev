@@ -10,7 +10,7 @@
 		<!-- Google Font -->
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Cinzel:400,700,900&display=swap" rel="stylesheet">
-
+		<script src="https://kit.fontawesome.com/4fc9ce1a44.js" crossorigin="anonymous"></script>
 		<title>
 			{% block title %}Esplay App
 			{% endblock %}
@@ -19,6 +19,7 @@
 																																           and uncomment the following Encore helpers to start using Symfony UX #}
 		{% block stylesheets %}
 			<!-- Css Styles -->
+			<link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
 			<link rel="stylesheet" href="{{asset('front/assets/css/chat.css')}}" type="text/css">
 			<link rel="stylesheet" href="{{asset('front/assets/css/bootstrap.min.css')}}" type="text/css">
 			<link rel="stylesheet" href="{{asset('front/assets/css/font-awesome.min.css')}}" type="text/css">
@@ -31,8 +32,14 @@
 		{% endblock %}
 
 		{% block javascripts %}
+			<script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+			<script src="//code.jquery.com/jquery.js"></script>
+
 			{#{{ encore_entry_script_tags('app') }}#}
 		{% endblock %}
+
+		{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+
 	</head>
 	<body>
 		<!-- Page Preloder -->
