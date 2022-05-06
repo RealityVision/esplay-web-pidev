@@ -11,7 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 /**
  * @Route("/report")
  */
@@ -61,6 +62,63 @@ class ReportController extends AbstractController
         return
             $this->redirectToRoute('app_chat_index', ['bool' => true]);
     }
+/**
+     * @Route("/admin", name="reportad", methods={"GET","POST"})
+     */
+    public function indexAdmin(EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $reports = $entityManager
+            ->getRepository(Report::class)
+            ->findAll();
+
+        $chats = $entityManager
+            ->getRepository(Chat::class)
+            ->findAll();
+        return
+            $this->render('admin/reports.html.twig', ['reports' => $reports]);
+    }
+
+ /**
+     * @Route("/{id}", name="app_report_email", methods={"GET"})
+     */
+    public function mail(Report $report,MailerInterface $mailer, EntityManagerInterface $entityManager): Response
+    {
+        $chat = $entityManager
+            ->getRepository(Chat::class)
+            ->find($report->getIdMessage());
+        $email = (new Email())
+        ->from('realityvison.pidev@gmail.com')
+        ->to('khaled.mihoub@esprit.tn')
+        
+        ->priority(Email::PRIORITY_HIGH)
+        ->subject('Someone report your message')
+        ->text('Someone report your message :  --'.$chat->getMessage().'--  in esplay community and may be deleted by admins.The reason was : '.$report->getReason());
+
+    $mailer->send($email);
+
+        return $this->redirectToRoute('reportad', []);
+    }
+
+     /**
+     * @Route("/{id}", name="delete_report_email", methods={"GET"})
+     */
+    public function deletemessage(Report $report, EntityManagerInterface $entityManager): Response
+    {
+        $chat = $entityManager
+            ->getRepository(Chat::class)
+            ->find($report->getIdMessage());
+        $entityManager->remove($report);
+            $entityManager->flush();
+            $entityManager->remove($chat);
+            $entityManager->flush();
+            
+
+        return $this->redirectToRoute('reportad', []);
+    }
+
+
+
+
 
     /**
      * @Route("/new", name="app_report_new", methods={"GET", "POST"})
