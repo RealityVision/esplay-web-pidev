@@ -143,6 +143,22 @@ class UserController extends AbstractController
       $this->redirectToRoute('app_index');
     }
 
+
+/**
+     * @Route("/logout", name="logoutroute", methods={"GET","POST"})
+     */
+    public function logout(EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $session = $request->getSession();
+        $session->clear();
+        $session->invalidate();
+        
+       
+              return $this->redirectToRoute('app_index');
+    }
+
+
+
         /**
      * @Route("/front", name="app_index", methods={"GET"})
      */
