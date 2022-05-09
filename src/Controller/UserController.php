@@ -69,8 +69,6 @@ class UserController extends AbstractController
                 $session->set('idsession', $iduser);
     
             //$session->get('idsession');
-              
-            
               return $this->redirectToRoute('app_user_index');
 
           }else 
@@ -90,7 +88,6 @@ class UserController extends AbstractController
         ]
         );
     }
-
       /**
      * @Route("/signup", name="signup", methods={"GET","POST"})
      */
