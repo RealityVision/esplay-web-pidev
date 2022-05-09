@@ -118,13 +118,13 @@ if ($('#ampiechart2').length) {
         "type": "pie",
         "theme": "light",
         "labelRadius": -65,
-        "labelText": "[[title]]%",
+        "labelText": "        [[title]] %",
         "dataProvider": [{
-            "title": "New",
-            "value": 4852
+            "title": "Male",
+            "value": 55
         }, {
-            "title": "Returning",
-            "value": 9899
+            "title": "Female",
+            "value": 45
         }],
         "titleField": "title",
         "valueField": "value",

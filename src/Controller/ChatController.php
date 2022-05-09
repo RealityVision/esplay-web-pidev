@@ -10,7 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\SerializerInterface;
 /**
  * @Route("/chat")
  */
@@ -55,6 +56,62 @@ class ChatController extends AbstractController
 
         ]);
     }
+    /**
+     * @Route("/mobile", name="app_chat_index3", methods={"GET", "POST"})
+     */
+    public function index3( SerializerInterface $serializer,Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $chat = new Chat();
+        $user = new User();
+        
+        $chats = $entityManager
+            ->getRepository(Chat::class)
+            ->findAll();
+
+        $user = $entityManager
+            ->getRepository(User::class)
+            ->find(32);
+
+            $data = $serializer->serialize($chats, 'json');
+            
+        return  new JsonResponse($data, 200, [], true);
+
+      
+    }
+
+    /**
+     * @Route("/chatmobile/", name="app_chat_index4")
+     */
+    public function index4( SerializerInterface $serializer,Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $chat = new Chat();
+        $user = new User();
+        
+        $chats = $entityManager
+            ->getRepository(Chat::class)
+            ->findAll();
+
+        $user = $entityManager
+            ->getRepository(User::class)
+            ->find(32);
+            $time = new \DateTime();
+            $chat->setMessage($request->get("message"));
+            $chat->setDateMessage($time);
+            $chat->setIdUser($user);
+            $chat->setUsername("khaled");
+            $entityManager->persist($chat);
+            $entityManager->flush();
+            $data = $serializer->serialize($chats, 'json');
+            
+        return  new Response("added");
+
+      
+    }
+
+
+
+
+
 
     /**
      * @Route("/new", name="app_chat_new", methods={"GET", "POST"})
