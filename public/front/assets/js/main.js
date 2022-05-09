@@ -52,6 +52,15 @@
         $('.signup-section').fadeOut(400);
     });
 
+      // Login Form
+      $('.login-switch').on('click', function () {
+        $('.login-section').fadeIn(400);
+    });
+
+    $('.login-close').on('click', function () {
+        $('.login-section').fadeOut(400);
+    });
+
     /*------------------
 		Navigation
 	--------------------*/

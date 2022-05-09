@@ -121,12 +121,12 @@ class Game
         return $this;
     }
 
-    public function getDateG(): ?\DateTimeInterface
+    public function getDateG(): ?\DateTime
     {
         return $this->dateG;
     }
 
-    public function setDateG(\DateTimeInterface $dateG): self
+    public function setDateG(\DateTime $dateG): self
     {
         $this->dateG = $dateG;
 
