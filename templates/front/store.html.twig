@@ -258,25 +258,27 @@
 			{% for produit2 in produit2s %}
 				<div class="col-lg-4 col-md-6 mt-5">
 					<div class="card card-bordered">
-						<img src="{{ vich_uploader_asset(produit2, 'imageFile')|imagine_filter('thumb')   }}" alt="card-image-top" style="width: auto; height:auto ">
+						<img src="{{ vich_uploader_asset(produit2, 'imageFile')}}" alt="card-image-top">
 
 						<div class="card-body" >
 							<h5 class="title">{{ produit2.nom }} </h5>
 							<h3>{{ produit2.prix }} dt</h3>
 							<p class="card-text">{{ produit2.description }}.</p>
 							<a href="{{ path('cart_add', {'idp2': produit2.idp2}) }}" class="btn btn-success float-right">
+{#	<a href="{{ path("panier.affiche",{'idp2': produit2.idp2 }) }}" class="btn-success">ajouter au panier </a>#}
 								<i class="fas fa-shopping-cart mr-1"></i>
 								Card
 							</a>
 						</div>
 					</div>
 				</div>
+
 			{% else %}
 				<tr>
 					<td colspan="9">no records found</td>
 				</tr>
 			{% endfor %}
-			<div class="navigation" style="width: -moz-max-content">
+			<div  class="navigation" style="width: -moz-max-content">
 				{{ knp_pagination_render(produit2s) }}
 			</div>
 		</div>

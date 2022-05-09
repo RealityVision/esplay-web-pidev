@@ -27,6 +27,8 @@ class Commandeprod
      *
      * @ORM\Column(name="id_acheteur", type="integer", nullable=false)
      */
+
+
     private $idAcheteur;
 
     /**
@@ -41,7 +43,7 @@ class Commandeprod
      *
      * @ORM\ManyToOne(targetEntity="Produit2")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_produit", referencedColumnName="idp2")
+     *  @ORM\JoinColumn(name="id_produit", referencedColumnName="idp2")
      * })
      */
     private $idProduit;

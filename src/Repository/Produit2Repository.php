@@ -11,6 +11,8 @@ use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ObjectManager;
+
 
 /**
  * @method Produit2|null find($id, $lockMode = null, $lockVersion = null)

@@ -2,9 +2,9 @@
 {% block title %}Category{% endblock %}
 
 {% block body %}
-    <h1>Category</h1>
+    <h1 style="color: azure">Category List</h1>
 
-    <table class="table">
+    <table class="table" style="color: azure">
         <thead>
             <tr>
                 <th>Id</th>
@@ -20,7 +20,9 @@
                 <td>{{ category_p.name }}</td>
                 <td>{{ category_p.description }}</td>
                 <td>
-                    <a href="{{ path('app_category_p_show', {'id': category_p.id}) }}">show</a>
+
+
+                    <a  href="{{ path('app_category_p_show', {'id': category_p.id}) }}">show</a>
                     <a href="{{ path('app_category_p_edit', {'id': category_p.id}) }}">edit</a>
                 </td>
             </tr>

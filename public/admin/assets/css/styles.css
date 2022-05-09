@@ -97,7 +97,7 @@
 }
 
 .main-content-inner {
-    padding: 0 30px 50px;
+    padding: 0 30px 100px;
 }
 
 /*------------------------- END Core Css -------------------*/
@@ -523,6 +523,7 @@
     right: -5px;
     top: -7px;
     font-family: 'Poppins', sans-serif;
+    color: azure;
     font-size: 10px;
     font-weight: 600;
     color: #fff;
@@ -1189,8 +1190,9 @@ table.dbkit-table tr td {
 
 .footer-area {
     text-align: center;
-    padding: 23px 0 19px;
-    background: #fff;
+    padding: 131px 0 27px;
+    background: border-box;
+
 }
 
 .footer-area p {
@@ -1853,6 +1855,8 @@ table.dbkit-table tr td {
 
 p.card-text {
     margin-bottom: 23px;
+    min-height: 120px;
+
 }
 
 /*-------------------- END Cards ------------------- */

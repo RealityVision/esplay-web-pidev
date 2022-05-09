@@ -8,6 +8,7 @@ use App\Form\ProduitSearchType;
 use App\Entity\ProduitSearch;
 use App\Entity\CatPSearch;
 use App\Form\CatPSearchType;
+use App\Repository\Produit2Repository;
 use Symfony\Component\Form\FormView;
 use OC\PlatformBundle\Form\ArticlesType;
 use Symfony\Component\Form\FormTypeInterface;
@@ -17,7 +18,15 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Validator\Constraints\Json;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
  * @Route("/produit2")
@@ -25,7 +34,7 @@ use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 class Produit2Controller extends Controller
 {
     /**
-     * @Route("/", name="app_produit2_index")
+     * @Route("/front/", name="app_produit2_index")
      */
     public function index(Request $request,EntityManagerInterface $entityManager ): Response
     {
@@ -49,15 +58,18 @@ class Produit2Controller extends Controller
             $request->query->getInt('page', 1),
             3
         );
-        return $this->render('front/store.html.twig', [
+        return $this->render('admin/store.html.twig', [
             'produit2s' => $produit2s,
             'produit2ss' => $produit2ss,
             'form' => $form-> createView()
         ]);
     }
 
+
+
+
     /**
-     * @Route("/new", name="app_produit2_new", methods={"GET", "POST"})
+     * @Route("/admin/new", name="app_produit2_new", methods={"GET", "POST"})
      */
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -94,6 +106,7 @@ class Produit2Controller extends Controller
             'produit2' => $produit2,
         ]);
     }
+
 
     /**
      * @Route("/{idp2}/edit", name="app_produit2_edit", methods={"GET", "POST"})
@@ -263,9 +276,6 @@ class Produit2Controller extends Controller
 
         return $this->render('produit2/stat.html.twig', array('piechart' => $pieChart));
     }
-
-
-
 
 
 
