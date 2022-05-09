@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Chat index{% endblock %}
+
+{% block body %}
+    <h1>Chat index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdMessage</th>
+                <th>Message</th>
+                <th>DateMessage</th>
+                <th>Picture</th>
+                <th>Username</th>
+                <th>File</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for chat in chats %}
+            <tr>
+                <td>{{ chat.idMessage }}</td>
+                <td>{{ chat.message }}</td>
+                <td>{{ chat.dateMessage ? chat.dateMessage|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ chat.picture }}</td>
+                <td>{{ chat.username }}</td>
+                <td>{{ chat.file }}</td>
+                <td>
+                    <a href="{{ path('app_chat_show', {'idMessage': chat.idMessage}) }}">show</a>
+                    <a href="{{ path('app_chat_edit', {'idMessage': chat.idMessage}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_chat_new') }}">Create new</a>
+{% endblock %}

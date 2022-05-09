@@ -1,0 +1,14 @@
+{% extends 'admin/baseAdmin.html.twig' %}
+
+{% block title %}Edit User
+{% endblock %}
+
+{% block body %}
+	<hh4 style="color: white;">Edit User</h4>
+
+	{{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+
+	<a href="{{ path('app_user_index')}}" class="btn btn-secondary btn-xs">back to list
+	</a>
+
+{% endblock %}
