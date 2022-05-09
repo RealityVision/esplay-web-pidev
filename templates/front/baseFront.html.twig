@@ -16,7 +16,7 @@
 			{% endblock %}
 		</title>
 		{# Run `composer require symfony/webpack-encore-bundle`
-																																										           and uncomment the following Encore helpers to start using Symfony UX #}
+																																																														           and uncomment the following Encore helpers to start using Symfony UX #}
 		{% block stylesheets %}
 			<!-- Css Styles -->
 			<link rel="stylesheet" href="{{asset('front/assets/css/chat.css')}}" type="text/css">
@@ -508,7 +508,7 @@
 										document.write(new Date().getFullYear());
 									</script>
 									All rights reserved | This
-																																																																																	                                template is made with
+																																																																																																																																																																											                                template is made with
 									<i class="fa fa-heart" aria-hidden="true"></i>
 									by
 									<a href="https://colorlib.com" target="_blank">Reality Vision</a>
@@ -541,17 +541,17 @@
 						<h2>Sign up</h2>
 						<p>Fill out the form below to recieve a free and confidential</p>
 					</div>
-					<form action="#" class="signup-form">
+					<form method="POST" action="{{path('signup')}}" class="signup-form">
 						<div class="sf-input-list">
-							<input type="text" class="input-value" placeholder="User Name*">
-							<input type="text" class="input-value" placeholder="Password">
-							<input type="text" class="input-value" placeholder="Confirm Password">
-							<input type="text" class="input-value" placeholder="Email Address">
-							<input type="text" class="input-value" placeholder="Full Name">
+							<input type="text" class="input-value" placeholder="User Name*" name="login" required>
+							<input type="text" class="input-value" placeholder="Name" name="name" required>
+							<input type="text" class="input-value" placeholder="Last Name" name="last_name" required>
+							<input type="text" class="input-value" placeholder="Email Address" name="Email" required>
+							<input type="password" class="input-value" placeholder="Password" name="password" required>
 						</div>
 						<div class="radio-check">
 							<label for="rc-agree">I agree with the term & conditions
-								<input type="checkbox" id="rc-agree">
+								<input type="checkbox" id="rc-agree" required>
 								<span class="checkbox"></span>
 							</label>
 						</div>
@@ -571,13 +571,13 @@
 			<div class="signup-text">
 				<div class="container">
 					<div class="signup-title">
-						<h2>Login</h2>
-						<p>Fill out the form below to recieve a free and confidential</p>
+						<h2>WELCOME BACK</h2>
+						<p>Welcome back! Please enter your details.</p>
 					</div>
-					<form action="#" class="signup-form">
+					<form method="POST" action="{{path('login')}}" class="signup-form">
 						<div class="sf-input-list">
-							<input type="text" class="input-value" placeholder="User Name*">
-							<input type="text" class="input-value" placeholder="Password">
+							<input type="text" class="input-value" placeholder="User Name*" name="username" required>
+							<input type="password" class="input-value" placeholder="Password" name="password" required>
 						</div>
 						<button type="submit">
 							<span>LOGIN</span>

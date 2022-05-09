@@ -12,9 +12,23 @@
 				<div class="card">
 					<div class="card-body">
 
+						{% for user in users %}
+							{% if user.created.diff(datelioum).days < 2 and  user.created.diff(datelioum).days >=0      %}
+
+								<div class="alert alert-primary success-alert" id="">
+									<button type="button" class="close" data-dismiss="alert">x</button>
+									<strong>New esplay user</strong>
+									{{ user.username}}.
+
+								</div>
+							{% endif %}
+						{% endfor %}
+
 						<h4 class="header-title">Esplay users
-							<a href="{{ path('app_user_new')}}" class="btn btn-success btn-xs pull-right">Add new user
+							<a href="{{ path('app_user_pdf')}}" class="btn btn-secondary btn-xs pull-right">Print data
 							</a>
+							<button type="button" class="btn btn-success btn-xs pull-right" data-toggle="modal" data-target="#Registration" style="margin-right: 20px;">Add New User
+							</button>
 						</h4>
 
 
@@ -28,13 +42,11 @@
 										<th>Last_name</th>
 										<th>Phone</th>
 										<th>Email</th>
-										<th>Country</th>
 										<th>Birth_date</th>
-										<th>Action</th>
-										<th>Address</th>
-										<th>Gender</th>
-										<th>Role</th>
 
+										<th>Role</th>
+										<th>Action</th>
+										<th>Gender</th>
 
 									</tr>
 								</thead>
@@ -46,27 +58,30 @@
 											<td>{{ user.lastName }}</td>
 											<td>{{ user.phone }}</td>
 											<td>{{ user.email }}</td>
-											<td>{{ user.country }}</td>
+
 											<td>{{ user.birthDate ? user.birthDate|date('Y-m-d') : '' }}</td>
 
 
+											<td>{{ user.role }}</td>
 											<td>
 												<ul class="d-flex justify-content-center">
 													<li class="mr-3">
-														<a href="{{ path('app_user_edit', {'idUser': user.idUser}) }}" class="btn btn-outline-warning btn-xs">edit</a>
+														<a href="{{ path('app_user_edit', {'idUser': user.idUser}) }}" class="btn btn-warning btn-xs">
+															<i class="fa fa-edit"></i>
+														</a>
 
 													</li>
 													<li>
 														<form method="post" action="{{ path('app_user_delete', {'idUser': user.idUser}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
 															<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.idUser) }}">
-															<button class="btn">Delete</button>
+															<button class="btn btn-xs btn-danger">
+																<i class="fa fa-trash" style="color : dark;"></i>
+															</button>
 														</form>
 													</li>
 												</ul>
 											</td>
-											<td>{{ user.address }}</td>
 											<td>{{ user.gender }}</td>
-											<td>{{ user.role }}</td>
 
 										</tr>
 									{% else %}
@@ -75,303 +90,211 @@
 										</tr>
 									{% endfor %}
 								</tbody>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!---modaaaaaaaaaaaaaaaaaaaaaaaalll deleetteee -->
 
-		<div class="modal fade" id="deleteModal">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title">Are you sure to delete this user ?
-						</h5>
-						<button type="button" class="close" data-dismiss="modal">
-							<span>&times;</span>
-						</button>
-					</div>
-
-					<div class="modal-footer">
-						<a href="{{ path('app_user_index') }}" button type="button" class="btn btn-secondary btn-xs">Close
-						</a>
-
+							</table>
+						</div>
 
 					</div>
 				</div>
 			</div>
-		</div>
-		<!--modaaaaaaaaaaaaaaaaaaaaaale edittt -->
+			<!---modaaaaaaaaaaaaaaaaaaaaaaaalll deleetteee -->
 
-		<div class="modal fade" id="editModal">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title">New user</h5>
-						<button type="button" class="close" data-dismiss="modal">
-							<span>&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<div class="form-row align-items-center">
-							<div class="col-sm-2 my-1"></div>
-							<div class="col-sm-2 my-1">
-
-								<label for="example-text-input" class="col-form-label">Username</label>
-							</div>
-							<div class="col-sm-6 my-1">
-								<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
-							</div>
+			<div class="modal fade" id="deleteModal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Are you sure to delete this user ?
+							</h5>
+							<button type="button" class="close" data-dismiss="modal">
+								<span>&times;</span>
+							</button>
 						</div>
-						<div class="form-row align-items-center">
-							<div class="col-sm-2 my-1"></div>
-							<div class="col-sm-2 my-1">
 
-								<label for="example-text-input" class="col-form-label">First name</label>
-							</div>
-							<div class="col-sm-6 my-1">
-								<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
-							</div>
-						</div>
-						<div class="form-row align-items-center">
-							<div class="col-sm-2 my-1"></div>
-							<div class="col-sm-2 my-1">
+						<div class="modal-footer">
+							<a href="{{ path('app_user_index') }}" button type="button" class="btn btn-secondary btn-xs">Close
+							</a>
 
-								<label for="example-text-input" class="col-form-label">Last name</label>
-							</div>
-							<div class="col-sm-6 my-1">
-								<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
-							</div>
-						</div>
-						<div class="form-row align-items-center">
-							<div class="col-sm-2 my-1"></div>
-							<div class="col-sm-2 my-1">
-
-								<label for="example-text-input" class="col-form-label">Phone</label>
-							</div>
-							<div class="col-sm-6 my-1">
-								<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
-							</div>
-						</div>
-						<div class="form-row align-items-center">
-							<div class="col-sm-2 my-1"></div>
-							<div class="col-sm-2 my-1">
-
-								<label for="example-text-input" class="col-form-label">Email</label>
-							</div>
-							<div class="col-sm-6 my-1">
-								<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
-							</div>
-						</div>
-						<div class="form-row align-items-center">
-							<div class="col-sm-2 my-1"></div>
-							<div class="col-sm-2 my-1">
-
-								<label for="example-text-input" class="col-form-label">Birth Date</label>
-							</div>
-							<div class="col-sm-6 my-1">
-								<input class="form-control form-control-sm" type="date" value="" id="example-text-input">
-							</div>
-						</div>
-						<div class="form-row align-items-center">
-							<div class="col-sm-2 my-1"></div>
-							<div class="col-sm-2 my-1">
-
-								<label for="example-text-input" class="col-form-label">Country</label>
-							</div>
-							<div class="col-sm-6 my-1">
-								<input class="form-control form-control-sm" type="tel" value="" id="example-text-input">
-							</div>
-						</div>
-						<div class="form-row align-items-center">
-							<div class="col-sm-2 my-1"></div>
-							<div class="col-sm-2 my-1">
-
-								<label for="example-text-input" class="col-form-label">Address</label>
-							</div>
-							<div class="col-sm-6 my-1">
-								<input class="form-control form-control-sm" type="email" value="" id="example-text-input">
-							</div>
-						</div>
-						<div class="form-row align-items-center">
-							<div class="col-sm-2 my-1"></div>
-
-							<div class="col-sm-2 my-1">
-								<label class="col-form-label">Role</label>
-							</div>
-							<div class="col-sm-6 my-1">
-								<select class="custom-select">
-									<option selected="selected" value="player">Player</option>
-									<option value="admin">Admin</option>
-
-								</select>
-							</div>
 
 						</div>
-						<div class="form-row align-items-center">
-							<div class="col-sm-2 my-1"></div>
-
-							<div class="col-sm-2 my-1">
-								<label class="col-form-label">Gender</label>
-							</div>
-							<div class="col-sm-6 my-1">
-								<select class="custom-select">
-									<option selected="selected" value="player">Female</option>
-									<option value="admin">Male</option>
-
-								</select>
-							</div>
-
-						</div>
-					</div>
-
-
-					<div class="modal-footer">
-						<a href="{{ path('app_user_index') }}" button type="button" class="btn btn-secondary btn-xs">Close
-						</a>
-						<button type="button" class="btn btn-success btn-xs">Save changes</button>
 					</div>
 				</div>
 			</div>
+			<!--modaaaaaaaaaaaaaaaaaaaaaale edittt -->
 
-		</div>
+			<div class="modal fade" id="editModal">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">New user</h5>
+							<button type="button" class="close" data-dismiss="modal">
+								<span>&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="form-row align-items-center">
+								<div class="col-sm-2 my-1"></div>
+								<div class="col-sm-2 my-1">
 
-		<!--modaaaaaaaaaaaaaaaaaaaaale add -->
-		<div class="modal fade" id="AddModal">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title">New user</h5>
-						<button type="button" class="close" data-dismiss="modal">
-							<span>&times;</span>
-						</button>
+									<label for="example-text-input" class="col-form-label">Username</label>
+								</div>
+								<div class="col-sm-6 my-1">
+									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
+								</div>
+							</div>
+							<div class="form-row align-items-center">
+								<div class="col-sm-2 my-1"></div>
+								<div class="col-sm-2 my-1">
+
+									<label for="example-text-input" class="col-form-label">First name</label>
+								</div>
+								<div class="col-sm-6 my-1">
+									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
+								</div>
+							</div>
+							<div class="form-row align-items-center">
+								<div class="col-sm-2 my-1"></div>
+								<div class="col-sm-2 my-1">
+
+									<label for="example-text-input" class="col-form-label">Last name</label>
+								</div>
+								<div class="col-sm-6 my-1">
+									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
+								</div>
+							</div>
+							<div class="form-row align-items-center">
+								<div class="col-sm-2 my-1"></div>
+								<div class="col-sm-2 my-1">
+
+									<label for="example-text-input" class="col-form-label">Phone</label>
+								</div>
+								<div class="col-sm-6 my-1">
+									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
+								</div>
+							</div>
+							<div class="form-row align-items-center">
+								<div class="col-sm-2 my-1"></div>
+								<div class="col-sm-2 my-1">
+
+									<label for="example-text-input" class="col-form-label">Email</label>
+								</div>
+								<div class="col-sm-6 my-1">
+									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
+								</div>
+							</div>
+							<div class="form-row align-items-center">
+								<div class="col-sm-2 my-1"></div>
+								<div class="col-sm-2 my-1">
+
+									<label for="example-text-input" class="col-form-label">Birth Date</label>
+								</div>
+								<div class="col-sm-6 my-1">
+									<input class="form-control form-control-sm" type="date" value="" id="example-text-input">
+								</div>
+							</div>
+							<div class="form-row align-items-center">
+								<div class="col-sm-2 my-1"></div>
+								<div class="col-sm-2 my-1">
+
+									<label for="example-text-input" class="col-form-label">Country</label>
+								</div>
+								<div class="col-sm-6 my-1">
+									<input class="form-control form-control-sm" type="tel" value="" id="example-text-input">
+								</div>
+							</div>
+							<div class="form-row align-items-center">
+								<div class="col-sm-2 my-1"></div>
+								<div class="col-sm-2 my-1">
+
+									<label for="example-text-input" class="col-form-label">Address</label>
+								</div>
+								<div class="col-sm-6 my-1">
+									<input class="form-control form-control-sm" type="email" value="" id="example-text-input">
+								</div>
+							</div>
+							<div class="form-row align-items-center">
+								<div class="col-sm-2 my-1"></div>
+
+								<div class="col-sm-2 my-1">
+									<label class="col-form-label">Role</label>
+								</div>
+								<div class="col-sm-6 my-1">
+									<select class="custom-select">
+										<option selected="selected" value="player">Player</option>
+										<option value="admin">Admin</option>
+
+									</select>
+								</div>
+
+							</div>
+							<div class="form-row align-items-center">
+								<div class="col-sm-2 my-1"></div>
+
+								<div class="col-sm-2 my-1">
+									<label class="col-form-label">Gender</label>
+								</div>
+								<div class="col-sm-6 my-1">
+									<select class="custom-select">
+										<option selected="selected" value="player">Female</option>
+										<option value="admin">Male</option>
+
+									</select>
+								</div>
+
+							</div>
+						</div>
+
+
+						<div class="modal-footer">
+							<a href="{{ path('app_user_index') }}" button type="button" class="btn btn-secondary btn-xs">Close
+							</a>
+							<button type="button" class="btn btn-success btn-xs">Save changes</button>
+						</div>
 					</div>
-					<div class="modal-body">
-						<div class="form-row align-items-center">
-							<div class="col-sm-2 my-1"></div>
-							<div class="col-sm-2 my-1">
+				</div>
 
-								<label for="example-text-input" class="col-form-label">Username</label>
-							</div>
-							<div class="col-sm-6 my-1">
-								<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
-							</div>
+			</div>
+
+			<div class="modal" id="Registration">
+
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h3 class="text-dark">Registration Form</h3>
 						</div>
-						<div class="form-row align-items-center">
-							<div class="col-sm-2 my-1"></div>
-							<div class="col-sm-2 my-1">
+						<div class="modal-body">
+							<p id="message" class="text-dark"></p>
+							<form method="POST" action="{{path('add')}}">
+								<div class="sf-input-list">
+									<input type="text" class=" form-control my-2 " placeholder="Username" name="UserName">
+									<input type="text" class="form-control my-2 " placeholder="Name" name="Name">
+									<input type="text" class="form-control my-2 " placeholder="Last Name" name="LastName">
+									<input type="email" class="form-control my-2" placeholder="Email" name="Email">
+									<input type="password" class="form-control my-2" placeholder="password" name="password">
+								</div>
 
-								<label for="example-text-input" class="col-form-label">First name</label>
 							</div>
-							<div class="col-sm-6 my-1">
-								<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
+							<div class="modal-footer">
+								<button type="submit" class="btn btn-success" id="btn_register">Register Now</button>
+								<button type="button" class="btn btn-danger" data-dismiss="modal" id="btn_close">Close</button>
 							</div>
-						</div>
-						<div class="form-row align-items-center">
-							<div class="col-sm-2 my-1"></div>
-							<div class="col-sm-2 my-1">
-
-								<label for="example-text-input" class="col-form-label">Last name</label>
-							</div>
-							<div class="col-sm-6 my-1">
-								<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
-							</div>
-						</div>
-						<div class="form-row align-items-center">
-							<div class="col-sm-2 my-1"></div>
-							<div class="col-sm-2 my-1">
-
-								<label for="example-text-input" class="col-form-label">Phone</label>
-							</div>
-							<div class="col-sm-6 my-1">
-								<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
-							</div>
-						</div>
-						<div class="form-row align-items-center">
-							<div class="col-sm-2 my-1"></div>
-							<div class="col-sm-2 my-1">
-
-								<label for="example-text-input" class="col-form-label">Email</label>
-							</div>
-							<div class="col-sm-6 my-1">
-								<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
-							</div>
-						</div>
-						<div class="form-row align-items-center">
-							<div class="col-sm-2 my-1"></div>
-							<div class="col-sm-2 my-1">
-
-								<label for="example-text-input" class="col-form-label">Birth Date</label>
-							</div>
-							<div class="col-sm-6 my-1">
-								<input class="form-control form-control-sm" type="date" value="" id="example-text-input">
-							</div>
-						</div>
-						<div class="form-row align-items-center">
-							<div class="col-sm-2 my-1"></div>
-							<div class="col-sm-2 my-1">
-
-								<label for="example-text-input" class="col-form-label">Country</label>
-							</div>
-							<div class="col-sm-6 my-1">
-								<input class="form-control form-control-sm" type="tel" value="" id="example-text-input">
-							</div>
-						</div>
-						<div class="form-row align-items-center">
-							<div class="col-sm-2 my-1"></div>
-							<div class="col-sm-2 my-1">
-
-								<label for="example-text-input" class="col-form-label">Address</label>
-							</div>
-							<div class="col-sm-6 my-1">
-								<input class="form-control form-control-sm" type="email" value="" id="example-text-input">
-							</div>
-						</div>
-						<div class="form-row align-items-center">
-							<div class="col-sm-2 my-1"></div>
-
-							<div class="col-sm-2 my-1">
-								<label class="col-form-label">Role</label>
-							</div>
-							<div class="col-sm-6 my-1">
-								<select class="custom-select">
-									<option selected="selected" value="player">Player</option>
-									<option value="admin">Admin</option>
-
-								</select>
-							</div>
-
-						</div>
-						<div class="form-row align-items-center">
-							<div class="col-sm-2 my-1"></div>
-
-							<div class="col-sm-2 my-1">
-								<label class="col-form-label">Gender</label>
-							</div>
-							<div class="col-sm-6 my-1">
-								<select class="custom-select">
-									<option selected="selected" value="player">Female</option>
-									<option value="admin">Male</option>
-
-								</select>
-							</div>
-
-						</div>
-					</div>
-
-
-					<div class="modal-footer">
-						<a href="{{ path('app_user_index') }}" button type="button" class="btn btn-secondary btn-xs">Close
-						</a>
-
-						<button type="button" class="btn btn-success btn-xs">Save changes</button>
+						</form>
 					</div>
 				</div>
 			</div>
-
 		</div>
+
 	</div>
 
-</div>{% endblock %}
+
+	<script>
+		window.onload = function () {
+
+
+$(".success-alert").fadeTo(2000, 800).slideUp(8000, function () {
+$(".success-alert").slideUp(1000);
+});
+
+}
+	</script>
+
+{% endblock %}
