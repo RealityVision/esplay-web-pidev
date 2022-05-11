@@ -58,14 +58,14 @@ class Produit2
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="date", nullable=false)
+     * @ORM\Column(name="date", type="date")
      */
     private $date;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=250, nullable=false)
+     * @ORM\Column(name="image", type="string", length=250)
      */
     private $image;
 
@@ -86,14 +86,14 @@ class Produit2
     /**
      * @var int
      *
-     * @ORM\Column(name="stock_produit", type="integer", nullable=false)
+     * @ORM\Column(name="stock_produit", type="integer")
      */
     private $stockProduit;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="produit2", type="string", length=255, nullable=false)
+     * @ORM\Column(name="produit2", type="string", length=255)
      */
     private $produit2;
 
