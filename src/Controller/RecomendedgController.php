@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Commentaire;
 use App\Entity\Recomendedg;
 use App\Entity\User;
@@ -13,8 +14,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 /**
  * @Route("/recomendedg")
  */
@@ -250,6 +256,99 @@ class RecomendedgController extends AbstractController
             return new Response($jsonc);
         }
     }
+
+    //*****MOBILE
+
+    /**
+     * @Route("/mobile/aff", name="affmobrec")
+     */
+    public function affmobrec(NormalizerInterface $normalizer)
+    {
+        $med=$this->getDoctrine()->getRepository(Recomendedg::class)->findAll();
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceLimit(1);
+        $normalizer->setCircularReferenceHandler(function ($med) {
+            return $med->getId();
+        });
+        $encoders = [new JsonEncoder()];
+        $normalizers = array($normalizer);
+        $serializer = new Serializer($normalizers,$encoders);
+        $formatted = $serializer->normalize($med);
+        return new JsonResponse($formatted);    }
+
+    /**
+     * @Route("/mobile/new", name="addmobrec")
+     */
+    public function addmobrec(Request $request,NormalizerInterface $normalizer,EntityManagerInterface $entityManager)
+    {
+        $recg= new Recomendedg();
+        $recg->setNom($request->get('nom'));
+        $recg->setPrix($request->get('prix'));
+        $cat = $this->getDoctrine()->getManager()->getRepository(Category::class)->findOneBy(
+            ['categoryName'=>$request->get('category')]
+        );
+
+        $recg->setCategory($cat);
+        $recg->setPlatform($request->get('platforme'));
+        $recg->setUrl($request->get('url'));
+
+        $entityManager->persist($recg);
+        $entityManager->flush();
+
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceLimit(1);
+        $normalizer->setCircularReferenceHandler(function ($recg) {
+            return $recg->getId();
+        });
+        $encoders = [new JsonEncoder()];
+        $normalizers = array($normalizer);
+        $serializer = new Serializer($normalizers,$encoders);
+        $formatted = $serializer->normalize($recg);
+        return new JsonResponse($formatted);    }
+
+    /**
+     * @Route("/mobile/editrecg", name="editmobrecg")
+     */
+    public function editmobrecg(Request $request,NormalizerInterface $normalizer)
+    {   $em=$this->getDoctrine()->getManager();
+
+        $recg = $em->getRepository(Recomendedg::class)->find($request->get('id'));
+
+        $recg->setNom($request->get('nom'));
+        $recg->setPrix($request->get('prix'));
+        $cat = $this->getDoctrine()->getManager()->getRepository(Category::class)->findOneBy(
+            ['categoryName'=>$request->get('category')]
+        );
+
+        $recg->setCategory($cat);
+        $recg->setPlatform($request->get('platforme'));
+        $recg->setUrl($request->get('url'));
+
+        $em->flush();
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceLimit(1);
+        $normalizer->setCircularReferenceHandler(function ($recg) {
+            return $recg->getId();
+        });
+        $encoders = [new JsonEncoder()];
+        $normalizers = array($normalizer);
+        $serializer = new Serializer($normalizers,$encoders);
+        $formatted = $serializer->normalize($recg);
+        return new JsonResponse($formatted);
+    }
+    /**
+     * @Route("/mobile/del", name="delmobrecg")
+     */
+    public function delmobproduit(Request $request,NormalizerInterface $normalizer)
+    {           $em=$this->getDoctrine()->getManager();
+        $rec=$this->getDoctrine()->getRepository(Recomendedg::class)
+            ->find($request->get('id'));
+        $em->remove($rec);
+        $em->flush();
+        $jsonContent = $normalizer->normalize($rec,'json',['blog'=>'post:read']);
+        return new Response(json_encode($jsonContent));
+    }
+
 
 
 

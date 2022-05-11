@@ -140,7 +140,7 @@ class Recomendedg
     /**
      * @return Collection<int, Commentaire>
      */
-    public function getReponses(): Collection
+    public function getReponses(): ?Collection
     {
         return $this->commentaire;
     }
