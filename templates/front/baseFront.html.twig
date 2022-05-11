@@ -187,8 +187,13 @@
 									<li>
 										<i class="fa fa-clock-o"></i>
 										Apr 08, 2022</li>
-									<li class="signup-switch signup-open">
+								    <li class="signup-switch signup-open">
 										<i class="fa fa-sign-out"></i>
+										Sign up
+									</li>
+									<li class="login-switch signup-open">
+										<i class="fa fa-sign-out"></i>
+										Login
 										Login / Sign up
 									</li>
 								</ul>
@@ -537,20 +542,20 @@
 			<div class="signup-text">
 				<div class="container">
 					<div class="signup-title">
-						<h2>Sign up</h2>
+					<h2>Sign up</h2>
 						<p>Fill out the form below to recieve a free and confidential</p>
 					</div>
-					<form action="#" class="signup-form">
+					<form method="POST" action="{{path('signup')}}" class="signup-form">
 						<div class="sf-input-list">
-							<input type="text" class="input-value" placeholder="User Name*">
-							<input type="text" class="input-value" placeholder="Password">
-							<input type="text" class="input-value" placeholder="Confirm Password">
-							<input type="text" class="input-value" placeholder="Email Address">
-							<input type="text" class="input-value" placeholder="Full Name">
+							<input type="text" class="input-value" placeholder="User Name*" name="login" required>
+							<input type="text" class="input-value" placeholder="Name" name="name" required>
+							<input type="text" class="input-value" placeholder="Last Name" name="last_name" required>
+							<input type="text" class="input-value" placeholder="Email Address" name="Email" required>
+							<input type="password" class="input-value" placeholder="Password" name="password" required>
 						</div>
 						<div class="radio-check">
 							<label for="rc-agree">I agree with the term & conditions
-								<input type="checkbox" id="rc-agree">
+								<input type="checkbox" id="rc-agree" required>
 								<span class="checkbox"></span>
 							</label>
 						</div>
@@ -562,7 +567,28 @@
 			</div>
 		</div>
 		<!-- Sign Up Section End -->
-
+<div class="login-section">
+			<div class="login-close">
+				<i class="fa fa-close"></i>
+			</div>
+			<div class="signup-text">
+				<div class="container">
+					<div class="signup-title">
+						<h2>WELCOME BACK</h2>
+						<p>Welcome back! Please enter your details.</p>
+					</div>
+					<form method="POST" action="{{path('login')}}" class="signup-form">
+						<div class="sf-input-list">
+							<input type="text" class="input-value" placeholder="User Name*" name="username" required>
+							<input type="password" class="input-value" placeholder="Password" name="password" required>
+						</div>
+						<button type="submit">
+							<span>LOGIN</span>
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
 		<!-- Search model Begin -->
 		<div class="search-model">
 			<div class="h-100 d-flex align-items-center justify-content-center">
