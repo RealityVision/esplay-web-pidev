@@ -23,7 +23,51 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class UserController extends AbstractController
 {
 
-    //-------------------------------------------------------------------------------------- FRONT
+      /**
+     * @Route("/signuppmobile", name="app_chat_index4e")
+     */
+    public function index4( SerializerInterface $serializer,Request $request, EntityManagerInterface $entityManager): Response
+    {
+      
+              //getSalt
+         $client = HttpClient::create();
+         $response = $client->request('GET', 'http://localhost:8080/getsalt');
+         $salt = $response->getContent();
+
+         
+
+        // Create a POST request psw crypté 
+        $response2 = $client->request('POST', 'http://localhost:8080/password', [
+            'headers' => [
+                'Content-Type' => 'application/json',
+            ],
+            'json' => 
+                [
+                'salt' => $salt,
+                'password' => $request->get("Password") 
+        ],
+        ]);
+    
+      $crypted = $response2->getContent();
+
+      $user = new User();
+      $time = new \DateTime();
+      $user->setCreated($time);
+      $user->setUsername($request->get("Login"));
+      $user->setFirstName($request->get("Name"));
+      $user->setLastName($request->get("LastName"));
+      $user->setEmail($request->get("Email"));
+      $user->setSalt($salt);
+      $user->setPassword($crypted);
+      $user->setRole("player");
+
+
+      $entityManager->persist($user);
+      $entityManager->flush();
+        return  new Response("salut");
+
+      
+    }
 
  /**
      * @Route("/login", name="login", methods={"GET","POST"})
@@ -89,6 +133,63 @@ class UserController extends AbstractController
            'msg' => $bool,
         ]
         );
+    }
+    /**
+     * @Route("/loginmobile", name="loginmobile")
+     */
+    public function loginmobile(EntityManagerInterface $entityManager, Request $request): Response
+    {
+      
+        $formData = $request->request->all();
+        $username= $request->get("login");
+        $password=$request->get("password");
+        $user = $entityManager
+        ->getRepository(User::class)
+        ->findByUsername($username);
+        if (!empty($user)) {
+                 // Create a POST request verifiépsw 
+        
+          $client = HttpClient::create();
+          $response3 = $client->request('POST', 'http://localhost:8080/verify', [
+            'headers' => [
+                'Content-Type' => 'application/json',
+            ],
+            'json' => 
+                [
+                'salt' => $user[0]->getSalt() ,
+                'securedPassword' =>  $user[0]->getPassword() ,
+                'providedPassword' => $password,
+        ],
+        ]);
+        $verified = $response3->getContent();
+        }
+
+        if (empty($user)) {
+           return new Response('falseempty');
+
+        } elseif (strcmp($verified, "false") == 0 ) {
+            return new Response('falsepzass');
+        } else {
+            
+            if ($user[0]->getRole() == "admin" ){
+              
+               
+    
+            //$session->get('idsession');
+              
+            
+            return new Response('true');
+
+          }else 
+          { 
+              
+
+            return new Response('true');
+        }
+
+        }
+        
+        
     }
 
       /**
@@ -170,7 +271,7 @@ class UserController extends AbstractController
         ]);
     }
 
-//------------------------------------------------------------pdf
+
  /**
      * @Route("/pdf", name="app_user_pdf", methods={"GET"})
      */
@@ -242,7 +343,7 @@ class UserController extends AbstractController
            
         ]);
     }
-//--------------------------------------------------------------------------------------ADMIN
+
 /**
      * @Route("/", name="app_user_index", methods={"GET"})
      */
@@ -315,7 +416,7 @@ class UserController extends AbstractController
       $this->redirectToRoute('app_user_index');
     }
 
-//--------------------------------------------------------------------------------------CRUD
+
     /**
      * @Route("/new", name="app_user_new", methods={"GET", "POST"})
      */
@@ -385,51 +486,7 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
-    /*--------------------------------------------------------------------------------------MOBILE
-      /**
-     * @Route("/signuppmobile", name="app_chat_index4")
-     */
-    public function index4( SerializerInterface $serializer,Request $request, EntityManagerInterface $entityManager): Response
-    {
-      
-              //getSalt
-         $client = HttpClient::create();
-         $response = $client->request('GET', 'http://localhost:8080/getsalt');
-         $salt = $response->getContent();
-
-         
-
-        // Create a POST request psw crypté 
-        $response2 = $client->request('POST', 'http://localhost:8080/password', [
-            'headers' => [
-                'Content-Type' => 'application/json',
-            ],
-            'json' => 
-                [
-                'salt' => $salt,
-                'password' => $request->get("Password") 
-        ],
-        ]);
     
-      $crypted = $response2->getContent();
-
-      $user = new User();
-      $time = new \DateTime();
-      $user->setCreated($time);
-      $user->setUsername($request->get("Login"));
-      $user->setFirstName($request->get("Name"));
-      $user->setLastName($request->get("LastName"));
-      $user->setEmail($request->get("Email"));
-      $user->setSalt($salt);
-      $user->setPassword($crypted);
-      $user->setRole("player");
-
-
-      $entityManager->persist($user);
-      $entityManager->flush();
-        return  new Response("salut");
-
-      
-    }
+    
     
 }
