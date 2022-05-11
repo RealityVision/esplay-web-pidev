@@ -1,125 +1,45 @@
 {% extends 'admin/baseAdmin.html.twig' %}
 
 
+
 {% block body %}
 	<!-- page title area end -->
 	<div class="main-content-inner">
 
 		<div class="row" style="margin-top: 30px;">
 			<div class="col-11">
-				<a href="#" class="btn btn-success btn-xs pull-right" data-toggle="modal" data-target="#AddModal">Add new game
+				<a href="{{ path('app_game_new') }}" class="btn btn-success btn-xs pull-right"  data-target="#AddModal">Add new game
 				</a>
 			</div>
 		</div>
-		<div
-			class="row">
+		<div class="row">
 			<!-- **********************data table start cardssssssssss-->
+			{% for game in games %}
 			<div class="col-lg-4 col-md-6 mt-5">
 				<div class="card card-bordered">
-					<img class="card-img-top img-fluid" src="{{asset('/admin/assets/images/media/tetr.jpg')}}" alt="image">
+														<!-- //'. game.imageG.trim("C:\wamp64\www"))'-->
+					<img class="card-img-top img-fluid" src={{ vich_uploader_asset(game,'imageFile') }} alt="image">
 					<div class="card-body">
-						<h5 class="title">Tetris</h5>
-						<p class="card-text">Tetris is a puzzle game in which geometric shapes called
-																																			                                    "tetrominoes" fall down onto a playing field, and the player has to arrange them to
-																																			                                    form gapless lines.</p>
-						<a href="#" class="btn btn-outline-warning btn-xs" data-toggle="modal" data-target="#editModal">Update</a>
-						<a href="#" class="btn btn-outline-danger btn-xs" data-toggle="modal" data-target="#deleteModal">Delete</a>
+						<h5 class="title">{{ game.title }}</h5>
+						<p class="card-text">{{ game.description }}</p>
+						<a href="{{ path('app_game_edit', {'idGame': game.idGame}) }}" class="btn btn-outline-warning btn-xs">Manage</a>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-4 col-md-6 mt-5">
-				<div class="card card-bordered">
-					<img class="card-img-top img-fluid" src="{{asset('/admin/assets/images/media/tetr.jpg')}}" alt="image">
-					<div class="card-body">
-						<h5 class="title">Tetris</h5>
-						<p class="card-text">Tetris is a puzzle game in which geometric shapes called
-																																			                                    "tetrominoes" fall down onto a playing field, and the player has to arrange them to
-																																			                                    form gapless lines.</p>
-						<a href="#" class="btn btn-outline-warning btn-xs" data-toggle="modal" data-target="#editModal">Update</a>
-						<a href="#" class="btn btn-outline-danger btn-xs" data-toggle="modal" data-target="#deleteModal">Delete</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 mt-5">
-				<div class="card card-bordered">
-					<img class="card-img-top img-fluid" src="{{asset('/admin/assets/images/media/tetr.jpg')}}" alt="image">
-					<div class="card-body">
-						<h5 class="title">Tetris</h5>
-						<p class="card-text">Tetris is a puzzle game in which geometric shapes called
-																																			                                    "tetrominoes" fall down onto a playing field, and the player has to arrange them to
-																																			                                    form gapless lines.</p>
-						<a href="#" class="btn btn-outline-warning btn-xs" data-toggle="modal" data-target="#editModal">Update</a>
-						<a href="#" class="btn btn-outline-danger btn-xs" data-toggle="modal" data-target="#deleteModal">Delete</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 mt-5">
-				<div class="card card-bordered">
-					<img class="card-img-top img-fluid" src="{{asset('/admin/assets/images/media/tetr.jpg')}}" alt="image">
-					<div class="card-body">
-						<h5 class="title">Tetris</h5>
-						<p class="card-text">Tetris is a puzzle game in which geometric shapes called
-																																			                                    "tetrominoes" fall down onto a playing field, and the player has to arrange them to
-																																			                                    form gapless lines.</p>
-						<a href="#" class="btn btn-outline-warning btn-xs" data-toggle="modal" data-target="#editModal">Update</a>
-						<a href="#" class="btn btn-outline-danger btn-xs" data-toggle="modal" data-target="#deleteModal">Delete</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 mt-5">
-				<div class="card card-bordered">
-					<img class="card-img-top img-fluid" src="{{asset('/admin/assets/images/media/tetr.jpg')}}" alt="image">
-					<div class="card-body">
-						<h5 class="title">Tetris</h5>
-						<p class="card-text">Tetris is a puzzle game in which geometric shapes called
-																																			                                    "tetrominoes" fall down onto a playing field, and the player has to arrange them to
-																																			                                    form gapless lines.</p>
-						<a href="#" class="btn btn-outline-warning btn-xs" data-toggle="modal" data-target="#editModal">Update</a>
-						<a href="#" class="btn btn-outline-danger btn-xs" data-toggle="modal" data-target="#deleteModal">Delete</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 mt-5">
-				<div class="card card-bordered">
-					<img class="card-img-top img-fluid" src="{{asset('/admin/assets/images/media/tetr.jpg')}}" alt="image">
-					<div class="card-body">
-						<h5 class="title">Tetris</h5>
-						<p class="card-text">Tetris is a puzzle game in which geometric shapes called
-																																			                                    "tetrominoes" fall down onto a playing field, and the player has to arrange them to
-																																			                                    form gapless lines.</p>
-						<a href="#" class="btn btn-outline-warning btn-xs" data-toggle="modal" data-target="#editModal">Update</a>
-						<a href="#" class="btn btn-outline-danger btn-xs" data-toggle="modal" data-target="#deleteModal">Delete</a>
-					</div>
-				</div>
-			</div>
+			{% else %}
+				<tr>
+					<td colspan="9">no records found</td>
+				</tr>
+			{% endfor %}
 
 
-			<!---modaaaaaaaaaaaaaaaaaaaaaaaalll deleetteee -->
-			<div class="modal fade" id="deleteModal">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title">Are you sure to delete this game ?
-							</h5>
-							<button type="button" class="close" data-dismiss="modal">
-								<span>&times;</span>
-							</button>
-						</div>
-
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-danger btn-sm">Confirm</button>
-						</div>
-					</div>
-				</div>
-			</div>
 			<!--modaaaaaaaaaaaaaaaaaaaaaale edittt -->
 
 			<div class="modal fade" id="editModal">
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title">Edit Game</h5>
+							<h5 class="modal-title">Edit game</h5>
 							<button type="button" class="close" data-dismiss="modal">
 								<span>&times;</span>
 							</button>
@@ -129,7 +49,7 @@
 								<div class="col-sm-2 my-1"></div>
 								<div class="col-sm-2 my-1">
 
-									<label for="example-text-input" class="col-form-label">Text</label>
+									<label for="example-text-input" class="col-form-label">Title</label>
 								</div>
 								<div class="col-sm-6 my-1">
 									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
@@ -139,7 +59,7 @@
 								<div class="col-sm-2 my-1"></div>
 								<div class="col-sm-2 my-1">
 
-									<label for="example-text-input" class="col-form-label">Text</label>
+									<label for="example-text-input" class="col-form-label">Description</label>
 								</div>
 								<div class="col-sm-6 my-1">
 									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
@@ -149,7 +69,7 @@
 								<div class="col-sm-2 my-1"></div>
 								<div class="col-sm-2 my-1">
 
-									<label for="example-text-input" class="col-form-label">Text</label>
+									<label for="example-text-input" class="col-form-label">Size</label>
 								</div>
 								<div class="col-sm-6 my-1">
 									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
@@ -159,7 +79,7 @@
 								<div class="col-sm-2 my-1"></div>
 								<div class="col-sm-2 my-1">
 
-									<label for="example-text-input" class="col-form-label">Text</label>
+									<label for="example-text-input" class="col-form-label">Image</label>
 								</div>
 								<div class="col-sm-6 my-1">
 									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
@@ -167,54 +87,14 @@
 							</div>
 							<div class="form-row align-items-center">
 								<div class="col-sm-2 my-1"></div>
-								<div class="col-sm-2 my-1">
-
-									<label for="example-text-input" class="col-form-label">Text</label>
-								</div>
-								<div class="col-sm-6 my-1">
-									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
-								</div>
-							</div>
-							<div class="form-row align-items-center">
-								<div class="col-sm-2 my-1"></div>
-								<div class="col-sm-2 my-1">
-
-									<label for="example-text-input" class="col-form-label">Date</label>
-								</div>
-								<div class="col-sm-6 my-1">
-									<input class="form-control form-control-sm" type="date" value="" id="example-text-input">
-								</div>
-							</div>
-							<div class="form-row align-items-center">
-								<div class="col-sm-2 my-1"></div>
-								<div class="col-sm-2 my-1">
-
-									<label for="example-text-input" class="col-form-label">Tel</label>
-								</div>
-								<div class="col-sm-6 my-1">
-									<input class="form-control form-control-sm" type="tel" value="" id="example-text-input">
-								</div>
-							</div>
-							<div class="form-row align-items-center">
-								<div class="col-sm-2 my-1"></div>
-								<div class="col-sm-2 my-1">
-
-									<label for="example-text-input" class="col-form-label">Email</label>
-								</div>
-								<div class="col-sm-6 my-1">
-									<input class="form-control form-control-sm" type="email" value="" id="example-text-input">
-								</div>
-							</div>
-							<div class="form-row align-items-center">
-								<div class="col-sm-2 my-1"></div>
 
 								<div class="col-sm-2 my-1">
-									<label class="col-form-label">Role</label>
+									<label class="col-form-label">Category</label>
 								</div>
 								<div class="col-sm-6 my-1">
 									<select class="custom-select">
-										<option selected="selected" value="player">Player</option>
-										<option value="admin">Admin</option>
+										<option selected="selected" >Select</option>
+										<option value="admin">Arcade</option>
 
 									</select>
 								</div>
@@ -247,7 +127,7 @@
 								<div class="col-sm-2 my-1"></div>
 								<div class="col-sm-2 my-1">
 
-									<label for="example-text-input" class="col-form-label">Text</label>
+									<label for="example-text-input" class="col-form-label">Title</label>
 								</div>
 								<div class="col-sm-6 my-1">
 									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
@@ -257,7 +137,7 @@
 								<div class="col-sm-2 my-1"></div>
 								<div class="col-sm-2 my-1">
 
-									<label for="example-text-input" class="col-form-label">Text</label>
+									<label for="example-text-input" class="col-form-label">Description</label>
 								</div>
 								<div class="col-sm-6 my-1">
 									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
@@ -267,7 +147,7 @@
 								<div class="col-sm-2 my-1"></div>
 								<div class="col-sm-2 my-1">
 
-									<label for="example-text-input" class="col-form-label">Text</label>
+									<label for="example-text-input" class="col-form-label">Size</label>
 								</div>
 								<div class="col-sm-6 my-1">
 									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
@@ -277,7 +157,7 @@
 								<div class="col-sm-2 my-1"></div>
 								<div class="col-sm-2 my-1">
 
-									<label for="example-text-input" class="col-form-label">Text</label>
+									<label for="example-text-input" class="col-form-label">Image</label>
 								</div>
 								<div class="col-sm-6 my-1">
 									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
@@ -285,54 +165,14 @@
 							</div>
 							<div class="form-row align-items-center">
 								<div class="col-sm-2 my-1"></div>
-								<div class="col-sm-2 my-1">
-
-									<label for="example-text-input" class="col-form-label">Text</label>
-								</div>
-								<div class="col-sm-6 my-1">
-									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
-								</div>
-							</div>
-							<div class="form-row align-items-center">
-								<div class="col-sm-2 my-1"></div>
-								<div class="col-sm-2 my-1">
-
-									<label for="example-text-input" class="col-form-label">Date</label>
-								</div>
-								<div class="col-sm-6 my-1">
-									<input class="form-control form-control-sm" type="date" value="" id="example-text-input">
-								</div>
-							</div>
-							<div class="form-row align-items-center">
-								<div class="col-sm-2 my-1"></div>
-								<div class="col-sm-2 my-1">
-
-									<label for="example-text-input" class="col-form-label">Tel</label>
-								</div>
-								<div class="col-sm-6 my-1">
-									<input class="form-control form-control-sm" type="tel" value="" id="example-text-input">
-								</div>
-							</div>
-							<div class="form-row align-items-center">
-								<div class="col-sm-2 my-1"></div>
-								<div class="col-sm-2 my-1">
-
-									<label for="example-text-input" class="col-form-label">Email</label>
-								</div>
-								<div class="col-sm-6 my-1">
-									<input class="form-control form-control-sm" type="email" value="" id="example-text-input">
-								</div>
-							</div>
-							<div class="form-row align-items-center">
-								<div class="col-sm-2 my-1"></div>
 
 								<div class="col-sm-2 my-1">
-									<label class="col-form-label">Role</label>
+									<label class="col-form-label">Category</label>
 								</div>
 								<div class="col-sm-6 my-1">
 									<select class="custom-select">
-										<option selected="selected" value="player">Player</option>
-										<option value="admin">Admin</option>
+										<option selected="selected" >Select</option>
+										<option value="admin">Arcade</option>
 
 									</select>
 								</div>

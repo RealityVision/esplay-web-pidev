@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Game;
 use App\Form\GameType;
+use App\Form\RatingGType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,13 +22,92 @@ class GameController extends AbstractController
      */
     public function index(EntityManagerInterface $entityManager): Response
     {
+
         $games = $entityManager
+
             ->getRepository(Game::class)
             ->findAll();
 
-        return $this->render('game/index.html.twig', [
-            'games' => $games,
+        return $this->render('front/game.html.twig',
+            ['games' => $games]
+        );
+    }
+   /**
+     * @Route("/{idGame}/play", name="app_game_play", methods={"GET", "POST"})
+     */
+    public function play(Request $request, Game $game, EntityManagerInterface $entityManager, $idGame): Response
+    {
+
+
+        if ($idGame == 1) {
+            $formmm = $this->createForm(RatingGType::class,$game);
+            $formmm->handleRequest($request);
+
+            if ($formmm->isSubmitted() && $formmm->isValid()) {
+                return $this->redirectToRoute('app_relationnel_index', [], Response::HTTP_SEE_OTHER);
+            }
+
+            return $this->render('game/game1.html.twig', [
+                'game' => $game,
+                'formmm' => $formmm->createView()
+            ]);
+        }
+        elseif($idGame == 2) {
+            return $this->render('game/game2.html.twig', [
+                'game' => $game,
+            ]);}
+        elseif($idGame == 3) {
+            return $this->render('game/game3.html.twig', [
+                'game' => $game,
+            ]);}
+        elseif($idGame == 4) {
+            return $this->render('game/game4.html.twig', [
+                'game' => $game,
+            ]);}
+        elseif($idGame == 5) {
+            return $this->render('game/game5.html.twig', [
+                'game' => $game,
+            ]);}
+        elseif($idGame == 6) {
+            return $this->render('game/game6.html.twig', [
+                'game' => $game,
+            ]);}
+
+        return $this->render('game/gameinJava.html.twig', [
+            'game' => $game,
         ]);
+    }
+
+
+    /**
+     * @Route("/game1", name="app_game_1", methods={"GET"})
+     */
+    public function game1(): Response
+    {
+        return $this->render('game/game1.html.twig');
+    }
+
+    /**
+     * @Route("/game2", name="app_game_2", methods={"GET"})
+     */
+    public function game2(): Response
+    {
+        return $this->render('game/game2.html.twig');
+    }
+
+    /**
+     * @Route("/game3", name="app_game_3", methods={"GET"})
+     */
+    public function game3(): Response
+    {
+        return $this->render('game/game3.html.twig');
+    }
+    /**
+     * @Route("/game4", name="app_game_4", methods={"GET"})
+     */
+    public function game4(): Response
+    {
+        return $this->render('game/game4.html.twig');
     }
 
     /**
