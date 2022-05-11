@@ -111,27 +111,6 @@ class User
      * @ORM\Column(name="role", type="string", length=50, nullable=false, options={"default"="player"})
      */
     private $role = 'player';
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="created", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
-     */
-    private $created = 'CURRENT_TIMESTAMP';
-
-
-
-    public function getCreated(): ?\DateTime
-    {
-        return $this->created;
-    }
-
-    public function setCreated(\DateTime $created): self
-    {
-        $this->created = $created;
-
-        return $this;
-    }
-
 
     public function getIdUser(): ?int
     {

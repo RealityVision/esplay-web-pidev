@@ -3,12 +3,18 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraint as Assert;
+
 
 /**
  * Game
  *
  * @ORM\Table(name="game", indexes={@ORM\Index(name="cat", columns={"category"})})
  * @ORM\Entity
+ * @Vich\Uploadable
  */
 class Game
 {
@@ -57,6 +63,14 @@ class Game
     private $imageG;
 
     /**
+     * @var File|null
+     *
+     * @Vich\UploadableField(mapping="game_img", fileNameProperty="imageG")
+
+     */
+    private $imageFile;
+
+    /**
      * @var float
      *
      * @ORM\Column(name="rate", type="float", precision=10, scale=0, nullable=false)
@@ -75,7 +89,7 @@ class Game
      *
      * @ORM\ManyToOne(targetEntity="Category")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="category", referencedColumnName="category_id")
+     *   @ORM\JoinColumn(name="category", referencedColumnName="category_id", onDelete="CASCADE")
      * })
      */
     private $category;
@@ -177,6 +191,30 @@ class Game
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File|null $imageFile
+     * @return Game
+     */
+    public function setImageFile(?File $imageFile): Game
+    {
+
+        $this->imageFile = $imageFile;
+        if ($this->imageFile instanceof UploadedFile){
+            $this->dateG = new \DateTime('now');
+
+        }
 
         return $this;
     }

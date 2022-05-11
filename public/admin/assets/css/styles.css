@@ -826,7 +826,7 @@ ul.breadcrumbs {
 .single-report .icon {
     font-size: 32px;
     color: #fff;
-    background: #b22a2a;
+    background: var(--primary-color);
     height: 95px;
     width: 100px;
     text-align: right;
@@ -1853,6 +1853,7 @@ table.dbkit-table tr td {
 
 p.card-text {
     margin-bottom: 23px;
+    min-height: 120px;
 }
 
 /*-------------------- END Cards ------------------- */

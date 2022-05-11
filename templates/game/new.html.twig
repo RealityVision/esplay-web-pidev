@@ -1,11 +1,17 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/baseAdmin.html.twig' %}
 
 {% block title %}New Game{% endblock %}
 
 {% block body %}
-    <h1>Create new Game</h1>
+
+
+    <h1 style="color: azure" align="center">Create new Game</h1>
+
+
 
     {{ include('game/_form.html.twig') }}
 
     <a href="{{ path('app_game_index') }}">back to list</a>
+
+
 {% endblock %}

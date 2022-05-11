@@ -24,27 +24,14 @@ class UserType extends AbstractType
             ->add('phone',NumberType::class)
             ->add('email',EmailType::class)
             ->add('password')
-            //->add('salt')
+            ->add('salt')
             ->add('country',TextType::class)
             ->add('birthDate')
             ->add('picture',FileType::class)
             ->add('address',TextType::class)
-            ->add('role', ChoiceType::class, [
-                'choices'  => [
-                    'Select your role' => null,
-                    'Player' => true,
-                    'Admin' => false,
-                ],
-            ])
-            ->add('gender', ChoiceType::class, [
-                'choices'  => [
-                    'Select your gender' => null,
-                    'Male' => true,
-                    'Female' => false,
-                ],
-            ]);
-            
-        
+            ->add('gender')
+            ->add('role')
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

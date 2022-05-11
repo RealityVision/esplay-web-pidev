@@ -120,7 +120,7 @@ if ($('#coin_sales3').length) {
         data: {
             labels: ["January", "February", "March", "April", "May", "June", "July", "January", "February", "March", "April", "May"],
             datasets: [{
-                label: "Users",
+                label: "Sales",
                 backgroundColor: "rgba(247, 163, 58, 0.1)",
                 borderColor: '#fd9d24',
                 fill: true,
@@ -168,6 +168,65 @@ if ($('#coin_sales3').length) {
 
 /*--------------  coin_sales3 End ------------*/
 
+/*--------------  overview-chart start ------------*/
+if ($('#verview-shart').length) {
+    var myConfig = {
+        "type": "line",
+
+        "scale-x": { //X-Axis
+            "labels": ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"],
+            "label": {
+                "font-size": 14,
+                "offset-x": 0,
+            },
+            "item": { //Scale Items (scale values or labels)
+                "font-size": 10,
+            },
+            "guide": { //Guides
+                "visible": false,
+                "line-style": "solid", //"solid", "dotted", "dashed", "dashdot"
+                "alpha": 1
+            }
+        },
+        "plot": { "aspect": "spline" },
+        "series": [{
+                "values": [20, 25, 30, 35, 45, 40, 40, 35, 25, 17, 40, 50],
+                "line-color": "#F0B41A",
+                /* "dotted" | "dashed" */
+                "line-width": 5 /* in pixels */ ,
+                "marker": { /* Marker object */
+                    "background-color": "#D79D3B",
+                    /* hexadecimal or RGB value */
+                    "size": 5,
+                    /* in pixels */
+                    "border-color": "#D79D3B",
+                    /* hexadecimal or RBG value */
+                }
+            },
+            {
+                "values": [40, 45, 30, 20, 30, 35, 45, 55, 40, 30, 55, 30],
+                "line-color": "#0884D9",
+                /* "dotted" | "dashed" */
+                "line-width": 5 /* in pixels */ ,
+                "marker": { /* Marker object */
+                    "background-color": "#067dce",
+                    /* hexadecimal or RGB value */
+                    "size": 5,
+                    /* in pixels */
+                    "border-color": "#067dce",
+                    /* hexadecimal or RBG value */
+                }
+            }
+        ]
+    };
+
+    zingchart.render({
+        id: 'verview-shart',
+        data: myConfig,
+        height: "100%",
+        width: "100%"
+    });
+}
 
 /*--------------  overview-chart END ------------*/
 
@@ -199,7 +258,7 @@ if ($('#mvaluechart').length) {
             },
             tooltips: {
                 callbacks: {
-                    label: function (tooltipItem) {
+                    label: function(tooltipItem) {
                         return tooltipItem.yLabel;
                     }
                 }
@@ -248,7 +307,7 @@ if ($('#mvaluechart2').length) {
             },
             tooltips: {
                 callbacks: {
-                    label: function (tooltipItem) {
+                    label: function(tooltipItem) {
                         return tooltipItem.yLabel;
                     }
                 }
@@ -297,7 +356,7 @@ if ($('#mvaluechart3').length) {
             },
             tooltips: {
                 callbacks: {
-                    label: function (tooltipItem) {
+                    label: function(tooltipItem) {
                         return tooltipItem.yLabel;
                     }
                 }
@@ -346,7 +405,7 @@ if ($('#mvaluechart4').length) {
             },
             tooltips: {
                 callbacks: {
-                    label: function (tooltipItem) {
+                    label: function(tooltipItem) {
                         return tooltipItem.yLabel;
                     }
                 }
@@ -388,17 +447,17 @@ if ($('#visitor_graph').length) {
             gridLineWidth: 1
         },
         series: [{
-            name: 'USD',
-            data: [400, 470, 520, 500, 420, 350, 320, 400, 550, 600, 500, 420, 400],
-            fillColor: 'rgba(76, 57, 249, 0.5)',
-            lineColor: 'transparent'
-        },
-        {
-            name: 'BTC',
-            data: [450, 520, 550, 400, 450, 500, 400, 450, 500, 450, 400, 500, 450],
-            fillColor: 'rgba(103, 13, 251, 0.5)',
-            lineColor: 'transparent'
-        }
+                name: 'USD',
+                data: [400, 470, 520, 500, 420, 350, 320, 400, 550, 600, 500, 420, 400],
+                fillColor: 'rgba(76, 57, 249, 0.5)',
+                lineColor: 'transparent'
+            },
+            {
+                name: 'BTC',
+                data: [450, 520, 550, 400, 450, 500, 400, 450, 500, 450, 400, 500, 450],
+                fillColor: 'rgba(103, 13, 251, 0.5)',
+                lineColor: 'transparent'
+            }
         ]
     });
 }
@@ -1996,7 +2055,7 @@ if ($('#salesanalytic').length) {
             "title": "Sales",
             "position": "left",
             "autoGridCount": false,
-            "labelFunction": function (value) {
+            "labelFunction": function(value) {
                 return "$" + Math.round(value) + "M";
             }
         }, {
