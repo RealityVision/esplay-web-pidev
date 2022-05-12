@@ -17,7 +17,7 @@
 			{% endblock %}
 		</title>
 		{# Run `composer require symfony/webpack-encore-bundle`
-																																																																																																														           and uncomment the following Encore helpers to start using Symfony UX #}
+																																																																																																																														           and uncomment the following Encore helpers to start using Symfony UX #}
 		{% block stylesheets %}
 
 			<!-- Css Styles -->
@@ -256,17 +256,17 @@
 					<div class="nav-menu">
 						<ul>
 							<li class="active">
-								<a href="./index.html">
+								<a>
 									<span>Home</span>
 								</a>
 							</li>
 							<li class="mega-menu">
-								<a href="#">
+								<a href="{{path('app_game_front')}}">
 									<span>Esplay GAMES
 										<i class="fa fa-angle-down"></i>
 									</span>
 								</a>
-								<div class="megamenu-wrapper">
+								<div class="megamenu-wrapper" style="margin-top : 50px;">
 									<ul class="mw-nav">
 										<li>
 											<a href="#">
@@ -375,23 +375,18 @@
 
 							</li>
 							<li>
-								<a href="./store.html">
+								<a href="{{path('app_produit2_index')}}">
 									<span>Store
 									</span>
 								</a>
 							</li>
 							<li>
-								<a href="./chat.html">
+								<a href="{{path('app_chat_index')}}">
 									<span>Esplay Community
 									</span>
 								</a>
 							</li>
-							<li>
-								<a href="#">
-									<span>PROFILE
-									</span>
-								</a>
-							</li>
+							<li></li>
 						</ul>
 					</div>
 				</div>
@@ -524,7 +519,7 @@
 										document.write(new Date().getFullYear());
 									</script>
 									All rights reserved | This
-																																																																																																																																																																																																																																																																																																																																																																																																			                                template is made with
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																											                                template is made with
 									<i class="fa fa-heart" aria-hidden="true"></i>
 									by
 									<a href="https://colorlib.com" target="_blank">Reality Vision</a>

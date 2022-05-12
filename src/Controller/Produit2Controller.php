@@ -36,18 +36,18 @@ class Produit2Controller extends Controller
     /**
      * @Route("/front/", name="app_produit2_index")
      */
-    public function index(Request $request,EntityManagerInterface $entityManager ): Response
+    public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $produitSearch= new ProduitSearch();
+        $produitSearch = new ProduitSearch();
         $form = $this->createForm(ProduitSearchType::class, $produitSearch);
         $form->handleRequest($request);
-        $produit2ss= [];
-        if($form->isSubmitted() && $form->isValid()) {
+        $produit2ss = [];
+        if ($form->isSubmitted() && $form->isValid()) {
             $nom = $produitSearch->getNom();
-            if ($nom!="")
-                $produit2ss= $this->getDoctrine()->getRepository(Produit2::class)->findBy(['nom' => $nom] );
+            if ($nom != "")
+                $produit2ss = $this->getDoctrine()->getRepository(Produit2::class)->findBy(['nom' => $nom]);
             else
-                $produit2ss= $this->getDoctrine()->getRepository(Produit2::class)->findAll();
+                $produit2ss = $this->getDoctrine()->getRepository(Produit2::class)->findAll();
         }
         $allproduit2s = $entityManager
             ->getRepository(Produit2::class)
@@ -56,30 +56,30 @@ class Produit2Controller extends Controller
         $produit2s = $this->get('knp_paginator')->paginate(
             $allproduit2s,
             $request->query->getInt('page', 1),
-            3
+            6
         );
         return $this->render('front/store.html.twig', [
             'produit2s' => $produit2s,
             'produit2ss' => $produit2ss,
-            'form' => $form-> createView()
+            'form' => $form->createView()
         ]);
     }
 
     /**
      * @Route("/admin/", name="app_produit2_index2")
      */
-    public function index2(Request $request,EntityManagerInterface $entityManager ): Response
+    public function index2(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $produitSearch= new ProduitSearch();
+        $produitSearch = new ProduitSearch();
         $form = $this->createForm(ProduitSearchType::class, $produitSearch);
         $form->handleRequest($request);
-        $produit2ss= [];
-        if($form->isSubmitted() && $form->isValid()) {
+        $produit2ss = [];
+        if ($form->isSubmitted() && $form->isValid()) {
             $nom = $produitSearch->getNom();
-            if ($nom!="")
-                $produit2ss= $this->getDoctrine()->getRepository(Produit2::class)->findBy(['nom' => $nom] );
+            if ($nom != "")
+                $produit2ss = $this->getDoctrine()->getRepository(Produit2::class)->findBy(['nom' => $nom]);
             else
-                $produit2ss= $this->getDoctrine()->getRepository(Produit2::class)->findAll();
+                $produit2ss = $this->getDoctrine()->getRepository(Produit2::class)->findAll();
         }
         $allproduit2s = $entityManager
             ->getRepository(Produit2::class)
@@ -88,12 +88,12 @@ class Produit2Controller extends Controller
         $produit2s = $this->get('knp_paginator')->paginate(
             $allproduit2s,
             $request->query->getInt('page', 1),
-            3
+            6
         );
         return $this->render('admin/store.html.twig', [
             'produit2s' => $produit2s,
             'produit2ss' => $produit2ss,
-            'form' => $form-> createView()
+            'form' => $form->createView()
         ]);
     }
 
@@ -124,9 +124,9 @@ class Produit2Controller extends Controller
             'form' => $form->createView(),
         ]);
     }
-//
+    //
 
-//
+    //
     /**
      * @Route("/{idp2}", name="app_produit2_show", methods={"GET"})
      */
@@ -154,7 +154,8 @@ class Produit2Controller extends Controller
                 ->setSubject('Produit  modifié')
                 ->setBody(
                     $this->renderView(
-                        'cart/mail.html.twig'),
+                        'cart/mail.html.twig'
+                    ),
                     'text/html'
                 );
 
@@ -174,7 +175,7 @@ class Produit2Controller extends Controller
      */
     public function delete(Request $request, Produit2 $produit2, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$produit2->getIdp2(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $produit2->getIdp2(), $request->request->get('_token'))) {
             $entityManager->remove($produit2);
             $entityManager->flush();
         }
@@ -188,27 +189,27 @@ class Produit2Controller extends Controller
     public function search(Request $request)
     {
         $produitSearch = new ProduitSearch();
-        $form = $this->createForm(ProduitSearchType::class,$produitSearch);
+        $form = $this->createForm(ProduitSearchType::class, $produitSearch);
         $form->handleRequest($request);
-        $produit2s= [];
+        $produit2s = [];
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $nom = $produitSearch->getNom();
-            if ($nom!="")
-                $produit2s= $this->getDoctrine()->getRepository(Produit2::class)->findBy(['nom' => $nom] );
+            if ($nom != "")
+                $produit2s = $this->getDoctrine()->getRepository(Produit2::class)->findBy(['nom' => $nom]);
             else
-                $produit2s= $this->getDoctrine()->getRepository(Produit2::class)->findAll();
+                $produit2s = $this->getDoctrine()->getRepository(Produit2::class)->findAll();
         }
 
-        return  $this->render('front/store.html.twig',[ 'form' =>$form->createView(), 'produit2s' => $produit2s]);
+        return  $this->render('front/store.html.twig', ['form' => $form->createView(), 'produit2s' => $produit2s]);
     }
-///trie
-///
-///
+    ///trie
+    ///
+    ///
     /**
      * @Route("/Produit2/tri", name="/produit/tri")
      */
-    public function Tri(Request $request,PaginatorInterface $paginator)
+    public function Tri(Request $request, PaginatorInterface $paginator)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -222,41 +223,41 @@ class Produit2Controller extends Controller
 
         $produit2s = $paginator->paginate(
             $produit2s,
-            $request->query->getInt('page',1),
+            $request->query->getInt('page', 1),
             4
         );
 
-        return $this->render('admin/store.html.twig',
-            array('produit2s' => $produit2s));
-
+        return $this->render(
+            'admin/store.html.twig',
+            array('produit2s' => $produit2s)
+        );
     }
 
     /**
      * @Route("/cat/", name="produit_par_cat")
      * Method({"GET", "POST"})
      */
-    public function ProduitsParCategorie(Request $request) {
+    public function ProduitsParCategorie(Request $request)
+    {
         $catPSearch = new CatPSearch();
-        $form = $this->createForm(CatPSearchType::class,$catPSearch);
+        $form = $this->createForm(CatPSearchType::class, $catPSearch);
         $form->handleRequest($request);
 
-        $produit2s= [];
+        $produit2s = [];
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $categoryP = $catPSearch->getCategoryP();
 
-            if ($categoryP!="")
-            {
+            if ($categoryP != "") {
 
-                $produit2s= $categoryP->getProduit2s();
+                $produit2s = $categoryP->getProduit2s();
                 // ou bien
                 //$articles= $this->getDoctrine()->getRepository(Article::class)->findBy(['category' => $category] );
-            }
-            else
-                $produit2s= $this->getDoctrine()->getRepository(Produit2::class)->findAll();
+            } else
+                $produit2s = $this->getDoctrine()->getRepository(Produit2::class)->findAll();
         }
 
-        return $this->render('category_p/ProduitsParCategorie.html.twig',[
+        return $this->render('category_p/ProduitsParCategorie.html.twig', [
             'form' => $form->createView(),
             'produit2s' => $produit2s
         ]);
@@ -264,33 +265,33 @@ class Produit2Controller extends Controller
     /**
      * @Route("/produit2/stat", name="/produit2/stat")
      */
-    public function indexAction(){
+    public function indexAction()
+    {
         $repository = $this->getDoctrine()->getRepository(Produit2::class);
         $Produit2s = $repository->findAll();
         $em = $this->getDoctrine()->getManager();
 
-        $pr1=52;
-        $pr2=10;
+        $pr1 = 52;
+        $pr2 = 10;
 
 
-        foreach ($Produit2s as $Produit2s)
-        {
-            if (  $Produit2s->getPrix()=="250")  :
+        foreach ($Produit2s as $Produit2s) {
+            if ($Produit2s->getPrix() == "250") :
 
-                $pr1+=1;
-            else:
+                $pr1 += 1;
+            else :
 
-                $pr2+=1;
+                $pr2 += 1;
 
 
             endif;
-
         }
 
 
         $pieChart = new PieChart();
         $pieChart->getData()->setArrayToDataTable(
-            [['prix', 'nombres'],
+            [
+                ['prix', 'nombres'],
                 ['150', $pr1],
                 ['51', $pr2],
             ]
@@ -323,7 +324,4 @@ class Produit2Controller extends Controller
             return new Response($jsonc);
         }
     }
-
-
-
 }

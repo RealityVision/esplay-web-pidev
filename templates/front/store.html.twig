@@ -3,6 +3,9 @@
 {% block body %}
 
 	<style>
+		.s1 {
+			background-color: black;
+		}
 		select {
 			margin-left: 95px;
 			width: 150px;
@@ -19,7 +22,7 @@
 		.select {
 			margin: 40px;
 			width: 150px;
-			padding: 5px 5px 5px 5px;
+			padding: 5px;
 			font-size: 40px;
 			height: 5px;
 			-webkit-appearance: none;
@@ -31,55 +34,57 @@
 			display: none; /* remove default arrow on ie10 and ie11 */
 		}
 		/* target Internet Explorer 9 to undo the custom arrow */
-		@media screen and (min-width:0\0) {
+		@media screen and(min-width:0\0) {
 			select {
-				background:none\9;
+				background: none\9;
 				padding: 5px\9;
 			}
 		}
 	</style>
 	<style>
-		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-		*{
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700 &display=swap');
+		* {
 			box-sizing: border-box;
 			padding: 0;
 			margin: 0;
 		}
-		img{width: 100%}
-		body{
+		img {
+			width: 100%
+		}
+		body {
 			font-family: 'Poppins', sans-serif;
 			line-height: 1.5;
 		}
 		/****************/
-		.main-container{
+		.main-container {
 			width: 90vw;
 			margin: 0 auto;
 			padding: 40px 0;
 		}
-		.main-container > h2{
+		.main-container > h2 {
 			text-align: center;
 			padding: 10px 0;
 			font-size: 32px;
 		}
-		.main-container > p{
+		.main-container > p {
 			font-weight: 300;
 			padding: 10px 0;
 			opacity: 0.7;
 			text-align: center;
 		}
-		.category-head{
+		.category-head {
 			margin: 30px 0;
 		}
-		.category-head ul{
+		.category-head ul {
 			list-style-type: none;
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: flex-start;
 		}
-		.category-title{
+		.category-title {
 			flex: 0 0 calc(16.6667% - 10px);
 			display: flex;
-			justify-content:center;
+			justify-content: center;
 			background: #a8a8a8;
 			padding: 12px;
 			color: #fff;
@@ -87,28 +92,28 @@
 			cursor: pointer;
 			transition: all 0.4s ease;
 		}
-		.category-title:hover{
+		.category-title:hover {
 			opacity: 0.7;
 		}
-		.category-title li{
+		.category-title li {
 			padding: 0 10px;
 		}
-		.category-title span{
+		.category-title span {
 			color: #222;
 		}
 		/** single post **/
-		.posts-main-container{
+		.posts-main-container {
 			display: grid;
 			grid-template-columns: repeat(3, 1fr);
 			grid-gap: 40px;
 		}
-		.posts-main-container > div{
-			box-shadow: 0px 8px 22px -12px rgba(246, 49, 49, 0.64);
+		.posts-main-container > div {
+			box-shadow: 0 8px 22px -12px rgba(246, 49, 49, 0.64);
 		}
-		.post-img{
+		.post-img {
 			position: relative;
 		}
-		.category-name{
+		.category-name {
 			position: absolute;
 			top: 20px;
 			left: 20px;
@@ -118,86 +123,86 @@
 			padding: 4px 10px;
 			border-radius: 2px;
 		}
-		.sports .category-name{
+		.sports .category-name {
 			background: #a1e44d;
 		}
-		.arcade .category-name{
+		.arcade .category-name {
 			background: #4db4e4;
 		}
-		.adventure .category-name{
+		.adventure .category-name {
 			background: #7f24a0;
 		}
-		.action .category-name{
+		.action .category-name {
 			background: #e4934d;
 		}
-		.platformer .category-name{
+		.platformer .category-name {
 			background: #e44d70;
 		}
-		.horror .category-name{
+		.horror .category-name {
 			background: #0811b3;
 		}
-		.role-playing .category-name{
+		.role-playing .category-name {
 			background: #13180c;
 		}
-		.strategy .category-name{
+		.strategy .category-name {
 			background: #d41e0d;
 		}
-		.puzzle .category-name{
+		.puzzle .category-name {
 			background: #ff209a;
 		}
-		.post-content{
+		.post-content {
 			padding: 25px;
 		}
-		.post-content-top{
+		.post-content-top {
 			background: #e25757;
 			color: #fff;
 			opacity: 0.8;
 			padding: 5px 0 5px 15px;
 		}
-		.post-content-top span{
+		.post-content-top span {
 			padding-right: 20px;
 		}
-		.post-content-top .fa-comment, .post-content-top .fa-calendar{
+		.post-content-top .fa-comment,
+		.post-content-top .fa-calendar {
 			padding-right: 5px;
 		}
-		.post-content h2{
+		.post-content h2 {
 			font-size: 22px;
 			padding: 12px 0;
 			font-weight: 400;
 		}
-		.post-content p{
+		.post-content p {
 			opacity: 0.7;
 			font-size: 15px;
 			line-height: 1.8;
 		}
-		.read-btn{
+		.read-btn {
 			border: none;
 			padding: 8px 15px;
 			display: block;
-			margin: 5px auto;
+			margin: 5px auto 40px;
 			font-family: 'Poppins', sans-serif;
 			font-size: 15px;
 			cursor: pointer;
 			border: 1px solid #292929;
 			background: transparent;
-			margin-bottom: 40px;
 		}
-		.read-btn:hover{
+		.read-btn:hover {
 			background: #f6f6f6;
 		}
 		/***************/
-		@media(max-width: 1170px){
-			.posts-main-container{
+		@media(max-width: 1170px) {
+			.posts-main-container {
 				grid-template-columns: repeat(2, 1fr);
 			}
 		}
-		@media(max-width: 768px){
-			.posts-main-container{
+		@media(max-width: 768px) {
+			.posts-main-container {
 				grid-template-columns: 1fr;
 			}
 		}
 		/***********/
-		.active{
+		.active {
 			background: #f0544f;
 		}
 	</style>
@@ -223,51 +228,64 @@
 			</div>
 		</div>
 	</section>
-	<div>
-		<form role="search" id="nav-search-form" method="post" action="{{ path('/produit/tri') }}">
-			<div class="btn-toolbar" role="toolbar" aria-label="Programmatic control">
-				<div class="btn-group btn-group-sm" aria-label="Set Select2 option">
-					<button class="js-programmatic-set-val btn btn-outline-primary mr-1 mb-1">
-						tri par prix
-					</button>
+	<section class="s1">
+		<div>
+			<form role="search" id="nav-search-form" method="post" action="{{ path('/produit/tri') }}">
+				<div class="btn-toolbar" role="toolbar" aria-label="Programmatic control">
+					<div class="btn-group btn-group-sm" aria-label="Set Select2 option">
+						<button class="js-programmatic-set-val btn btn-outline-primary mr-1 mb-1">
+							tri par prix
+						</button>
+					</div>
+				</div>
+
+			</form>
+		</div>
+
+		{{ form_start(form) }}
+		<div class="form-row align-items-end">
+			<div class="col">
+				{{ form_row(form.nom) }}
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<button type="submit" class="btn btn-success">Rechercher</button>
 				</div>
 			</div>
-
-		</form>
-	</div>
-	{{ form_start(form) }}
-	<div class="form-row align-items-end">
-		<div class="col">
-			{{ form_row(form.nom) }}
 		</div>
-		<div class="col">
-			<div class="form-group">
-				<button type="submit" class="btn btn-success">Rechercher</button>
+		{{ form_end(form) }}
+		{% for message in app.flashes('info') %}
+			<div class="alert alert-success">
+				{{ message }}
 			</div>
-		</div>
-	</div>
-	{{ form_end(form) }}
-	{% for message in app.flashes('info') %}
-		<div class="alert alert-success">
-			{{ message }}
-		</div>
-	{% endfor %}
+		{% endfor %}
 
 		<div class="ml-5 mr-5 row">
 
 			{% for produit2 in produit2s %}
 				<div class="col-lg-4 col-md-6 mt-5">
 					<div class="card card-bordered">
-						<img src="{{ vich_uploader_asset(produit2, 'imageFile')}}" alt="card-image-top">
+						<center>
+							<img src="{{ vich_uploader_asset(produit2, 'imageFile')}}" alt="card-image-top">
+						</center>
+						<div class="card-body">
+							<h5 class="title">{{ produit2.nom }}
+							</h5>
+							<h3>{{ produit2.prix }}
+								dt</h3>
+							<p class="card-text">{{ produit2.description }}.
+								<a href="{{path('app_produit2_show', {'idp2': produit2.idp2})}}">
+									<span>infos
+										<i class="fa fa-angle-down"></i>
+									</span>
+								</a>
+							</p>
 
-						<div class="card-body" >
-							<h5 class="title">{{ produit2.nom }} </h5>
-							<h3>{{ produit2.prix }} dt</h3>
-							<p class="card-text">{{ produit2.description }}.</p>
-							<a href="{{ path('cart_add', {'idp2': produit2.idp2}) }}" class="btn btn-success float-right">
-{#	<a href="{{ path("panier.affiche",{'idp2': produit2.idp2 }) }}" class="btn-success">ajouter au panier </a>#}
+							<a
+								href="{{ path('cart_add', {'idp2': produit2.idp2}) }}" class="btn btn-success float-right">
+								{#	<a href="{{ path("panier.affiche",{'idp2': produit2.idp2 }) }}" class="btn-success">ajouter au panier </a>#}
 								<i class="fas fa-shopping-cart mr-1"></i>
-								Card
+								Cart
 							</a>
 						</div>
 					</div>
@@ -278,12 +296,9 @@
 					<td colspan="9">no records found</td>
 				</tr>
 			{% endfor %}
-			<div  class="navigation" style="width: -moz-max-content">
+			<div class="navigation" style="width: -moz-max-content">
 				{{ knp_pagination_render(produit2s) }}
 			</div>
 		</div>
-		</div>
-	</section>
-
-
-{% endblock %}
+	</div>
+</section>{% endblock %}
