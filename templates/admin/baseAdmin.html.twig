@@ -12,7 +12,7 @@
 			{% endblock %}
 		</title>
 		{# Run `composer require symfony/webpack-encore-bundle`
-																																																																																						           and uncomment the following Encore helpers to start using Symfony UX #}
+																																																																																																		           and uncomment the following Encore helpers to start using Symfony UX #}
 		{% block stylesheets %}
 			<link rel="stylesheet" href="{{asset('admin/assets/css/bootstrap.min.css')}}"/>
 			<link rel="stylesheet" href="{{asset('admin/assets/css/font-awesome.min.css')}}"/>
@@ -72,24 +72,24 @@
 					<div class="menu-inner">
 						<nav>
 							<ul class="metismenu" id="menu">
-								<li class="active">
-									<a href="index.html" aria-expanded="true">
+								<li>
+									<a href="{{ path('app_stat')}}" aria-expanded="true">
 										<i class="fa fa-area-chart"></i>
 										<span>dashboard</span>
 									</a>
 
 								</li>
 								<li>
+									<!-- class="active" -->
 									<!-- usersssssssssss -->
-									<a href="users.html" aria-expanded="true">
-										<i class="fa fa-users"></i>
+										<a href="{{ path('app_user_index')}}" aria-expanded="true"> <i class="fa fa-users"></i>
 										<span>Users</span>
 									</a>
 
 								</li>
 								<li>
 									<!-- Gamesssssss -->
-									<a href="games.html" aria-expanded="true">
+									<a href="{{ path('app_user_pdf')}}" aria-expanded="true">
 										<i class="fa fa-gamepad"></i>
 										<span>Games</span>
 									</a>
@@ -97,7 +97,7 @@
 								</li>
 								<li>
 									<!-- Storeeeee -->
-									<a href="store.html" aria-expanded="true">
+									<a href="{{ path('app_produit2_index2')}}" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Store</span>
 									</a>
@@ -105,15 +105,15 @@
 								</li>
 								<li>
 									<!-- Orderssssssss -->
-									<a href="orders.html" aria-expanded="true">
+									<a href="{{ path('app_user_pdf')}}" aria-expanded="true">
 										<i class="fa fa-credit-card"></i>
 										<span>Orders</span>
 									</a>
 
 								</li>
 								<li>
-									<!-- Orderssssssss -->
-									<a href="orders.html" aria-expanded="true">
+									<!-- reports -->
+									<a href="{{ path('reportad')}}" aria-expanded="true">
 										<i class="fa fa-credit-card"></i>
 										<span>Reports</span>
 									</a>
@@ -396,7 +396,7 @@
 							</div>
 							<p>
 								Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
-																																																																																																																																																																																																																																																								              distinctio itaque at.
+																																																																																																																																																																																																																																																																																																								              distinctio itaque at.
 							</p>
 						</div>
 						<div class="timeline-task">
@@ -431,7 +431,7 @@
 							</div>
 							<p>
 								Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
-																																																																																																																																																																																																																																																								              distinctio itaque at.
+																																																																																																																																																																																																																																																																																																								              distinctio itaque at.
 							</p>
 						</div>
 						<div class="timeline-task">
@@ -445,7 +445,7 @@
 							</div>
 							<p>
 								Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
-																																																																																																																																																																																																																																																								              distinctio itaque at.
+																																																																																																																																																																																																																																																																																																								              distinctio itaque at.
 							</p>
 						</div>
 						<div class="timeline-task">
@@ -470,7 +470,7 @@
 							</div>
 							<p>
 								Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
-																																																																																																																																																																																																																																																								              distinctio itaque at.
+																																																																																																																																																																																																																																																																																																								              distinctio itaque at.
 							</p>
 						</div>
 						<div class="timeline-task">
@@ -494,7 +494,7 @@
 							</div>
 							<p>
 								Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
-																																																																																																																																																																																																																																																								              distinctio itaque at.
+																																																																																																																																																																																																																																																																																																								              distinctio itaque at.
 							</p>
 						</div>
 						<div class="timeline-task">
@@ -508,7 +508,7 @@
 							</div>
 							<p>
 								Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
-																																																																																																																																																																																																																																																								              distinctio itaque at.
+																																																																																																																																																																																																																																																																																																								              distinctio itaque at.
 							</p>
 						</div>
 					</div>
@@ -537,7 +537,7 @@
 								</div>
 								<p>
 									The for attribute is necessary to bind our custom checkbox
-																																																																																																																																																																																																																																																																																							                with the input.
+																																																																																																																																																																																																																																																																																																																																													                with the input.
 								</p>
 							</div>
 							<div class="s-settings">
@@ -560,7 +560,7 @@
 								</div>
 								<p>
 									The for attribute is necessary to bind our custom checkbox
-																																																																																																																																																																																																																																																																																							                with the input.
+																																																																																																																																																																																																																																																																																																																																													                with the input.
 								</p>
 							</div>
 							<div class="s-settings">

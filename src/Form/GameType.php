@@ -19,11 +19,10 @@ class GameType extends AbstractType
             ->add('description')
             ->add('size')
 
-            ->add('imageG',FileType::class)
+            ->add('imageFile', FileType::class, ['required' => false])
             ->add('rate')
             ->add('rateNbr')
-            ->add('category',EntityType::class,['class' => Category::class,'choice_label' =>'categoryName'])
-        ;
+            ->add('category', EntityType::class, ['class' => Category::class, 'choice_label' => 'categoryName']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -1,9 +1,9 @@
 {% extends 'admin/baseAdmin.html.twig' %}
 
-{% block title %}Produit2 index{% endblock %}
+{% block title %}Products {% endblock %}
 
 {% block body %}
-    <h1>Produit2 index</h1>
+    <h1>Produit </h1>
 
     <table class="table">
         <thead>
@@ -28,13 +28,14 @@
                 <td>{{ produit2.description }}</td>
                 <td>{{ produit2.categorie }}</td>
                 <td>{{ produit2.date ? produit2.date|date('Y-m-d') : '' }}</td>
-                <td>{{ produit2.image }}</td>
+                <td>{{ produit2.imageFile }}</td>
                 <td>{{ produit2.prix }}</td>
                 <td>{{ produit2.stockProduit }}</td>
                 <td>{{ produit2.produit2 }}</td>
                 <td>
-                    <a href="{{ path('app_produit2_show', {'idp2': produit2.idp2}) }}">show</a>
-                    <a href="{{ path('app_produit2_edit', {'idp2': produit2.idp2}) }}">edit</a>
+                    <a class="btn btn-primary" href="{{ path('app_produit2_show', {'idp2': produit2.idp2}) }}">show</a>
+                    <a class="btn btn-primary" href="{{ path('app_produit2_edit', {'idp2': produit2.idp2}) }}">edit</a>
+                    <a class="btn btn-primary" href="{{path('ImprimerCommande')}}">Print</a>
                 </td>
             </tr>
         {% else %}

@@ -1,4 +1,19 @@
-<form method="post" action="{{ path('app_game_delete', {'idGame': game.idGame}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ game.idGame) }}">
-    <button class="btn">Delete</button>
+<form method="post" action="{{ path('app_game_delete', {'idGame': game.idGame}) }}" onsubmit="return confirm('Are you sure you want to delete {{ game.title }}?');">
+
+
+	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ game.idGame) }}">
+	<button class="buttonnn">Delete
+		{{ game.title }}</button>
 </form>
+<style>
+	.buttonnn {
+		border-radius: 12px;
+		background-color: #ff0000;
+		color: white;
+		padding: 1em 1.5em;
+		text-decoration: none;
+		text-transform: uppercase;
+		margin-left: 50px;
+
+	}
+</style>

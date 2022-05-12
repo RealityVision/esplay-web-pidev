@@ -1,0 +1,17 @@
+{% block body %}
+    <h1 align="center">Détails de la commande</h1><hr>
+
+    <body>
+    <h3>Numéro de la commande</h3>
+    {% for c in commande %}
+        <p>{{ c.idCommande }}</p>
+        <br>
+        <h3>Quantity</h3>
+        <p>{{ c.quantite}}</p>
+        <br>
+        <h3>User Code</h3>
+        <p>{{ c.idAcheteur}}</p>
+        <br>
+    {% endfor %}
+    </body>
+{% endblock %}
