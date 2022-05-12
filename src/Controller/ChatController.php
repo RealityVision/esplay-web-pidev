@@ -6,12 +6,18 @@ use App\Entity\Chat;
 use App\Entity\User;
 use App\Form\ChatType;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
+
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
+
+
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Serializer;
 /**
  * @Route("/chat")
  */
@@ -107,7 +113,25 @@ class ChatController extends AbstractController
 
       
     }
+/**
+     * @Route("/chatmobile/affiche", name="app_chat_affiche")
+     */
+    public function afficheProd(EntityManagerInterface $entityManager ) {
+        
+        $chats = $entityManager
+            ->getRepository(Chat::class)
+            ->findAll();
+        //RESPONSE JSON FROM OUR SERVER
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
 
+        
+
+        $serializer = new Serializer([$normalizer],[$encoder]);
+        $formatted = $serializer->normalize($chats);
+        
+        return new JsonResponse($formatted);
+    }
 
 
 
