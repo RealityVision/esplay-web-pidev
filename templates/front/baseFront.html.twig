@@ -65,7 +65,7 @@
 								<a href="./categories-grid.html">Our GAMES</a>
 							</li>
 							<li>
-								<a href="./typography.html">Recommended Games</a>
+								<a href="{{path('app_recomendedg_index')}}">Recommended Games</a>
 							</li>
 							<li>
 								<a href="./details-post-default.html">About Us</a>
@@ -355,7 +355,7 @@
 								</div>
 							</li>
 							<li>
-								<a href="#">
+								<a href="{{path('app_recomendedg_index_Client')}}">
 									<span>Recommended Games
 										<i class="fa fa-angle-down"></i>
 									</span>
@@ -608,5 +608,8 @@
 		<script src="{{asset('front/assets/js/jquery.slicknav.js')}}"></script>
 		<script src="{{asset('front/assets/js/owl.carousel.min.js')}}"></script>
 		<script src="{{asset('front/assets/js/main.js')}}"></script>
+
+		<script src="{{ asset('bundles/starrating/js/rating.js') }}"></script>
+
 	</body>
 </html>

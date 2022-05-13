@@ -116,7 +116,7 @@ class User
      *
      * @ORM\Column(name="created", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
      */
-    private $created = 'CURRENT_TIMESTAMP';
+    private $created ;
 
 
 

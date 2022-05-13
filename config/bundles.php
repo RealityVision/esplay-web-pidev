@@ -16,4 +16,5 @@ return [
     Vich\UploaderBundle\VichUploaderBundle::class => ['all' => true],
     blackknight467\StarRatingBundle\StarRatingBundle::class => ['all' => true],
     Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle::class => ['all' => true],
+    Nomaya\SocialBundle\NomayaSocialBundle::class => ['all' => true],
 ];
