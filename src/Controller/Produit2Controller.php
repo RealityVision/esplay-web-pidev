@@ -161,7 +161,7 @@ class Produit2Controller extends Controller
 
             $mailer->send($message);
             $this->addFlash('message', 'le message a bien ete envoye');
-            return $this->redirectToRoute('app_produit2_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_produit2_index2', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('produit2/edit.html.twig', [

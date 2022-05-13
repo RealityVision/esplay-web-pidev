@@ -22,6 +22,7 @@ use Symfony\Component\Serializer\Serializer;
  */
 class GameController extends AbstractController
 {
+
     /**
      * @Route("/", name="app_game_index", methods={"GET"})
      */
@@ -38,6 +39,7 @@ class GameController extends AbstractController
             ['games' => $games]
         );
     }
+
     /**
      * @Route("/front", name="app_game_front", methods={"GET"})
      */
@@ -54,6 +56,8 @@ class GameController extends AbstractController
             ['games' => $games]
         );
     }
+
+
     /**
      * @Route("/{idGame}/play", name="app_game_play", methods={"GET", "POST"})
      */

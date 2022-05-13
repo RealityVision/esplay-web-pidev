@@ -17,7 +17,7 @@
 			{% endblock %}
 		</title>
 		{# Run `composer require symfony/webpack-encore-bundle`
-																																																																																																																														           and uncomment the following Encore helpers to start using Symfony UX #}
+																																																																																																																																																								           and uncomment the following Encore helpers to start using Symfony UX #}
 		{% block stylesheets %}
 
 			<!-- Css Styles -->
@@ -185,9 +185,9 @@
 										Tunis</li>
 									<li>
 										<i class="fa fa-clock-o"></i>
-										Apr 08, 2022
+										welcome back
 									</li>
-									{% if app.request.get('msg') == true %}
+									{% if app.session.get('idsession') != null %}
 
 										<li class="login-switch signup-open">
 
@@ -197,8 +197,7 @@
 											</a>
 
 										</li>
-									{% endif %}
-									{% if app.request.get('msg') == false  %}
+									{% else %}
 										<li class="signup-switch signup-open">
 											<i class="fa fa-sign-out"></i>
 											Sign in
@@ -386,6 +385,7 @@
 									</span>
 								</a>
 							</li>
+
 							<li></li>
 						</ul>
 					</div>
@@ -519,7 +519,7 @@
 										document.write(new Date().getFullYear());
 									</script>
 									All rights reserved | This
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																											                                template is made with
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																                                template is made with
 									<i class="fa fa-heart" aria-hidden="true"></i>
 									by
 									<a href="https://colorlib.com" target="_blank">Reality Vision</a>
@@ -554,11 +554,11 @@
 					</div>
 					<form method="POST" action="{{path('signup')}}" class="signup-form">
 						<div class="sf-input-list">
-							<input type="text" class="input-value" placeholder="User Name*" name="login" required>
+							<input type="text" class="input-value" pattern=".{4,}" title="4 or more characters" placeholder="User Name*" name="login" required>
 							<input type="text" class="input-value" placeholder="Name" name="name" required>
 							<input type="text" class="input-value" placeholder="Last Name" name="last_name" required>
-							<input type="text" class="input-value" placeholder="Email Address" name="Email" required>
-							<input type="password" class="input-value" placeholder="Password" name="password" required>
+							<input type="text" class="input-value" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Email not valid" placeholder="Email Address" name="Email" required>
+							<input type="password" class="input-value" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" placeholder="Password" name="password" required>
 						</div>
 						<div class="radio-check">
 							<label for="rc-agree">I agree with the term & conditions

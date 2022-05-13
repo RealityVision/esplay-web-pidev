@@ -36,17 +36,18 @@ class ChatController extends AbstractController
         $chats = $entityManager
             ->getRepository(Chat::class)
             ->findAll();
-
+        $session = $request->getSession();
         $user = $entityManager
             ->getRepository(User::class)
-            ->find(32);
+            ->find($session->get('idsession'));
+
 
 
         if ($form->isSubmitted() && $form->isValid()) {
             $time = new \DateTime();
             $chat->setDateMessage($time);
             $chat->setIdUser($user);
-            $chat->setUsername("khaled");
+            $chat->setUsername($user->getUsername());
             $entityManager->persist($chat);
             $entityManager->flush();
 
@@ -60,6 +61,7 @@ class ChatController extends AbstractController
             'chats' => $chats,
             'form' => $form->createView(),
             'bool' => false,
+            'user' => $user,
 
         ]);
     }

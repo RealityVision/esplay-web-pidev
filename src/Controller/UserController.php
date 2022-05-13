@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Game;
 use App\Entity\User;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -100,8 +101,10 @@ class UserController extends AbstractController
 
         if (empty($user)) {
             $bool = false;
+            $user = null;
         } elseif (strcmp($verified, "false") == 0) {
             $bool = false;
+            $user = null;
         } else {
             $bool = true;
             if ($user[0]->getRole() == "admin") {
@@ -113,20 +116,26 @@ class UserController extends AbstractController
                 //$session->get('idsession');
 
 
-                return $this->redirectToRoute('app_user_index', ['msg' => $bool]);
+                return $this->redirectToRoute('app_user_index');
             } else {
                 $iduser = $user[0]->getIdUser();
                 $session = new Session();
                 $session->set('idsession', $iduser);
 
                 return
-                    $this->redirectToRoute('app_index', ['msg' => $bool]);
+                    $this->redirectToRoute('app_game_front');
+                $user = null;
             }
         }
+        $games = $entityManager
 
+            ->getRepository(Game::class)
+            ->findAll();
         return $this->render(
-            'front/index.html.twig',
+            'front/game.html.twig',
             [
+                'games' => $games,
+                'user' => $user,
                 'msg' => $bool,
             ]
         );
@@ -232,7 +241,7 @@ class UserController extends AbstractController
         $entityManager->persist($user);
         $entityManager->flush();
         return
-            $this->redirectToRoute('app_index');
+            $this->redirectToRoute('app_game_front');
     }
 
 
@@ -246,7 +255,7 @@ class UserController extends AbstractController
         $session->invalidate();
 
 
-        return $this->redirectToRoute('app_index');
+        return $this->redirectToRoute('app_game_front');
     }
 
 
