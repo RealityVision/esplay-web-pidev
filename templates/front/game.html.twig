@@ -1,0 +1,564 @@
+{% extends 'front/baseFront.html.twig' %}
+
+{% block body %}
+	<link rel="stylesheet" href="{{asset('front/assets/css/rating.css')}}" type="text/css">
+
+	<style>
+		select {
+			margin-left: 95px;
+			width: 150px;
+			padding: 5px 35px 5px 5px;
+			font-size: 16px;
+			border: 1px solid #ccc;
+			height: 34px;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+			background: 96% / 15% no-repeat #eee;
+			background-color: #DE2F69;
+		}
+		.select {
+			margin: 40px;
+			width: 150px;
+			padding: 5px;
+			font-size: 40px;
+			height: 5px;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+		}
+		/* CAUTION: IE hackery ahead */
+		select::-ms-expand {
+			display: none; /* remove default arrow on ie10 and ie11 */
+		}
+
+		/* target Internet Explorer 9 to undo the custom arrow */
+		@media screen and(min-width:0\0) {
+			select {
+				background: none\9;
+				padding: 5px\9;
+			}
+		}
+	</style>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700 &display=swap');
+
+		* {
+			box-sizing: border-box;
+			padding: 0;
+			margin: 0;
+		}
+		img {
+			width: 100%
+		}
+
+		body {
+			font-family: 'Poppins', sans-serif;
+			line-height: 1.5;
+			background-color: #343a40;
+		}
+
+		/****************/
+		.main-container {
+			width: 90vw;
+			margin: 0 auto;
+			padding: 40px 0;
+		}
+		.main-container > h2 {
+			text-align: center;
+			padding: 10px 0;
+			font-size: 32px;
+		}
+		.main-container > p {
+			font-weight: 300;
+			padding: 10px 0;
+			opacity: 0.7;
+			text-align: center;
+		}
+		.category-head {
+			margin: 30px 0;
+		}
+		.category-head ul {
+			list-style-type: none;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: flex-start;
+		}
+		.category-title {
+			flex: 0 0 calc(16.6667% - 10px);
+			display: flex;
+			justify-content: center;
+			background: #a8a8a8;
+			padding: 12px;
+			color: #fff;
+			margin: 5px;
+			cursor: pointer;
+			transition: all 0.4s ease;
+		}
+		.category-title:hover {
+			opacity: 0.7;
+		}
+		.category-title li {
+			padding: 0 10px;
+		}
+		.category-title span {
+			color: #222;
+		}
+
+		/** single post **/
+		.posts-main-container {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			grid-gap: 40px;
+		}
+		.posts-main-container > div {
+			box-shadow: 0 8px 22px -12px rgba(246, 49, 49, 0.64);
+		}
+		.post-img {
+			position: relative;
+		}
+		.category-name {
+			position: absolute;
+			top: 20px;
+			left: 20px;
+			text-transform: uppercase;
+			font-size: 13px;
+			color: #fff;
+			padding: 4px 10px;
+			border-radius: 2px;
+		}
+
+		.sports .category-name {
+			background: #a1e44d;
+		}
+		.arcade .category-name {
+			background: #4db4e4;
+		}
+		.adventure .category-name {
+			background: #7f24a0;
+		}
+		.action .category-name {
+			background: #e4934d;
+		}
+		.platformer .category-name {
+			background: #e44d70;
+		}
+		.horror .category-name {
+			background: #0811b3;
+		}
+		.role-playing .category-name {
+			background: #13180c;
+		}
+		.strategy .category-name {
+			background: #d41e0d;
+		}
+		.puzzle .category-name {
+			background: #ff209a;
+		}
+
+
+		.post-content {
+			padding: 25px;
+		}
+		.post-content-top {
+			background: #e25757;
+			color: #fff;
+			opacity: 0.8;
+			padding: 5px 0 5px 15px;
+		}
+		.post-content-top span {
+			padding-right: 20px;
+		}
+		.post-content-top .fa-comment,
+		.post-content-top .fa-calendar {
+			padding-right: 5px;
+		}
+		.post-content h2 {
+			font-size: 22px;
+			padding: 12px 0;
+			font-weight: 400;
+		}
+		.post-content p {
+			opacity: 0.7;
+			font-size: 15px;
+			line-height: 1.8;
+		}
+		.read-btn {
+			border: none;
+			padding: 8px 15px;
+			display: block;
+			margin: 5px auto 40px;
+			font-family: 'Poppins', sans-serif;
+			font-size: 15px;
+			cursor: pointer;
+			border: 1px solid #292929;
+			background: transparent;
+		}
+
+		.read-btn:hover {
+			background: #f6f6f6;
+		}
+
+
+		/***************/
+		@media(max-width: 1170px) {
+			.posts-main-container {
+				grid-template-columns: repeat(2, 1fr);
+			}
+		}
+		@media(max-width: 768px) {
+			.posts-main-container {
+				grid-template-columns: 1fr;
+			}
+		}
+
+
+		/***********/
+
+		.active {
+			background: #f0544f;
+		}
+	</style>
+
+
+	<section class="breadcrumb-section set-bg spad" data-setbg="{{asset('front/assets/img/breadcrumb-bg.jpg')}}">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 text-center">
+					<div class="breadcrumb-text">
+						<h3>
+							<i class="fa fa-comment-o"></i>
+							Esplay
+							<span>Local Games</span>
+						</h3>
+						<div class="bt-option">
+							<a href="{{path('app_game_front')}}">Home</a>
+
+							<span>Games</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="categories-list-section spad">
+
+		<!-- start message list section  -->
+
+		<!-- end message list section  -->
+		<!-- start content section  -->
+
+		<!-- end content section  -->
+		<!-- start infos section  -->
+		<!-- Details Gallery Section Begin -->
+			<div class="details-gallery-section"> <div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="dg-slider owl-carousel">
+
+							<div class="dg-item set-bg" data-setbg="{{asset('/images/produits/snake.png')}}"></div>
+
+							<div class="dg-item set-bg" data-setbg="{{asset('/images/produits/racing.jpg')}}"></div>
+
+							<div class="dg-item set-bg" data-setbg="{{asset('/images/produits/mario.jpg')}}"></div>
+
+							<div class="dg-item set-bg" data-setbg="{{asset('/images/produits/Tetris.jpg')}}"></div>
+
+							<div class="dg-item set-bg" data-setbg="{{asset('/images/produits/Minecraft.jpg')}}"></div>
+
+							<div class="dg-item set-bg" data-setbg="{{asset('/images/produits/GeoDash.jpg')}}"></div>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="ml-5 mr-5 row">
+
+			{% for game in games %}
+				<div class="col-lg-4 col-md-6 mt-5">
+					<div
+						class="card card-bordered">
+						<!-- //'. game.imageG.trim("C:\wamp64\www"))'-->
+						<img class="card-img-top img-fluid" src={{ vich_uploader_asset(game,'imageFile') }} alt="image">
+						<div class="card-body">
+							<h5 class="title">{{ game.title }}</h5>
+							<p class="card-text">{{ game.description }}</p>
+							<a href="{{ path('app_game_play', {'idGame':game.idGame}) }}" class="btn btn-outline-warning btn-xs">Play</a>
+
+
+								{{ (game.rate // game.rateNbr) | rating }}
+
+							<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+						</div>
+					</div>
+				</div>
+			{% else %}
+				<tr>
+					<td colspan="9">no records found</td>
+				</tr>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+
+
+<div class="main-container">
+	<h2 style="color: azure">Game Categories</h2>
+	<p style="font-size: large">Choose the genre that suits your playstyle!</p>
+	<div class="filter-container">
+		<div class="category-head">
+			<ul>
+				<div class="category-title active" id="all">
+					<li>All</li>
+					<span>
+						<i class="fas fa-border-all"></i>
+					</span>
+				</div>
+				<div class="category-title" id="arcade">
+					<li>Arcade</li>
+					<span>
+						<i class="fas fa-running"></i>
+					</span>
+				</div>
+				<div class="category-title" id="platformer">
+					<li>Platformer</li>
+					<span>
+						<i class="fas fa-theater-masks"></i>
+					</span>
+				</div>
+				<div class="category-title" id="adventure">
+					<li>Adventure</li>
+					<span>
+						<i class="fas fa-chart-area"></i>
+					</span>
+				</div>
+				<div class="category-title" id="action">
+					<li>Action</li>
+					<span>
+						<i class="fas fa-coins"></i>
+					</span>
+				</div>
+				<div class="category-title" id="puzzle">
+					<li>Puzzle</li>
+					<span>
+						<i class="fas fa-running"></i>
+					</span>
+				</div>
+				<div class="category-title" id="role-Playing">
+					<li>Role-Playing</li>
+					<span>
+						<i class="fas fa-running"></i>
+					</span>
+				</div>
+				<div class="category-title" id="sports">
+					<li>Sports</li>
+					<span>
+						<i class="fas fa-running"></i>
+					</span>
+				</div>
+				<div class="category-title" id="strategy">
+					<li>Strategy</li>
+					<span>
+						<i class="fas fa-running"></i>
+					</span>
+				</div>
+				<div class="category-title" id="horror">
+					<li>Horror</li>
+					<span>
+						<i class="fas fa-landmark"></i>
+					</span>
+				</div>
+
+			</ul>
+		</div>
+
+
+		<div class="posts-collect">
+			<div
+				class="posts-main-container">
+				<!-- single post -->
+				<div class="all adventure">
+					<div class="post-img">
+						<img class="card-img-top img-fluid" src="{{asset('/images/produits/mario.jpg')}}" alt="post">
+						<span class="category-name">adventure</span>
+					</div>
+
+					<div class="post-content">
+						<div class="post-content-top">
+							<span>
+								<i></i>April 23, 2022</span>
+
+						</div>
+						<h2 style="color: azure">Super Mario</h2>
+						<p>Super Mario Bros. is a platform game. In the game, Mario must race through the Mushroom Kingdom and save Princess Toadstool (later Princess Peach) from Bowser.</p>
+					</div>
+				</div>
+				<div class="all sports">
+					<div class="post-img">
+						<img class="card-img-top img-fluid" src="{{asset('/images/produits/racing.jpg')}}" alt="post">
+						<span class="category-name">sports</span>
+					</div>
+
+					<div class="post-content">
+						<div class="post-content-top">
+							<span>
+								<i></i>April 20, 2022</span>
+
+						</div>
+						<h2 style="color: azure">Esplay Racing</h2>
+						<p>Consist of some kind of vehicle competing against other vehicles on a series of different tracks</p>
+
+					</div>
+				</div>
+				<div class="all arcade">
+					<div class="post-img">
+						<img class="card-img-top img-fluid" src="{{asset('/images/produits/snake.png')}}" alt="post">
+						<span class="category-name">arcade</span>
+					</div>
+
+					<div class="post-content">
+						<div class="post-content-top">
+							<span>
+								<i></i>April 23, 2022</span>
+
+						</div>
+						<h2 style="color: azure">Esplay Snake</h2>
+						<p>player controls a long, thin creature, resembling a snake, which roams around on a bordered plane, picking up food (or some other item), trying to avoid hitting its own tail or the edges of the playing area.</p>
+
+					</div>
+				</div>
+				<div class="all adventure">
+					<div class="post-img">
+						<img class="card-img-top img-fluid" src="{{asset('/images/produits/Minecraft.jpg')}}" alt="post">
+						<span class="category-name">adventure</span>
+					</div>
+
+					<div class="post-content">
+						<div class="post-content-top">
+							<span>
+								<i></i>April 23, 2022</span>
+
+						</div>
+						<h2 style="color: azure">Minecraft</h2>
+						<p>Minecraft is a 3-D computer game where players can build anything. The game which has been described as like an 'online Lego' involves building blocks and creating structures across different environments and terrains.</p>
+					</div>
+				</div>
+				<div class="all arcade">
+					<div class="post-img">
+						<img class="card-img-top img-fluid" src="{{asset('/images/produits/GeoDash.jpg')}}" alt="post">
+						<span class="category-name">arcade</span>
+					</div>
+
+					<div class="post-content">
+						<div class="post-content-top">
+							<span>
+								<i></i>April 23, 2022</span>
+
+						</div>
+						<h2 style="color: azure">Geometry Dash</h2>
+						<p>In Geometry Dash, players control the movement of an icon and navigate along music-based levels, while avoiding obstacles such as spikes that instantly destroy the icon on impact</p>
+					</div>
+				</div>
+				<div class="all arcade">
+					<div class="post-img">
+						<img class="card-img-top img-fluid" src="{{asset('/images/produits/Tetris.jpg')}}" alt="post">
+						<span class="category-name">arcade</span>
+					</div>
+
+					<div class="post-content">
+						<div class="post-content-top">
+							<span>
+								<i></i>April 23, 2022</span>
+
+						</div>
+						<h2 style="color: azure">Tetris</h2>
+						<p>The player controls a long, thin creature, resembling a snake, which roams around on a bordered plane, picking up food (or some other item), trying to avoid hitting its own tail or the edges of the playing area.</p>
+					</div>
+				</div>
+				<div class="all puzzle">
+					<div class="post-img">
+						<img class="card-img-top img-fluid" src="{{asset('/images/produits/mohJHox.jpg')}}" alt="post">
+						<span class="category-name">puzzle</span>
+					</div>
+
+					<div class="post-content">
+						<div class="post-content-top">
+							<span>
+								<i></i>April 23, 2022</span>
+
+						</div>
+						<h2 style="color: azure">TickTackToe</h2>
+						<p>A game in which two players seek in alternate turns to complete a row, a column, or a diagonal with either three O's or three X's drawn in the spaces of a grid of nine squares</p>
+					</div>
+				</div>
+				<div class="all platformer">
+					<div class="post-img">
+						<img class="card-img-top img-fluid" src="{{asset('/images/produits/KJzHIdh.png')}}" alt="post">
+						<span class="category-name">platformer</span>
+					</div>
+
+					<div class="post-content">
+						<div class="post-content-top">
+							<span>
+								<i></i>April 23, 2022</span>
+
+						</div>
+						<h2 style="color: azure">Brick Breaker</h2>
+						<p>Player must smash wall of bricks by deflecting a bouncing ball with a paddle.</p>
+					</div>
+				</div>
+				<div class="all strategy">
+					<div class="post-img">
+						<img class="card-img-top img-fluid" src="{{asset('/images/produits/HLmguBM.jpg')}}" alt="post">
+						<span class="category-name">strategy</span>
+					</div>
+
+					<div class="post-content">
+						<div class="post-content-top">
+							<span>
+								<i></i>April 23, 2022</span>
+
+						</div>
+						<h2 style="color: azure">Pinball</h2>
+						<p>
+							Pinball is an arcade game in which a ball rolls and is propelled inside a machine, hitting various lights, bumpers, ramps, and other targets depending on its design.</p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	const categoryTitle = document.querySelectorAll('.category-title');
+const allCategoryPosts = document.querySelectorAll('.all');
+
+for (let i = 0; i < categoryTitle.length; i++) {
+categoryTitle[i].addEventListener('click', filterPosts.bind(this, categoryTitle[i]));
+}
+
+function filterPosts(item) {
+changeActivePosition(item);
+for (let i = 0; i < allCategoryPosts.length; i++) {
+if (allCategoryPosts[i].classList.contains(item.attributes.id.value)) {
+allCategoryPosts[i].style.display = "block";
+} else {
+allCategoryPosts[i].style.display = "none";
+}
+}
+}
+
+function changeActivePosition(activeItem) {
+for (let i = 0; i < categoryTitle.length; i++) {
+categoryTitle[i].classList.remove('active');
+}
+activeItem.classList.add('active');
+};
+</script>{% endblock %}

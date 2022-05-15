@@ -3,97 +3,148 @@
 
 {% block body %}
 	<!-- page title area end -->
+	<style>
+
+		.custom-btn {
+			width: 130px;
+			height: 40px;
+			color: #e3e9ff;
+			border-radius: 11px;
+			padding: 10px 33px;
+			font-weight: 200;
+			background: transparent;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			position: relative;
+			display: inline-block;
+			box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+			7px 7px 20px 0px rgba(0,0,0,.1),
+			4px 4px 5px 0px rgba(0,0,0,.1);
+			outline: none;
+		}
+		.btn-15 {
+			background: #1a44d4;
+			border: none;
+			z-index: 1;
+		}
+		.btn-15:after {
+			position: absolute;
+			content: "";
+			width: 0;
+			height: 100%;
+			top: 0;
+			right: 0;
+			z-index: -1;
+			background-color: #801ec4;
+			border-radius: 5px;
+			box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+			7px 7px 20px 0px rgba(0,0,0,.1),
+			4px 4px 5px 0px rgba(0,0,0,.1);
+			transition: all 0.3s ease;
+		}
+		.btn-15:hover {
+			color: #fff;
+		}
+		.btn-15:hover:after {
+			left: 0;
+			width: 100%;
+		}
+		.btn-15:active {
+			top: 2px;
+		}
+		.btn-9 {
+			border: none;
+			transition: all 0.3s ease;
+			overflow: hidden;
+		}
+		.btn-9:after {
+			position: absolute;
+			content: " ";
+			z-index: -1;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: #1fd1f9;
+			background-image: linear-gradient(315deg, #1fd1f9 0%, #b621fe 74%);
+			transition: all 0.3s ease;
+		}
+		.btn-9:hover {
+			background: transparent;
+			box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+			-4px -4px 6px 0 rgba(116, 125, 136, .2),
+			inset -4px -4px 6px 0 rgba(255,255,255,.5),
+			inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
+			color: #fff;
+		}
+		.btn-9:hover:after {
+			-webkit-transform: scale(2) rotate(180deg);
+			transform: scale(2) rotate(180deg);
+			box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+			-4px -4px 6px 0 rgba(116, 125, 136, .2),
+			inset -4px -4px 6px 0 rgba(255,255,255,.5),
+			inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
+		}
+	</style>
 	<div class="main-content-inner">
+
 
 		<div class="row" style="margin-top: 30px;">
 			<div class="col-11">
-				<a href="#" class="btn btn-success btn-xs pull-right" data-toggle="modal" data-target="#AddModal">Add new product</a>
+				<a class="custom-btn btn-15" href="{{ path('/produit2/stat') }}">
+					STATS
+				</a>
+				<a class="custom-btn btn-15" href="{{ path('app_commande_index') }}">
+					Order list
+				</a>
+
+				<a class="custom-btn btn-15" href="{{ path('app_category_p_new')}}">
+					Category
+				</a>
+
+				<a href="{{ path('app_produit2_new') }}" class="btn-9 btn-success btn-xs pull-right">Add new product</a>
 			</div>
+		</div>
+		<div>
+
+			<form role="search" id="nav-search-form" method="post" action="{{ path('/produit/tri') }}">
+				<div class="btn-toolbar" role="toolbar" aria-label="Programmatic control">
+					<div class="btn-group btn-group-sm" aria-label="Set Select2 option">
+						<button style="margin-top: 20px" class="js-programmatic-set-val btn btn-outline-primary mr-1 mb-1">
+							tri par prix
+						</button>
+					</div>
+				</div>
+
+			</form>
 		</div>
 		<div
 			class="row">
 			<!-- **********************data table start cardssssssssss-->
-			<div class="col-lg-4 col-md-6 mt-5">
-				<div class="card card-bordered">
-					<img class="card-img-top img-fluid" src="{{asset('/admin/assets/images/media/tetr.jpg')}}" alt="image">
-					<div class="card-body">
-						<h5 class="title">Tetris</h5>
-						<p class="card-text">Tetris is a puzzle game in which geometric shapes called
-														                                    "tetrominoes" fall down onto a playing field, and the player has to arrange them to
-														                                    form gapless lines.</p>
-						<a href="#" class="btn btn-outline-warning btn-xs" data-toggle="modal" data-target="#editModal">Update</a>
-						<a href="#" class="btn btn-outline-danger btn-xs" data-toggle="modal" data-target="#deleteModal">Delete</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 mt-5">
-				<div class="card card-bordered">
-					<img class="card-img-top img-fluid" src="{{asset('/admin/assets/images/media/tetr.jpg')}}" alt="image">
-					<div class="card-body">
-						<h5 class="title">Tetris</h5>
-						<p class="card-text">Tetris is a puzzle game in which geometric shapes called
-														                                    "tetrominoes" fall down onto a playing field, and the player has to arrange them to
-														                                    form gapless lines.</p>
-						<a href="#" class="btn btn-outline-warning btn-xs" data-toggle="modal" data-target="#editModal">Update</a>
-						<a href="#" class="btn btn-outline-danger btn-xs" data-toggle="modal" data-target="#deleteModal">Delete</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 mt-5">
-				<div class="card card-bordered">
-					<img class="card-img-top img-fluid" src="{{asset('/admin/assets/images/media/tetr.jpg')}}" alt="image">
-					<div class="card-body">
-						<h5 class="title">Tetris</h5>
-						<p class="card-text">Tetris is a puzzle game in which geometric shapes called
-														                                    "tetrominoes" fall down onto a playing field, and the player has to arrange them to
-														                                    form gapless lines.</p>
-						<a href="#" class="btn btn-outline-warning btn-xs" data-toggle="modal" data-target="#editModal">Update</a>
-						<a href="#" class="btn btn-outline-danger btn-xs" data-toggle="modal" data-target="#deleteModal">Delete</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 mt-5">
-				<div class="card card-bordered">
-					<img class="card-img-top img-fluid" src="{{asset('/admin/assets/images/media/tetr.jpg')}}" alt="image">
-					<div class="card-body">
-						<h5 class="title">Tetris</h5>
-						<p class="card-text">Tetris is a puzzle game in which geometric shapes called
-														                                    "tetrominoes" fall down onto a playing field, and the player has to arrange them to
-														                                    form gapless lines.</p>
-						<a href="#" class="btn btn-outline-warning btn-xs" data-toggle="modal" data-target="#editModal">Update</a>
-						<a href="#" class="btn btn-outline-danger btn-xs" data-toggle="modal" data-target="#deleteModal">Delete</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 mt-5">
-				<div class="card card-bordered">
-					<img class="card-img-top img-fluid" src="{{asset('/admin/assets/images/media/tetr.jpg')}}" alt="image">
-					<div class="card-body">
-						<h5 class="title">Tetris</h5>
-						<p class="card-text">Tetris is a puzzle game in which geometric shapes called
-														                                    "tetrominoes" fall down onto a playing field, and the player has to arrange them to
-														                                    form gapless lines.</p>
-						<a href="#" class="btn btn-outline-warning btn-xs" data-toggle="modal" data-target="#editModal">Update</a>
-						<a href="#" class="btn btn-outline-danger btn-xs" data-toggle="modal" data-target="#deleteModal">Delete</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 mt-5">
-				<div class="card card-bordered">
-					<img class="card-img-top img-fluid" src="{{asset('/admin/assets/images/media/tetr.jpg')}}" alt="image">
-					<div class="card-body">
-						<h5 class="title">Tetris</h5>
-						<p class="card-text">Tetris is a puzzle game in which geometric shapes called
-														                                    "tetrominoes" fall down onto a playing field, and the player has to arrange them to
-														                                    form gapless lines.</p>
-						<a href="#" class="btn btn-outline-warning btn-xs" data-toggle="modal" data-target="#editModal">Update</a>
-						<a href="#" class="btn btn-outline-danger btn-xs" data-toggle="modal" data-target="#deleteModal">Delete</a>
-					</div>
-				</div>
-			</div>
 
+			{% for produit2 in produit2s %}
+				<div class="col-lg-4 col-md-6 mt-5">
+					<div class="card card-bordered">
+						<img src="{{ vich_uploader_asset(produit2, 'imageFile') }}" alt="card-image-top">
+						<div class="card-body">
+							<h5>{{ produit2.nom }}
+							</h5>
+							<h3>{{ produit2.prix }}
+								dt</h3>
+							<p class="card-text">{{ produit2.description }}.</p>
+							<a href="{{ path('app_produit2_edit', {'idp2': produit2.idp2}) }}" class="btn btn-outline-warning btn-xs">Manage</a>
 
-			<!---modaaaaaaaaaaaaaaaaaaaaaaaalll deleetteee -->
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+			<div class="navigation" style="font-size: large">
+				{{ knp_pagination_render(produit2s) }}
+			</div>
+		</div>
+
+		<!---modaaaaaaaaaaaaaaaaaaaaaaaalll deleetteee -->
+		{% for produit2 in produit2s %}
 			<div class="modal fade" id="deleteModal">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -107,131 +158,17 @@
 
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-danger btn-sm">Confirm</button>
+							<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+							{{ include('produit2/_delete_form.html.twig') }}
+
+
 						</div>
 					</div>
 				</div>
-			</div>
-			<!--modaaaaaaaaaaaaaaaaaaaaaale edittt -->
-
-			<div class="modal fade" id="editModal">
-				<div class="modal-dialog modal-dialog-centered" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title">Edit Item</h5>
-							<button type="button" class="close" data-dismiss="modal">
-								<span>&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<div class="form-row align-items-center">
-								<div class="col-sm-2 my-1"></div>
-								<div class="col-sm-2 my-1">
-
-									<label for="example-text-input" class="col-form-label">Text</label>
-								</div>
-								<div class="col-sm-6 my-1">
-									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
-								</div>
-							</div>
-							<div class="form-row align-items-center">
-								<div class="col-sm-2 my-1"></div>
-								<div class="col-sm-2 my-1">
-
-									<label for="example-text-input" class="col-form-label">Text</label>
-								</div>
-								<div class="col-sm-6 my-1">
-									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
-								</div>
-							</div>
-							<div class="form-row align-items-center">
-								<div class="col-sm-2 my-1"></div>
-								<div class="col-sm-2 my-1">
-
-									<label for="example-text-input" class="col-form-label">Text</label>
-								</div>
-								<div class="col-sm-6 my-1">
-									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
-								</div>
-							</div>
-							<div class="form-row align-items-center">
-								<div class="col-sm-2 my-1"></div>
-								<div class="col-sm-2 my-1">
-
-									<label for="example-text-input" class="col-form-label">Text</label>
-								</div>
-								<div class="col-sm-6 my-1">
-									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
-								</div>
-							</div>
-							<div class="form-row align-items-center">
-								<div class="col-sm-2 my-1"></div>
-								<div class="col-sm-2 my-1">
-
-									<label for="example-text-input" class="col-form-label">Text</label>
-								</div>
-								<div class="col-sm-6 my-1">
-									<input class="form-control form-control-sm" type="text" value="" id="example-text-input">
-								</div>
-							</div>
-							<div class="form-row align-items-center">
-								<div class="col-sm-2 my-1"></div>
-								<div class="col-sm-2 my-1">
-
-									<label for="example-text-input" class="col-form-label">Date</label>
-								</div>
-								<div class="col-sm-6 my-1">
-									<input class="form-control form-control-sm" type="date" value="" id="example-text-input">
-								</div>
-							</div>
-							<div class="form-row align-items-center">
-								<div class="col-sm-2 my-1"></div>
-								<div class="col-sm-2 my-1">
-
-									<label for="example-text-input" class="col-form-label">Tel</label>
-								</div>
-								<div class="col-sm-6 my-1">
-									<input class="form-control form-control-sm" type="tel" value="" id="example-text-input">
-								</div>
-							</div>
-							<div class="form-row align-items-center">
-								<div class="col-sm-2 my-1"></div>
-								<div class="col-sm-2 my-1">
-
-									<label for="example-text-input" class="col-form-label">Email</label>
-								</div>
-								<div class="col-sm-6 my-1">
-									<input class="form-control form-control-sm" type="email" value="" id="example-text-input">
-								</div>
-							</div>
-							<div class="form-row align-items-center">
-								<div class="col-sm-2 my-1"></div>
-
-								<div class="col-sm-2 my-1">
-									<label class="col-form-label">Role</label>
-								</div>
-								<div class="col-sm-6 my-1">
-									<select class="custom-select">
-										<option selected="selected" value="player">Player</option>
-										<option value="admin">Admin</option>
-
-									</select>
-								</div>
-
-							</div>
-						</div>
-
-
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary btn-xs" data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-success btn-xs">Save changes</button>
-						</div>
-					</div>
-				</div>
-
-			</div>
+			{% endfor %}
 
 			<!--modaaaaaaaaaaaaaaaaaaaaale add -->
+
 			<div class="modal fade" id="AddModal">
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
@@ -350,4 +287,10 @@
 			</div>
 		</div>
 	</div>
+	<style>
+		body {
+			background-color: #0d0d0d;
+			justify-content: center;
+		}
+	</style>
 {% endblock %}

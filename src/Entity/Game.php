@@ -3,12 +3,18 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraint as Assert;
+
 
 /**
  * Game
  *
  * @ORM\Table(name="game", indexes={@ORM\Index(name="cat", columns={"category"})})
  * @ORM\Entity
+ * @Vich\Uploadable
  */
 class Game
 {
@@ -47,7 +53,7 @@ class Game
      *
      * @ORM\Column(name="date_g", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
      */
-    private $dateG = 'CURRENT_TIMESTAMP';
+    public $dateG = 'CURRENT_TIMESTAMP';
 
     /**
      * @var string|null
@@ -55,6 +61,14 @@ class Game
      * @ORM\Column(name="image_g", type="string", length=255, nullable=true)
      */
     private $imageG;
+
+    /**
+     * @var File|null
+     *
+     * @Vich\UploadableField(mapping="produit_image", fileNameProperty="imageG")
+
+     */
+    private $imageFile;
 
     /**
      * @var float
@@ -75,7 +89,7 @@ class Game
      *
      * @ORM\ManyToOne(targetEntity="Category")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="category", referencedColumnName="category_id")
+     *   @ORM\JoinColumn(name="category", referencedColumnName="category_id", onDelete="CASCADE")
      * })
      */
     private $category;
@@ -121,12 +135,12 @@ class Game
         return $this;
     }
 
-    public function getDateG(): ?\DateTimeInterface
+    public function getDateG(): ?\DateTime
     {
         return $this->dateG;
     }
 
-    public function setDateG(\DateTimeInterface $dateG): self
+    public function setDateG(\DateTime $dateG): self
     {
         $this->dateG = $dateG;
 
@@ -181,5 +195,26 @@ class Game
         return $this;
     }
 
+    /**
+     * @return File|null
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
 
+    /**
+     * @param File|null $imageFile
+     * @return Game
+     */
+    public function setImageFile(?File $imageFile): Game
+    {
+
+        $this->imageFile = $imageFile;
+        if ($this->imageFile instanceof UploadedFile) {
+            $this->dateG = new \DateTime('now');
+        }
+
+        return $this;
+    }
 }

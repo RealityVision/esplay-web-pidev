@@ -1,0 +1,106 @@
+{% extends 'front/baseFront.html.twig' %}
+
+{% block title %}Cart!{% endblock %}
+
+{% block body %}
+
+<style>
+    body {
+
+        font-family: 'Poppins', sans-serif;
+        line-height: 1.5;
+        background-color: #343a40;
+
+    }
+</style>
+    <div class="p-3">
+        <h1>Votre panier</h1>
+    </div>
+    {% if carts | length > 0 %}
+        <table class="table" bgcolor="#a9a9a9">
+            <thead>
+            <tr bgcolor="#a9a9a9">
+                <th>Item</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+            </thead>
+
+                <tbody>
+
+                {% for cart in carts %}
+                    <tr bgcolor="#a9a9a9">
+
+                        <td>{{ cart.produit.nom }}</td>
+                        <td>{{ cart.produit.prix}}</td>
+                        <td>{{ cart.quantity}}</td>
+                        <td>{{ cart.produit.prix * cart.quantity }}</td>
+
+                       <td>
+                            <a href="{{ path('cart_remove', {'idp2': cart.produit.idp2})  }}" class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                           <a href="{{ path('app_commande_new') }}"class="btn btn-success float-centre">
+                               <i class="fas fa-shopping-cart mr-1"></i>
+                               Order
+                           </a>
+
+
+                       </td>
+
+                    </tr>
+
+                {% endfor %}
+
+
+                </tbody>
+
+            <tfoot>
+
+            <tr>
+                <td colspan="3" class="text-right" bgcolor="#a9a9a9">Total :
+                </td>
+                <td bgcolor="#a9a9a9">{{ total }}</td>
+                <td> <a href="{{path("delete_all")}}"  class="btn btn-danger btn-sm">
+                        <i class="fas fa-trash"></i>
+                    </a></td>
+            </tr>
+            </tfoot>
+        </table>
+        <script src="https://js.stripe.com/v3/"></script>
+        <button id="checkout-button" class="btn btn-primary">Procéder au paiement</button>
+    {% else %}
+        <p>vide !</p>
+    {% endif %}
+    <script type="text/javascript">
+        // Create an instance of the Stripe object with your publishable API key
+        var stripe = Stripe('pk_test_51KY8A4FFpLUKdfWcnshDIcYnoInv0YIxfdZhcvHoTU0pXU813rfb3uyoxmW8kiEKhQtqQNYZpgEGkDcIvts78u2Z007Zew5SZv');
+        var checkoutButton = document.getElementById('checkout-button');
+        checkoutButton.addEventListener('click', function() {
+            // Create a new Checkout Session using the server-side endpoint you
+            // created in step 3.
+            fetch('/create-checkout-session', {
+                method: 'POST',
+            })
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(session) {
+                    return stripe.redirectToCheckout({ sessionId: session.id });
+                })
+                .then(function(result) {
+                    // If `redirectToCheckout` fails due to a browser or network
+                    // error, you should display the localized error message to your
+                    // customer using `error.message`.
+                    if (result.error) {
+                        alert(result.error.message);
+                    }
+                })
+                .catch(function(error) {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+{% endblock %}

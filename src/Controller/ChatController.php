@@ -18,6 +18,7 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Serializer;
+
 /**
  * @Route("/chat")
  */
@@ -35,17 +36,18 @@ class ChatController extends AbstractController
         $chats = $entityManager
             ->getRepository(Chat::class)
             ->findAll();
-
+        $session = $request->getSession();
         $user = $entityManager
             ->getRepository(User::class)
-            ->find(32);
+            ->find($session->get('idsession'));
+
 
 
         if ($form->isSubmitted() && $form->isValid()) {
             $time = new \DateTime();
             $chat->setDateMessage($time);
             $chat->setIdUser($user);
-            $chat->setUsername("khaled");
+            $chat->setUsername($user->getUsername());
             $entityManager->persist($chat);
             $entityManager->flush();
 
@@ -59,17 +61,18 @@ class ChatController extends AbstractController
             'chats' => $chats,
             'form' => $form->createView(),
             'bool' => false,
+            'user' => $user,
 
         ]);
     }
     /**
      * @Route("/mobile", name="app_chat_index3", methods={"GET", "POST"})
      */
-    public function index3( SerializerInterface $serializer,Request $request, EntityManagerInterface $entityManager): Response
+    public function index3(SerializerInterface $serializer, Request $request, EntityManagerInterface $entityManager): Response
     {
         $chat = new Chat();
         $user = new User();
-        
+
         $chats = $entityManager
             ->getRepository(Chat::class)
             ->findAll();
@@ -78,21 +81,19 @@ class ChatController extends AbstractController
             ->getRepository(User::class)
             ->find(32);
 
-            $data = $serializer->serialize($chats, 'json');
-            
-        return  new JsonResponse($data, 200, [], true);
+        $data = $serializer->serialize($chats, 'json');
 
-      
+        return  new JsonResponse($data, 200, [], true);
     }
 
     /**
      * @Route("/chatmobile/", name="app_chat_index4")
      */
-    public function index4( SerializerInterface $serializer,Request $request, EntityManagerInterface $entityManager): Response
+    public function index4(SerializerInterface $serializer, Request $request, EntityManagerInterface $entityManager): Response
     {
         $chat = new Chat();
         $user = new User();
-        
+
         $chats = $entityManager
             ->getRepository(Chat::class)
             ->findAll();
@@ -100,24 +101,23 @@ class ChatController extends AbstractController
         $user = $entityManager
             ->getRepository(User::class)
             ->find(32);
-            $time = new \DateTime();
-            $chat->setMessage($request->get("message"));
-            $chat->setDateMessage($time);
-            $chat->setIdUser($user);
-            $chat->setUsername("khaled");
-            $entityManager->persist($chat);
-            $entityManager->flush();
-            $data = $serializer->serialize($chats, 'json');
-            
-        return  new Response("added");
+        $time = new \DateTime();
+        $chat->setMessage($request->get("message"));
+        $chat->setDateMessage($time);
+        $chat->setIdUser($user);
+        $chat->setUsername("khaled");
+        $entityManager->persist($chat);
+        $entityManager->flush();
+        $data = $serializer->serialize($chats, 'json');
 
-      
+        return  new Response("added");
     }
-/**
+    /**
      * @Route("/chatmobile/affiche", name="app_chat_affiche")
      */
-    public function afficheProd(EntityManagerInterface $entityManager ) {
-        
+    public function afficheProd(EntityManagerInterface $entityManager)
+    {
+
         $chats = $entityManager
             ->getRepository(Chat::class)
             ->findAll();
@@ -125,11 +125,11 @@ class ChatController extends AbstractController
         $encoder = new JsonEncoder();
         $normalizer = new ObjectNormalizer();
 
-        
 
-        $serializer = new Serializer([$normalizer],[$encoder]);
+
+        $serializer = new Serializer([$normalizer], [$encoder]);
         $formatted = $serializer->normalize($chats);
-        
+
         return new JsonResponse($formatted);
     }
 

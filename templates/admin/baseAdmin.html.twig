@@ -12,13 +12,16 @@
 			{% endblock %}
 		</title>
 		{# Run `composer require symfony/webpack-encore-bundle`
-																																																																								           and uncomment the following Encore helpers to start using Symfony UX #}
+																																																																																																						           and uncomment the following Encore helpers to start using Symfony UX #}
 		{% block stylesheets %}
 			<link rel="stylesheet" href="{{asset('admin/assets/css/bootstrap.min.css')}}"/>
 			<link rel="stylesheet" href="{{asset('admin/assets/css/font-awesome.min.css')}}"/>
 			<link rel="stylesheet" href="{{asset('admin/assets/css/themify-icons.css')}}"/>
 			<link rel="stylesheet" href="{{asset('admin/assets/css/metisMenu.css')}}"/>
 			<link rel="stylesheet" href="{{asset('admin/assets/css/owl.carousel.min.css')}}"/>
+			<link rel="stylesheet" href="{{asset('admin/assets/css/bootstrap.css')}}"/>
+			<link rel="stylesheet" href="{{asset('admin/assets/css/fonts.css')}}">
+
 			<link
 			rel="stylesheet" href="{{asset('admin/assets/css/slicknav.min.css')}}"/>
 
@@ -60,7 +63,7 @@
 				<div class="sidebar-header">
 					<div class="logo">
 
-						<a href="index.html"><img src=" {{asset('admin/assets/images/logo/logoesplay1.png')}}" alt="logo"/></a>
+						<a href="{{ path('app_stat') }}"><img src=" {{asset('admin/assets/images/logo/logoesplay1.png')}}" alt="logo"/></a>
 					</div>
 				</div>
 				<div
@@ -69,24 +72,24 @@
 					<div class="menu-inner">
 						<nav>
 							<ul class="metismenu" id="menu">
-								<li class="active">
-									<a href="index.html" aria-expanded="true">
+								<li>
+									<a href="{{ path('app_stat')}}" aria-expanded="true">
 										<i class="fa fa-area-chart"></i>
 										<span>dashboard</span>
 									</a>
 
 								</li>
 								<li>
+									<!-- class="active" -->
 									<!-- usersssssssssss -->
-									<a href="users.html" aria-expanded="true">
-										<i class="fa fa-users"></i>
+										<a href="{{ path('app_user_index')}}" aria-expanded="true"> <i class="fa fa-users"></i>
 										<span>Users</span>
 									</a>
 
 								</li>
 								<li>
 									<!-- Gamesssssss -->
-									<a href="games.html" aria-expanded="true">
+									<a href="{{ path('app_game_index')}}" aria-expanded="true">
 										<i class="fa fa-gamepad"></i>
 										<span>Games</span>
 									</a>
@@ -94,7 +97,7 @@
 								</li>
 								<li>
 									<!-- Storeeeee -->
-									<a href="store.html" aria-expanded="true">
+									<a href="{{ path('app_produit2_index2')}}" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Store</span>
 									</a>
@@ -102,15 +105,15 @@
 								</li>
 								<li>
 									<!-- Orderssssssss -->
-									<a href="orders.html" aria-expanded="true">
+									<a href="{{ path('app_commande_index')}}" aria-expanded="true">
 										<i class="fa fa-credit-card"></i>
 										<span>Orders</span>
 									</a>
 
 								</li>
 								<li>
-									<!-- Orderssssssss -->
-									<a href="orders.html" aria-expanded="true">
+									<!-- reports -->
+									<a href="{{ path('reportad')}}" aria-expanded="true">
 										<i class="fa fa-credit-card"></i>
 										<span>Reports</span>
 									</a>
@@ -325,7 +328,7 @@
 								<h4 class="page-title pull-left">Dashboard</h4>
 								<ul class="breadcrumbs pull-left">
 									<li>
-										<a href="index.html">Home</a>
+										<a href="{{ path('app_stat') }}">Home</a>
 									</li>
 									<li>
 
@@ -337,7 +340,7 @@
 						</div>
 						<div class="col-sm-6 clearfix">
 							<div class="user-profile pull-right">
-								<img class="avatar user-thumb" src="{{asset('/admin/assets/images/author/avatar.png')}}" alt="avatar"/>
+								<img class="avatar user-thumb" src="{{asset('/admin/assets/images/author/a.png')}}" alt="avatar"/>
 								<h4 class="user-name dropdown-toggle" data-toggle="dropdown">
 									Admin
 									<i class="fa fa-angle-down"></i>
@@ -345,7 +348,7 @@
 								<div class="dropdown-menu">
 									<a class="dropdown-item" href="#">Message</a>
 									<a class="dropdown-item" href="#">Settings</a>
-									<a class="dropdown-item" href="#">Log Out</a>
+									<a class="dropdown-item" href="{{ path('logoutroute')}}">Log Out</a>
 								</div>
 							</div>
 						</div>
@@ -393,7 +396,7 @@
 							</div>
 							<p>
 								Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
-																																																																																																																																																																																																              distinctio itaque at.
+																																																																																																																																																																																																																																																																																																																								              distinctio itaque at.
 							</p>
 						</div>
 						<div class="timeline-task">
@@ -428,7 +431,7 @@
 							</div>
 							<p>
 								Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
-																																																																																																																																																																																																              distinctio itaque at.
+																																																																																																																																																																																																																																																																																																																								              distinctio itaque at.
 							</p>
 						</div>
 						<div class="timeline-task">
@@ -442,7 +445,7 @@
 							</div>
 							<p>
 								Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
-																																																																																																																																																																																																              distinctio itaque at.
+																																																																																																																																																																																																																																																																																																																								              distinctio itaque at.
 							</p>
 						</div>
 						<div class="timeline-task">
@@ -467,7 +470,7 @@
 							</div>
 							<p>
 								Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
-																																																																																																																																																																																																              distinctio itaque at.
+																																																																																																																																																																																																																																																																																																																								              distinctio itaque at.
 							</p>
 						</div>
 						<div class="timeline-task">
@@ -491,7 +494,7 @@
 							</div>
 							<p>
 								Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
-																																																																																																																																																																																																              distinctio itaque at.
+																																																																																																																																																																																																																																																																																																																								              distinctio itaque at.
 							</p>
 						</div>
 						<div class="timeline-task">
@@ -505,7 +508,7 @@
 							</div>
 							<p>
 								Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
-																																																																																																																																																																																																              distinctio itaque at.
+																																																																																																																																																																																																																																																																																																																								              distinctio itaque at.
 							</p>
 						</div>
 					</div>
@@ -534,7 +537,7 @@
 								</div>
 								<p>
 									The for attribute is necessary to bind our custom checkbox
-																																																																																																																																																																																																																								                with the input.
+																																																																																																																																																																																																																																																																																																																																																															                with the input.
 								</p>
 							</div>
 							<div class="s-settings">
@@ -557,7 +560,7 @@
 								</div>
 								<p>
 									The for attribute is necessary to bind our custom checkbox
-																																																																																																																																																																																																																								                with the input.
+																																																																																																																																																																																																																																																																																																																																																															                with the input.
 								</p>
 							</div>
 							<div class="s-settings">
@@ -579,37 +582,20 @@
 
 		<!-- bootstrap 4 js -->
 		<script src="{{asset('admin/assets/js/popper.min.js')}}"></script>
+		<!--jquery -->
+		<script src="{{asset('admin/assets/js/jquery.js')}}"></script>
+		<script src="{{asset('admin/assets/js/bootstrap.js')}}"></script>
 
-		<script src="{{asset('admin/assets/js/bootstrap.min.js')}}"></script>
-		<script src="{{asset('admin/assets/js/owl.carousel.min.js')}}"></script>
-		<script src="{{asset('admin/assets/js/metisMenu.min.js')}}"></script>
-		<script src="{{asset('admin/assets/js/jquery.slimscroll.min.js')}}"></script>
-		<script src="{{asset('admin/assets/js/jquery.slicknav.min.js')}}"></script>
-
-
-	
 		<!-- start zingchart js -->
 		<script src="https://cdn.zingchart.com/zingchart.min.js"></script>
 		<script>
 			zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
 ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d",];
 		</script>
-	
-	
-		<!-- others plugins -->
-
-
-		<!-- jquery latest version -->
-		<script src="{{asset('admin/assets/js/vendor/jquery-2.2.4.min.js')}}"></script>
-
-
-		
 
 		<!-- offset area end -->
-		<!-- jquery latest version -->
-		<script src="{{asset('admin/assets/js/vendor/jquery-2.2.4.min.js')}}"></script>
 		<!-- bootstrap 4 js -->
-		<script src="{{asset('admin/assets/js/popper.min.js')}}"></script>
+
 		<script src="{{asset('admin/assets/js/bootstrap.min.js')}}"></script>
 		<script src="{{asset('admin/assets/js/owl.carousel.min.js')}}"></script>
 		<script src="{{asset('admin/assets/js/metisMenu.min.js')}}"></script>
@@ -624,32 +610,32 @@ ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3eda
 		<!-- others plugins -->
 		<script src="{{asset('admin/assets/js/plugins.js')}}"></script>
 		<script src="{{asset('admin/assets/js/scripts.js')}}"></script>
-<!-- start chart js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-    <!-- start highcharts js -->
-   <!-- start highcharts js -->
+		<!-- start chart js -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+		<!-- start highcharts js -->
+		<!-- start highcharts js -->
 		<script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <!-- start amcharts -->
-    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-    <script src="https://www.amcharts.com/lib/3/ammap.js"></script>
-    <script src="https://www.amcharts.com/lib/3/maps/js/worldLow.js"></script>
-    <script src="https://www.amcharts.com/lib/3/serial.js"></script>
-    <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
-    <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+		<script src="https://code.highcharts.com/modules/exporting.js"></script>
+		<script src="https://code.highcharts.com/modules/export-data.js"></script>
+		<!-- start amcharts -->
+		<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+		<script src="https://www.amcharts.com/lib/3/ammap.js"></script>
+		<script src="https://www.amcharts.com/lib/3/maps/js/worldLow.js"></script>
+		<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+		<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+		<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 		<!-- all line chart activation -->
-<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-<script src="https://www.amcharts.com/lib/3/pie.js"></script>
-<script src="https://www.amcharts.com/lib/3/serial.js"></script>
-<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+		<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+		<script src="https://www.amcharts.com/lib/3/pie.js"></script>
+		<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+		<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 		<script src="{{asset('admin/assets/js/line-chart.js')}}"></script>
 		<!-- all pie chart -->
 
 		<script src="{{asset('admin/assets/js/pie-chart.js')}}"></script>
 		<script src="{{asset('admin/assets/js/bar-chart.js')}}"></script>
-			<!-- start chart js -->
+		<!-- start chart js -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-		
+
 	</body>
 </html>

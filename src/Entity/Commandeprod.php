@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Commandeprod
  *
  * @ORM\Table(name="commandeprod", indexes={@ORM\Index(name="fk_1", columns={"id_produit"})})
+ * @ORM\Entity(repositoryClass="App\Repository\CommandeRepository")
  * @ORM\Entity
  */
 class Commandeprod
@@ -26,6 +27,8 @@ class Commandeprod
      *
      * @ORM\Column(name="id_acheteur", type="integer", nullable=false)
      */
+
+
     private $idAcheteur;
 
     /**
@@ -40,7 +43,7 @@ class Commandeprod
      *
      * @ORM\ManyToOne(targetEntity="Produit2")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_produit", referencedColumnName="idp2")
+     *  @ORM\JoinColumn(name="id_produit", referencedColumnName="idp2")
      * })
      */
     private $idProduit;

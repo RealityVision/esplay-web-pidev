@@ -1,0 +1,13 @@
+{% extends 'admin/baseAdmin.html.twig' %}
+
+{% block title %}Edit Orders{% endblock %}
+
+{% block body %}
+    <h1>Edit Orders</h1>
+
+    {{ include('commande/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_commande_index') }}">see list</a>
+
+    {{ include('commande/_delete_form.html.twig') }}
+{% endblock %}
