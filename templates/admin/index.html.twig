@@ -1,0 +1,329 @@
+{% extends 'admin/baseAdmin.html.twig' %}
+
+
+{% block body %}
+
+	<!-- page title area end -->
+	<div
+		class="main-content-inner">
+		<!-- sales report area start -->
+		<div class="sales-report-area mt-5 mb-5">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="single-report mb-xs-30">
+						<div class="s-report-inner pr--20 pt--30 mb-3">
+							<div class="icon">
+								<i class="fa fa-users"></i>
+							</div>
+							<div class="s-report-title d-flex justify-content-between">
+								<h4 class="header-title mb-0">Esplay Users
+								</h4>
+								<p>24 H</p>
+							</div>
+							<div class="d-flex justify-content-between pb-2">
+								<h2>{{count}}
+									players</h2>
+								<span>+3</span>
+							</div>
+						</div>
+						<canvas id="coin_sales1" height="100"></canvas>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="single-report mb-xs-30">
+						<div class="s-report-inner pr--20 pt--30 mb-3">
+							<div class="icon">
+								<i class="fa fa-shopping-cart"></i>
+							</div>
+							<div class="s-report-title d-flex justify-content-between">
+								<h4 class="header-title mb-0">Orders</h4>
+								<p>24 H</p>
+							</div>
+							<div class="d-flex justify-content-between pb-2">
+								<h2> order number## </h2>
+								<span>- 3</span>
+							</div>
+						</div>
+						<canvas id="coin_sales2" height="100"></canvas>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="single-report">
+						<div class="s-report-inner pr--20 pt--30 mb-3">
+							<div class="icon">
+								<i class="fa fa-comment-o"></i>
+							</div>
+							<div class="s-report-title d-flex justify-content-between">
+								<h4 class="header-title mb-0">Chat
+								</h4>
+								<p>24 H</p>
+							</div>
+							<div class="d-flex justify-content-between pb-2">
+								<h2>{{count_c}}
+									messages</h2>
+								<span>+ 6</span>
+							</div>
+						</div>
+						<canvas id="coin_sales3" height="100"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- sales report area end -->
+		<!-- overview area start -->
+		<div class="row">
+			<div class="col-xl-8 col-lg-8">
+				<div class="card">
+					<div class="card-body">
+						<div class="d-flex justify-content-between align-items-center">
+							<h4 class="header-title mb-0">Number of messages sent by Esplay users /Month
+							</h4>
+							<select class="custome-select border-0 pr-3">
+								<option selected>2022</option>
+
+							</select>
+						</div>
+						<div id="verview-shart"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-4 col-lg-4 coin-distribution">
+				<div class="card h-full">
+					<div class="card-body">
+						<h4 class="header-title mb-0">Demographics of Video games</h4>
+					<div class= "card">
+                            <div id="ampiechart2"></div>
+                        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- overview area end -->
+		
+					
+					
+		<!-- row area start -->
+		<div
+			class="row">
+			<!-- Live Crypto Price area start -->
+			<div class="col-lg-4 mt-1">
+                        <div class="card">
+                            <div class="card-body pb-0">
+                                <h4 class="header-title">Age of Gamers</h4>
+                                <div id="socialads" style="height: 420px;"></div>
+                            </div>
+                        </div>
+                    </div>
+			<!-- Live Crypto Price area end -->
+			<!-- trading history area start -->
+			<div class="col-lg-8 mt-1">
+                       <div class="card">
+					   <div class="card-body">
+					   <h4 class="header-title">Preferred Game Genres, According to Gamers</h4>
+                            
+                                <div id="ambarchart5"></div>
+                            </div>
+                        </div>
+                    </div>
+			<!-- trading history area end -->
+		</div>
+		
+	</div>
+<script>
+/*--------------  overview-chart start ------------*/
+window.onload = function(){
+ var chart = AmCharts.makeChart("ambarchart5", {
+        "type": "serial",
+        "theme": "light",
+        "dataProvider": [{
+            "name": "Casual",
+            "points": 63,
+            "color": "#7F8DA9"
+        }, {
+            "name": "Action",
+            "points": 39,
+            "color": "#FEC514"
+        }, {
+            "name": "Shooter",
+            "points": 39,
+            "color": "#952FFE"
+        }, {
+            "name": "Racing",
+            "points": 37,
+            "color": "#8282F1"
+        }, {
+            "name": "Family",
+            "points": 33,
+            "color": "#2599D4"
+        }, {
+            "name": "Adventure",
+            "points": 31,
+            "color": "#2563D6"
+        }],
+        "valueAxes": [{
+            "maximum": 70,
+            "minimum": 0,
+            "axisAlpha": 0,
+            "dashLength": 4,
+            "position": "left"
+        }],
+        "startDuration": 1,
+        "graphs": [{
+            "balloonText": "<span style='font-size:13px;'>[[category]]: <b>[[value]] %	</b></span>",
+            "bulletOffset": 10,
+            "bulletSize": 52,
+            "colorField": "color",
+            "cornerRadiusTop": 8,
+            "customBulletField": "bullet",
+            "fillAlphas": 0.8,
+            "lineAlpha": 0,
+            "type": "column",
+            "valueField": "points"
+        }],
+        "marginTop": 0,
+        "marginRight": 0,
+        "marginLeft": 0,
+        "marginBottom": 0,
+        "autoMargins": false,
+        "categoryField": "name",
+        "categoryAxis": {
+            "axisAlpha": 0,
+            "gridAlpha": 0,
+            "inside": true,
+            "tickLength": 10,
+            "color": "#fff"
+        },
+        "export": {
+            "enabled": false
+        }
+    });
+
+
+
+
+
+
+	zingchart.THEME = "classic";
+
+    var myConfig = {
+        "globals": {
+            "font-family": "Roboto"
+        },
+        "graphset": [{
+                "type": "pie",
+                "background-color": "#fff",
+                "legend": {
+                    "background-color": "none",
+                    "border-width": 0,
+                    "shadow": false,
+                    "layout": "float",
+                    "margin": "auto auto 16% auto",
+                    "marker": {
+                        "border-radius": 3,
+                        "border-width": 0
+                    },
+                    "item": {
+                        "color": "%backgroundcolor"
+                    }
+                },
+                "plotarea": {
+                    "background-color": "#FFFFFF",
+                    "border-color": "#DFE1E3",
+                    "margin": "25% 8%"
+                },
+                "labels": [{
+                    "x": "45%",
+                    "y": "47%",
+                    "width": "10%",
+                    "text": "%",
+                    "font-size": 17,
+                    "font-weight": 700
+                }],
+                "plot": {
+                    "size": 70,
+                    "slice": 90,
+                    "margin-right": 0,
+                    "border-width": 0,
+                    "shadow": 0,
+                    "value-box": {
+                        "visible": true
+                    },
+                    "tooltip": {
+                        "text": "%v %",
+                        "shadow": false,
+                        "border-radius": 2
+                    }
+                },
+                "series": [{
+                        "values": [45],
+                        "text": "Female",
+                        "background-color": "#4cff63"
+                    },
+                    {
+                        "values": [55],
+                        "text": "Male",
+                        "background-color": "#fd9c21"
+                    }
+                ]
+            }
+
+        ]
+    };
+
+    zingchart.render({
+        id: 'coin_distribution',
+        data: myConfig,
+    });
+var myConfig = {
+        "type": "area",
+
+        "scale-x": { //X-Axis
+           "labels": {{ axex | raw }},
+            "label": {
+                "font-size": 14,
+                "offset-x": 0,
+            },
+            "item": { //Scale Items (scale values or labels)
+                "font-size": 10,
+            },
+            "guide": { //Guides
+                "visible": false,
+                "line-style": "solid", //"solid", "dotted", "dashed", "dashdot"
+                "alpha": 1
+            }
+        },
+       
+        "series": [{
+            "values": {{ axey }},
+            "line-color": "#2d60e0",
+			 "background-color": "#2d60e0",
+            /* "dotted" | "dashed" */
+            "line-width": 1 /* in pixels */,
+            "marker": { /* Marker object */
+                "background-color": "#2d60e0",
+                /* hexadecimal or RGB value */
+                "size": 2,
+                /* in pixels */
+                "border-color": "#2d60e0",
+                /* hexadecimal or RBG value */
+            }
+        },
+       
+        ]
+    };
+
+    zingchart.render({
+        id: 'verview-shart',
+        data: myConfig,
+        height: "100%",
+        width: "100%"
+    });
+
+
+    
+
+}
+/*--------------  overview-chart END ------------*/
+</script>
+{% endblock %}
+

@@ -1,0 +1,31 @@
+{% extends 'admin/baseAdmin.html.twig' %}
+{% block body %}
+    <div class="body">
+    <div class="app-content" >
+        <div class="side-app">
+            <div class="page-header">
+                <h4 class="page-title">statistiques</h4>
+
+            </div>
+            <div class="box" id="div_chart"></div>
+
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script type="text/javascript">
+                {{ gc_draw(piechart, 'div_chart') }}
+            </script>
+        </div>
+    </div>
+    </div>
+    <style>
+
+        .body {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+        }
+        .box{
+            border-radius: 30px;
+        }
+    </style>
+{% endblock %}

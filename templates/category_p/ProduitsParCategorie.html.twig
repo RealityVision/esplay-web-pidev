@@ -1,0 +1,57 @@
+{% extends 'front/baseFront.html.twig' %}
+{% block title%} Liste des produits par Catégorie{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+
+    <div class="form-row align-items-end" >
+        <div class="col">
+            {{ form_row(form.categoryP) }}
+        </div>
+
+        <div class="col">
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Rechercher</button>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+    {% if articles %}
+        <table id="articles" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th>Catégorie</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for produit2 in produit2s %}
+                <div class="col-lg-4 col-md-6 mt-5">
+                    <div class="card card-bordered" >
+                        <img src="{{ vich_uploader_asset(produit2, 'imageFile')|imagine_filter('thumb')   }}" alt="card-image-top" style="width: auto; height:auto ">
+                        <div class="card-body">
+                            <h5>{{ produit2.nom }} </h5>
+                            <h3>{{ produit2.prix }} dt</h3>
+                            <p class="card-text">{{ produit2.description }}.</p>
+
+
+                            <a href="{{ path('cart_add', {'idp2': produit2.idp2}) }}" class="btn btn-success float-right">
+                                <i class="fas fa-shopping-cart mr-1"></i>
+                                Card
+                            </a>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Aucun produits</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'admin/baseAdmin.html.twig' %}
+
+{% block title %}New Category{% endblock %}
+
+{% block body %}
+    <h1 style="color: azure">Create new Category</h1>
+
+    {{ include('category_p/_form.html.twig') }}
+
+    <a href="{{ path('app_category_p_index') }}">back to list</a>
+{% endblock %}

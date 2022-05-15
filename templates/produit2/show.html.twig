@@ -1,0 +1,63 @@
+{% extends 'front/baseFront.html.twig' %}
+{% block title %}Store
+{% endblock %}
+
+{% block body %}
+	<section style="background-color: black;">
+		<h1>Produit</h1>
+
+		<table class="table" bgcolor="#a9a9a9">
+			<tbody bgcolor="#a9a9a9">
+				<tr>
+					<th>Id</th>
+					<td>{{ produit2.idp2 }}</td>
+				</tr>
+				<tr>
+					<th>Nom</th>
+					<td>{{ produit2.nom }}</td>
+				</tr>
+				<tr>
+					<th>Description</th>
+					<td>{{ produit2.description }}</td>
+				</tr>
+				<tr>
+					<th>Categorie</th>
+					<td>{{ produit2.categoryP.name }}</td>
+
+				</tr>
+				<tr>
+					<th>Date</th>
+					<td>{{ produit2.date ? produit2.date|date('Y-m-d') : '' }}</td>
+				</tr>
+				<tr>
+
+					<img src="{{ vich_uploader_asset(produit2, 'imageFile')|imagine_filter('thumb') }}" alt="card-image-top" style="width: auto; height:auto ">
+				</tr>
+				<tr>
+					<th>Prix</th>
+					<td>{{ produit2.prix }}</td>
+				</tr>
+				<tr>
+					<th>StockProduit</th>
+					<td>{{ produit2.stockProduit }}</td>
+				</tr>
+				<tr>
+					<th>Produit2</th>
+					<td>{{ produit2.produit2 }}</td>
+				</tr>
+			</tbody>
+		</table>
+		<a href="{{ path('app_produit2_index')}}">
+
+			Back to store
+		</a>
+		<a href="{{ path('cart_add', {'idp2': produit2.idp2}) }}" class="btn btn-success float-centre">
+			<i class="fas fa-shopping-cart mr-1"></i>
+			Cart
+		</a>
+
+
+	</section>
+
+
+{% endblock %}

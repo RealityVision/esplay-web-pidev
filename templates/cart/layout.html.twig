@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>test</title>
+    <meta name="viewport" content="width=device-width, initial-scale-1, maximum-scale=1" />
+    <meta name="description" content="tutoYoutube | Développement de sites web professionnels sous le framework Symfony"/>
+    <link rel="stylesheet" href="{{ preload(asset('bundles/app/css/custom.css')) }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    </head>
+    <body class="indigo darken-2">
+    {% include "AppBundle: Partials:header.html. twig" %}
+    {% block body %} {% endblock %}
+    {% include "AppBundle:Partials:footer.html.twig" %}
+    <script src="https://js.stripe.com/v3/"></script>
+    <script async src="{{ preload(asset ("bundles/app/js/jquery-2.1.3.min.js')) }}"></script>
+{% block javascripts %} {% endblock %}
+
+</body>
+</html>

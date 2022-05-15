@@ -1,0 +1,13 @@
+{% extends 'admin/baseAdmin.html.twig' %}
+
+{% block title %}Edit User
+{% endblock %}
+
+{% block body %}
+	<h4 style="color: azure">Edit
+		{{ user.username }}</h4>
+
+	{{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+
+
+{% endblock %}
