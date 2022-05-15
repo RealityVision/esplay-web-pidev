@@ -32,15 +32,15 @@ class UserType extends AbstractType
             ->add('role', ChoiceType::class, [
                 'choices'  => [
                     'Select your role' => null,
-                    'Player' => true,
-                    'Admin' => false,
+                    'Player' => "player",
+                    'Admin' => "admin",
                 ],
             ])
             ->add('gender', ChoiceType::class, [
                 'choices'  => [
                     'Select your gender' => null,
-                    'Male' => true,
-                    'Female' => false,
+                    'Male' => "male",
+                    'Female' => "female",
                 ],
             ]);
     }

@@ -17,7 +17,7 @@
 			{% endblock %}
 		</title>
 		{# Run `composer require symfony/webpack-encore-bundle`
-																																																																																																																																																								           and uncomment the following Encore helpers to start using Symfony UX #}
+																																																																																																																																																																								           and uncomment the following Encore helpers to start using Symfony UX #}
 		{% block stylesheets %}
 
 			<!-- Css Styles -->
@@ -366,7 +366,7 @@
 								</div>
 							</li>
 							<li>
-								<a href="#">
+								<a href="{{path('app_recomendedg_index_Client')}}">
 									<span>Recommended Games
 										<i class="fa fa-angle-down"></i>
 									</span>
@@ -519,7 +519,7 @@
 										document.write(new Date().getFullYear());
 									</script>
 									All rights reserved | This
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																                                template is made with
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																								                                template is made with
 									<i class="fa fa-heart" aria-hidden="true"></i>
 									by
 									<a href="https://colorlib.com" target="_blank">Reality Vision</a>
@@ -552,17 +552,27 @@
 						<h2>Sign up</h2>
 						<p>Fill out the form below to recieve a free and confidential</p>
 					</div>
-					<form method="POST" action="{{path('signup')}}" class="signup-form">
+					{% if (error is defined) and (error is not empty) %}
+						{% for er in error %}
+
+
+							<div class="alert alert-danger success-alert" id="">
+								<button type="button" class="close" data-dismiss="alert">x</button>
+								<strong>{{ er }}</strong>
+							</div>
+						{% endfor %}
+					{% endif %}
+					<form method="POST" action="{{path('signup')}}" class="signup-form" novalidate>
 						<div class="sf-input-list">
-							<input type="text" class="input-value" pattern=".{4,}" title="4 or more characters" placeholder="User Name*" name="login" required>
-							<input type="text" class="input-value" placeholder="Name" name="name" required>
-							<input type="text" class="input-value" placeholder="Last Name" name="last_name" required>
-							<input type="text" class="input-value" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Email not valid" placeholder="Email Address" name="Email" required>
-							<input type="password" class="input-value" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" placeholder="Password" name="password" required>
+							<input type="text" class="input-value" title="4 or more characters" placeholder="User Name*" name="login">
+							<input type="text" class="input-value" placeholder="Name" name="name">
+							<input type="text" class="input-value" placeholder="Last Name" name="last_name">
+							<input type="text" class="input-value" placeholder="Email Address" name="Email">
+							<input type="password" class="input-value" placeholder="Password" name="password">
 						</div>
 						<div class="radio-check">
 							<label for="rc-agree">I agree with the term & conditions
-								<input type="checkbox" id="rc-agree" required>
+								<input type="checkbox" id="rc-agree">
 								<span class="checkbox"></span>
 							</label>
 						</div>
@@ -587,6 +597,18 @@
 					</div>
 					<form method="POST" action="{{path('login')}}" class="signup-form">
 						<div class="sf-input-list">
+							{% if (msgerreurpsw is defined) and (msgerreurpsw) %}
+								<div class="alert alert-danger success-alert" id="">
+									<button type="button" class="close" data-dismiss="alert">x</button>
+									<strong>Your password is incorrect. please verify your password.</strong>
+								</div>
+							{% endif %}
+							{% if (msgerreuruser is defined) and (msgerreuruser) %}
+								<div class="alert alert-danger success-alert" id="">
+									<button type="button" class="close" data-dismiss="alert">x</button>
+									<strong>We can't found your account, please verify your username.</strong>
+								</div>
+							{% endif %}
 							<input type="text" class="input-value" placeholder="User Name*" name="username" required>
 							<input type="password" class="input-value" placeholder="Password" name="password" required>
 						</div>

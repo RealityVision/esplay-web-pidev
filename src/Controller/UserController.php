@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @Route("/user")
@@ -74,6 +75,8 @@ class UserController extends AbstractController
      */
     public function login(EntityManagerInterface $entityManager, Request $request): Response
     {
+        $msgerreurpsw = false;
+        $msgerreuruser = false;
         $bool = false;
         $formData = $request->request->all();
         $username = $formData["username"];
@@ -100,12 +103,16 @@ class UserController extends AbstractController
         }
 
         if (empty($user)) {
+            $msgerreuruser = true;
             $bool = false;
             $user = null;
         } elseif (strcmp($verified, "false") == 0) {
+            $msgerreurpsw = true;
             $bool = false;
             $user = null;
         } else {
+            $msgerreurpsw = false;
+            $msgerreuruser = false;
             $bool = true;
             if ($user[0]->getRole() == "admin") {
 
@@ -134,6 +141,8 @@ class UserController extends AbstractController
         return $this->render(
             'front/game.html.twig',
             [
+                'msgerreuruser' => $msgerreuruser,
+                'msgerreurpsw' => $msgerreurpsw,
                 'games' => $games,
                 'user' => $user,
                 'msg' => $bool,
@@ -195,7 +204,7 @@ class UserController extends AbstractController
     /**
      * @Route("/signup", name="signup", methods={"GET","POST"})
      */
-    public function signup(EntityManagerInterface $entityManager, Request $request): Response
+    public function signup(EntityManagerInterface $entityManager, Request $request, ValidatorInterface $validator): Response
     {
         $formData = $request->request->all();
 
@@ -237,12 +246,48 @@ class UserController extends AbstractController
         $user->setSalt($salt);
         $user->setPassword($crypted);
         $user->setRole("player");
+        $errors = $validator->validate($user);
+        if (count($errors) > 0) {
+            $err = (string) $errors;
+            $error = array();
+            if (strpos($err, "username") !== false) {
+                array_push($error, "Usename must be at least 4 characters long");
+            }
+            if (strpos($err, "firstName") !== false) {
+                array_push($error, "Lirst Name field can't be blank ");
+            }
+            if (strpos($err, "lastName") !== false) {
+                array_push($error, "Last Name field can't be blank ");
+            }
+            if (strpos($err, "email") !== false) {
+                array_push($error, "Email not valid ");
+            }
+            if (strlen($password) < 8) {
+                array_push($error, "Password must be at least 8 characters long ");
+            }
+        }
+        if (empty($error)) {
+            $entityManager->persist($user);
+            $entityManager->flush();
+            return
+                $this->redirectToRoute('app_game_front');
+        }
+        $user = null;
+        $games = $entityManager
 
-        $entityManager->persist($user);
-        $entityManager->flush();
-        return
-            $this->redirectToRoute('app_game_front');
+            ->getRepository(Game::class)
+            ->findAll();
+        return $this->render(
+            'front/game.html.twig',
+            [
+                'error' => $error,
+                'games' => $games,
+                'user' => $user,
+
+            ]
+        );
     }
+
 
 
     /**

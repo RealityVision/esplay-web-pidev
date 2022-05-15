@@ -39,10 +39,10 @@ class ReportController extends AbstractController
         $message = $entityManager
             ->getRepository(Chat::class)
             ->find($id);
-
+        $session = $request->getSession();
         $user = $entityManager
             ->getRepository(User::class)
-            ->find(32);
+            ->find($session->get('idsession'));
 
         $report = new Report();
         $report->setIdMessage($message);
@@ -89,11 +89,11 @@ class ReportController extends AbstractController
             ->find($report->getIdMessage());
         $email = (new Email())
             ->from('realityvison.pidev@gmail.com')
-            ->to('khaled.mihoub@esprit.tn')
+            ->to($chat->getidUser()->getEmail())
 
             ->priority(Email::PRIORITY_HIGH)
-            ->subject('Someone report your message')
-            ->text('Someone report your message :  --' . $chat->getMessage() . '--  in esplay community and may be deleted by admins.The reason was : ' . $report->getReason());
+            ->subject('Someone reported your message')
+            ->text('Someone reported your message :  --' . $chat->getMessage() . '--  in esplay community and may be deleted by admins. The reason was : ' . $report->getReason());
 
         $mailer->send($email);
 

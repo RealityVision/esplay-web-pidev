@@ -38,31 +38,35 @@ class Produit2Controller extends Controller
      */
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $produitSearch = new ProduitSearch();
-        $form = $this->createForm(ProduitSearchType::class, $produitSearch);
-        $form->handleRequest($request);
-        $produit2ss = [];
-        if ($form->isSubmitted() && $form->isValid()) {
-            $nom = $produitSearch->getNom();
-            if ($nom != "")
-                $produit2ss = $this->getDoctrine()->getRepository(Produit2::class)->findBy(['nom' => $nom]);
-            else
-                $produit2ss = $this->getDoctrine()->getRepository(Produit2::class)->findAll();
-        }
-        $allproduit2s = $entityManager
-            ->getRepository(Produit2::class)
-            ->findAll();
+        $session = $request->getSession();
 
-        $produit2s = $this->get('knp_paginator')->paginate(
-            $allproduit2s,
-            $request->query->getInt('page', 1),
-            6
-        );
-        return $this->render('front/store.html.twig', [
-            'produit2s' => $produit2s,
-            'produit2ss' => $produit2ss,
-            'form' => $form->createView()
-        ]);
+        if ($session->get('idsession') !== null) {
+            $produitSearch = new ProduitSearch();
+            $form = $this->createForm(ProduitSearchType::class, $produitSearch);
+            $form->handleRequest($request);
+            $produit2ss = [];
+            if ($form->isSubmitted() && $form->isValid()) {
+                $nom = $produitSearch->getNom();
+                if ($nom != "")
+                    $produit2ss = $this->getDoctrine()->getRepository(Produit2::class)->findBy(['nom' => $nom]);
+                else
+                    $produit2ss = $this->getDoctrine()->getRepository(Produit2::class)->findAll();
+            }
+            $allproduit2s = $entityManager
+                ->getRepository(Produit2::class)
+                ->findAll();
+
+            $produit2s = $this->get('knp_paginator')->paginate(
+                $allproduit2s,
+                $request->query->getInt('page', 1),
+                6
+            );
+            return $this->render('front/store.html.twig', [
+                'produit2s' => $produit2s,
+                'produit2ss' => $produit2ss,
+                'form' => $form->createView()
+            ]);
+        } else return $this->redirectToRoute('app_game_front');
     }
 
     /**

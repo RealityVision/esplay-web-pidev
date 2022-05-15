@@ -29,41 +29,45 @@ class ChatController extends AbstractController
      */
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $chat = new Chat();
-        $user = new User();
-        $form = $this->createForm(ChatType::class, $chat);
-        $form->handleRequest($request);
-        $chats = $entityManager
-            ->getRepository(Chat::class)
-            ->findAll();
         $session = $request->getSession();
-        $user = $entityManager
-            ->getRepository(User::class)
-            ->find($session->get('idsession'));
 
-
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $time = new \DateTime();
-            $chat->setDateMessage($time);
-            $chat->setIdUser($user);
-            $chat->setUsername($user->getUsername());
-            $entityManager->persist($chat);
-            $entityManager->flush();
-
+        if ($session->get('idsession') !== null) {
+            $chat = new Chat();
+            $user = new User();
+            $form = $this->createForm(ChatType::class, $chat);
+            $form->handleRequest($request);
             $chats = $entityManager
                 ->getRepository(Chat::class)
                 ->findAll();
-        }
+
+            $user = $entityManager
+                ->getRepository(User::class)
+                ->find($session->get('idsession'));
 
 
-        return $this->render('front/chat.html.twig', [
-            'chats' => $chats,
-            'form' => $form->createView(),
-            'bool' => false,
-            'user' => $user,
 
-        ]);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $time = new \DateTime();
+                $chat->setDateMessage($time);
+                $chat->setIdUser($user);
+                $chat->setUsername($user->getUsername());
+                $entityManager->persist($chat);
+                $entityManager->flush();
+
+                $chats = $entityManager
+                    ->getRepository(Chat::class)
+                    ->findAll();
+            }
+
+
+            return $this->render('front/chat.html.twig', [
+                'chats' => $chats,
+                'form' => $form->createView(),
+                'bool' => false,
+                'user' => $user,
+
+            ]);
+        } else return $this->redirectToRoute('app_game_front');
     }
     /**
      * @Route("/mobile", name="app_chat_index3", methods={"GET", "POST"})

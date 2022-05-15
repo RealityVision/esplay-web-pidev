@@ -290,7 +290,7 @@
 							<a href="{{ path('app_game_play', {'idGame':game.idGame}) }}" class="btn btn-outline-warning btn-xs">Play</a>
 
 
-							{#	{{ (game.rate // game.rateNbr) | rating }}  #}
+							{{ (game.rate // game.rateNbr) | rating }}
 
 							<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
@@ -561,4 +561,27 @@ categoryTitle[i].classList.remove('active');
 }
 activeItem.classList.add('active');
 };
-</script>{% endblock %}
+</script>
+{% if (msgerreurpsw is defined) and (msgerreurpsw) %}
+	<script>
+		window.onload = function () {
+$('.login-section').fadeIn(400);
+}
+	</script>
+{% endif %}
+{% if (msgerreuruser is defined) and (msgerreuruser) %}
+	<script>
+		window.onload = function () {
+$('.login-section').fadeIn(400);
+}
+	</script>
+{% endif %}
+
+
+{% if (error is defined) and (error is not empty) %}
+	<script>
+		window.onload = function () {
+$('.signup-section').fadeIn(400);
+}
+	</script>
+{% endif %}{% endblock %}

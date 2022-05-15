@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * User
@@ -25,6 +27,13 @@ class User
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=50, nullable=false)
+     * @Assert\NotBlank(message="filed can't be blank ")
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 50,
+     *      minMessage = "Username must be at least {{ limit }} characters long",
+     *      maxMessage = "Username  cannot be longer than {{ limit }} characters"
+     * )
      */
     private $username;
 
@@ -32,6 +41,7 @@ class User
      * @var string
      *
      * @ORM\Column(name="first_name", type="string", length=50, nullable=false)
+     * @Assert\NotBlank(message="filed can't be blank ")
      */
     private $firstName;
 
@@ -39,6 +49,7 @@ class User
      * @var string
      *
      * @ORM\Column(name="last_name", type="string", length=50, nullable=false)
+     * @Assert\NotBlank(message=" filed can't be blank ")
      */
     private $lastName;
 
@@ -46,6 +57,7 @@ class User
      * @var int|null
      *
      * @ORM\Column(name="phone", type="integer", nullable=true)
+     * @Assert\NotBlank(message=" filed can't be blank ")
      */
     private $phone;
 
@@ -53,6 +65,10 @@ class User
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=50, nullable=false)
+     * @Assert\NotBlank(message=" filed can't be blank ")
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email."
+     * )
      */
     private $email;
 
@@ -60,6 +76,13 @@ class User
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=200, nullable=false)
+     * @Assert\NotBlank(message=" filed can't be blank ")
+     * @Assert\Length(
+     *      min = 8,
+     *      max = 50,
+     *      minMessage = "Password must be at least {{ limit }} characters long",
+     *      maxMessage = "Password cannot be longer than {{ limit }} characters"
+     * )
      */
     private $password;
 
@@ -74,6 +97,7 @@ class User
      * @var string|null
      *
      * @ORM\Column(name="country", type="string", length=50, nullable=true)
+     * @Assert\NotBlank(message=" filed can't be blank ")
      */
     private $country;
 
@@ -81,6 +105,7 @@ class User
      * @var \DateTime|null
      *
      * @ORM\Column(name="birth_date", type="date", nullable=true)
+     * @Assert\NotBlank(message=" filed can't be blank ")
      */
     private $birthDate;
 
@@ -102,6 +127,7 @@ class User
      * @var string|null
      *
      * @ORM\Column(name="gender", type="string", length=50, nullable=true)
+     * @Assert\NotBlank(message=" filed can't be blank ")
      */
     private $gender;
 
@@ -293,6 +319,4 @@ class User
 
         return $this;
     }
-
-
 }

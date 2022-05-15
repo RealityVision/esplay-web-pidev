@@ -40,9 +40,10 @@
 												</tr>
 												{% for report in reports %}
 													<tr>
-														<td>{{report.idSender.username}}</td>
-														<td>{{report.idMessage.message}}</td>
 														<td>{{report.idMessage.idUser.username}}</td>
+														<td>{{report.idMessage.message}}</td>
+														<td>{{report.idSender.username}}</td>
+
 														<td>{{report.reason|replace({" * ": "<br>"})|raw }}</td>
 														<td>
 															<a href="{{ path('app_report_email', {'id': report.id}) }}" type="button" class="btn btn-outline-secondary btn-xs">Mail the sender</a>

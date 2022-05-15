@@ -70,7 +70,7 @@ class GameController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                return $this->redirectToRoute('app_relationnel_index', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_game_front', [], Response::HTTP_SEE_OTHER);
             }
 
             return $this->render('game/game1.html.twig', [
@@ -82,7 +82,7 @@ class GameController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                return $this->redirectToRoute('app_relationnel_index', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_game_front', [], Response::HTTP_SEE_OTHER);
             }
             return $this->render('game/game2.html.twig', [
                 'game' => $game,
@@ -94,7 +94,7 @@ class GameController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                return $this->redirectToRoute('app_relationnel_index', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_game_front', [], Response::HTTP_SEE_OTHER);
             }
             return $this->render('game/game3.html.twig', [
                 'game' => $game,
@@ -106,7 +106,7 @@ class GameController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                return $this->redirectToRoute('app_relationnel_index', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_game_front', [], Response::HTTP_SEE_OTHER);
             }
             return $this->render('game/game4.html.twig', [
                 'game' => $game,
@@ -118,7 +118,7 @@ class GameController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                return $this->redirectToRoute('app_relationnel_index', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_game_front', [], Response::HTTP_SEE_OTHER);
             }
             return $this->render('game/game5.html.twig', [
                 'game' => $game,
@@ -130,7 +130,7 @@ class GameController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                return $this->redirectToRoute('app_relationnel_index', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_game_front', [], Response::HTTP_SEE_OTHER);
             }
             return $this->render('game/game6.html.twig', [
                 'game' => $game,

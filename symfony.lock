@@ -134,6 +134,9 @@
     "nikic/php-parser": {
         "version": "v4.13.2"
     },
+    "nomaya/social-bundle": {
+        "version": "1.0-dev"
+    },
     "phar-io/manifest": {
         "version": "2.0.3"
     },

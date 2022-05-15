@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * Chat
@@ -25,6 +27,7 @@ class Chat
      * @var string|null
      *
      * @ORM\Column(name="message", type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message=" filed can't be blank ")
      */
     private $message;
 
@@ -142,6 +145,4 @@ class Chat
 
         return $this;
     }
-
-
 }
