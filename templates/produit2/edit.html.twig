@@ -1,14 +1,13 @@
 {% extends 'admin/baseAdmin.html.twig' %}
-{% block title %}Edit Produit
+{% block title %}Edit Product
 {% endblock %}
 
 {% block body %}
-	<h1 style="color: beige">Edit Produit
+	<h1 style="color: beige">Edit Product
 	</h1>
 
-	{{ include('produit2/_form.html.twig', {'button_label': 'Update'}) }}
+	{{ include('produit2/_form.html.twig', {'button_label': 'Update Product'}) }}
 
-	<a href="{{ path('app_produit2_index2') }}">back to list</a>
 
 	{{ include('produit2/_delete_form.html.twig') }}
 {% endblock %}

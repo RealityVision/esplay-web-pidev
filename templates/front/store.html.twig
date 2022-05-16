@@ -3,9 +3,6 @@
 {% block body %}
 
 	<style>
-		.s1 {
-			background-color: black;
-		}
 		select {
 			margin-left: 95px;
 			width: 150px;
@@ -42,6 +39,38 @@
 		}
 	</style>
 	<style>
+		.btn-14 {
+			background: rgb(205, 25, 75);
+			border: none;
+			z-index: 1;
+		}
+		.btn-14:after {
+			position: absolute;
+			content: "";
+			width: 100%;
+			height: 0;
+			top: 0;
+			left: 0;
+			z-index: -1;
+			border-radius: 5px;
+			background-color: #c40769;
+			background-image: linear-gradient(315deg, #e918f8 0%, #ec0230 74%);
+			box-shadow: inset 2px 2px 2px 0 rgba(255, 255, 255, 0.5);
+			7px 7px 20px 0px rgba(0,0,0,.1), 4px 4px 5px 0 rgba(0, 0, 0, 0.1);
+			transition: all 0.3s ease;
+		}
+		.btn-14:hover {
+			color: #000;
+		}
+		.btn-14:hover:after {
+			top: auto;
+			bottom: 0;
+			height: 100%;
+		}
+		.btn-14:active {
+			top: 2px;
+		}
+
 		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700 &display=swap');
 		* {
 			box-sizing: border-box;
@@ -52,8 +81,11 @@
 			width: 100%
 		}
 		body {
+
 			font-family: 'Poppins', sans-serif;
 			line-height: 1.5;
+			background-color: #343a40;
+
 		}
 		/****************/
 		.main-container {
@@ -205,6 +237,22 @@
 		.active {
 			background: #f0544f;
 		}
+		.custom-btn {
+			width: 130px;
+			height: 40px;
+			color: #515151;
+			border-radius: 5px;
+			padding: 10px 25px;
+			font-family: 'Lato', sans-serif;
+			font-weight: 500;
+			background: transparent;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			position: relative;
+			display: inline-block;
+			box-shadow: inset 2px 2px 2px 0 rgba(255, 255, 255, 0.5), 7px 7px 20px 0 rgba(0, 0, 0, 0.1), 4px 4px 5px 0 rgba(0, 0, 0, 0.1);
+			outline: none;
+		}
 	</style>
 
 
@@ -228,13 +276,13 @@
 			</div>
 		</div>
 	</section>
-	<section class="s1">
+	<section class="s1" style="background-color : #0d0d0d">
 		<div>
 			<form role="search" id="nav-search-form" method="post" action="{{ path('/produit/tri') }}">
 				<div class="btn-toolbar" role="toolbar" aria-label="Programmatic control">
 					<div class="btn-group btn-group-sm" aria-label="Set Select2 option">
-						<button class="js-programmatic-set-val btn btn-outline-primary mr-1 mb-1">
-							tri par prix
+						<button style="margin-top: 20px; margin-left: 50px;" class="js-programmatic-set-val btn btn-outline-danger mr-1 mb-1">
+							Order by price
 						</button>
 					</div>
 				</div>
@@ -242,23 +290,6 @@
 			</form>
 		</div>
 
-		{{ form_start(form) }}
-		<div class="form-row align-items-end">
-			<div class="col">
-				{{ form_row(form.nom) }}
-			</div>
-			<div class="col">
-				<div class="form-group">
-					<button type="submit" class="btn btn-success">Rechercher</button>
-				</div>
-			</div>
-		</div>
-		{{ form_end(form) }}
-		{% for message in app.flashes('info') %}
-			<div class="alert alert-success">
-				{{ message }}
-			</div>
-		{% endfor %}
 
 		<div class="ml-5 mr-5 row">
 
@@ -281,10 +312,8 @@
 								</a>
 							</p>
 
-							<a
-								href="{{ path('cart_add', {'idp2': produit2.idp2}) }}" class="btn btn-success float-right">
-								{#	<a href="{{ path("panier.affiche",{'idp2': produit2.idp2 }) }}" class="btn-success">ajouter au panier </a>#}
-								<i class="fas fa-shopping-cart mr-1"></i>
+							<a href="{{ path('cart_add', {'idp2': produit2.idp2}) }}" class="btn-14 custom-btn float-right">
+								<i class="fa fa-shopping-cart mr-1"></i>
 								Cart
 							</a>
 						</div>

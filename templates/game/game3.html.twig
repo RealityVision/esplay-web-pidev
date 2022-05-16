@@ -3,7 +3,10 @@
 {% endblock %}
 
 {% block body %}
+	<link rel="stylesheet" href="{{asset('front/assets/css/rating.css')}}" type="text/css">
+
 	<style>
+
 		.example-wrapper {
 			margin: 1em auto;
 			max-width: 800px;
@@ -20,21 +23,21 @@
 		<ul>
 
 			<h2 style="color: azure" align="center">ESPLAY SNAKE</h2>
-			<center>
+
 				<div style="background-color: aliceblue" id="principal"></div>
-			</center>
+
 			<script>
 
 				tabuleiro = "<table align=center border=1>";
 for (x = 0; x < 10; x ++) {
 tabuleiro += "<tr>";
-for (y = 0; y < 10; y ++) 
+for (y = 0; y < 10; y ++)
 tabuleiro += "<td id=td" + x + "_" + y + " style='width:80px; height:60px;'> </td>";
 
 tabuleiro += "</tr>";
 }
 document.getElementById('principal').innerHTML = tabuleiro + "</table>";
-cobra = [[5, 0]];
+cobra = [[6, 0]];
 direcao = 2;
 mx = parseInt(Math.random() * 10);
 my = parseInt(Math.random() * 10);
@@ -115,17 +118,14 @@ return false;
 			<h4 style="color: azure" align="center">RULE : STAY INBOUND OF THE CANVAS</h4>
 		</ul>
 	</div>
-	<h1>Your Rating</h1>
-	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}"/>
+	<h1>
+		{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+		{{ form_widget(form) }}
+		<button type="submit" class="btn-success">Submit
+		</button></h1>
 
-	{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
-	{{ form_widget(form) }}
-	<button type="submit" class="btn-success">Submit
-	</button>
+
 	{{ form_end(form) }}
-
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-	<script src="{{ asset('bundles/starrating/js/rating.js') }}"></script>
 	<style>
 		* {
 			font-family: "Lato";
@@ -133,12 +133,12 @@ return false;
 
 		/*decoration*/
 		h1 {
-			margin: 20px 50px 0;
-			background: #EFF0F2;
-			width: 275px;
+			margin: -300px -1px 0;
+			background: #581c22;
+			width: 199px;
 			font-size: 1.5em;
 			text-align: center;
-			border-radius: 5px 5px 0 0;
+			border-radius: 22px 35px 0 0;
 			padding: 30px 0;
 			color: #34495E;
 		}
@@ -261,4 +261,5 @@ return false;
 			color: #d35400 !important;
 		}
 	</style>
+
 {% endblock %}

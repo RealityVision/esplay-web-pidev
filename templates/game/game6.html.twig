@@ -666,6 +666,25 @@ selectShape();
 draw();
 }
 
+					document.addEventListener('keydown', preventKeyBoardScroll, false);
+
+					function preventKeyBoardScroll(e) {
+						var keys = [
+							32,
+							33,
+							34,
+							35,
+							37,
+							38,
+							39,
+							40
+						];
+						if (keys.includes(e.keyCode)) {
+							e.preventDefault();
+							return false;
+						}
+					}
+
 init();
 				</script>
 			</canvas>
@@ -674,17 +693,16 @@ init();
 
 		</ul>
 	</div>
-	<h1>Your Rating</h1>
 	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}"/>
 
-	{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
-	{{ form_widget(form) }}
-	<button type="submit" class="btn-success">Submit
-	</button>
-	{{ form_end(form) }}
+	<h1>
+		{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+		{{ form_widget(form) }}
+		<button type="submit" class="btn-success">Submit
+		</button></h1>
 
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-	<script src="{{ asset('bundles/starrating/js/rating.js') }}"></script>
+
+	{{ form_end(form) }}
 	<style>
 		* {
 			font-family: "Lato";
@@ -692,12 +710,12 @@ init();
 
 		/*decoration*/
 		h1 {
-			margin: 20px 50px 0;
-			background: #EFF0F2;
-			width: 275px;
+			margin: -300px -1px 0;
+			background: #581c22;
+			width: 199px;
 			font-size: 1.5em;
 			text-align: center;
-			border-radius: 5px 5px 0 0;
+			border-radius: 22px 35px 0 0;
 			padding: 30px 0;
 			color: #34495E;
 		}

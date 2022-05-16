@@ -115,12 +115,17 @@ class Produit2Controller extends Controller
             $entityManager->persist($produit2);
             $entityManager->flush();
 
+            $file = 'C:\\esplay-web-pidev-Nada-branch\\public\\images\\produits\\' . $produit2->getImage();
+            $newfile = 'C:\\wamp64\\www\\' . $produit2->getImage();
+            if (!copy($file, $newfile)) {
+                var_dump("failed to copy $file");
+            }
             $this->addFlash(
                 'info',
                 'New Item Added !'
             );
 
-            return $this->redirectToRoute('app_produit2_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_produit2_index2', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('produit2/new.html.twig', [

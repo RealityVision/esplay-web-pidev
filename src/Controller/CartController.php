@@ -35,8 +35,9 @@ class CartController extends AbstractController
      * @Route("/cart/add/{idp2}", name="cart_add")
      */
 
-    public function add($idp2, CartService $cartService){
-      $cartService->add($idp2);
+    public function add($idp2, CartService $cartService)
+    {
+        $cartService->add($idp2);
         return $this->redirectToRoute('cart_index');
     }
     /**
@@ -44,7 +45,7 @@ class CartController extends AbstractController
      */
     public function remove($idp2, CartService $cartService)
     {
-          $cartService->remove($idp2);
+        $cartService->remove($idp2);
 
         return $this->redirectToRoute('cart_index');
     }
@@ -60,9 +61,10 @@ class CartController extends AbstractController
     /**
      * @Route("/create-checkout-session", name="checkout")
      */
-    public function checkout() {
-        $em= $this->getDoctrine()->getManager();
-        $Produit2=$em->getRepository(Produit2::class);
+    public function checkout()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $Produit2 = $em->getRepository(Produit2::class);
 
         \Stripe\Stripe::setApiKey('your stripe key');
 
@@ -80,10 +82,10 @@ class CartController extends AbstractController
                 'quantity' => 1,
             ]],
             'mode' => 'payment',
-          //  'success_url' => $this->generateUrl('succes', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            //  'success_url' => $this->generateUrl('succes', [], UrlGeneratorInterface::ABSOLUTE_URL),
             //'cancel_url' => $this->generateUrl('erreur', [], UrlGeneratorInterface::ABSOLUTE_URL),
         ]);
-        return new JsonResponse([ 'id' => $session->id ]);
+        return new JsonResponse(['id' => $session->id]);
     }
 
     /**
@@ -103,7 +105,8 @@ class CartController extends AbstractController
 
             ->setBody(
                 $this->renderView(
-                    'cart/Commande.html.twig'),
+                    'cart/Commande.html.twig'
+                ),
 
                 'text/html'
             );
@@ -120,6 +123,4 @@ class CartController extends AbstractController
     {
         return $this->render('produit/Error.html.twig');
     }
-
-
 }

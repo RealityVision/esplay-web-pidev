@@ -34,9 +34,9 @@ class CommandeController extends AbstractController
         ]);
     }
     //////
-///
-///
-///
+    ///
+    ///
+    ///
     /**
      * @Route("/ImprimerCommande", name="ImprimerCommande")
      */
@@ -52,8 +52,10 @@ class CommandeController extends AbstractController
 
 
         // Retrieve the HTML generated in our twig file
-        $html = $this->renderView('commande/Commande.html.twig',
-            ['commande' => $commande]);
+        $html = $this->renderView(
+            'commande/Commande.html.twig',
+            ['commande' => $commande]
+        );
 
         // Load HTML to Dompdf
         $dompdf->loadHtml($html);
@@ -68,8 +70,6 @@ class CommandeController extends AbstractController
         $dompdf->stream("Commande_finale.pdf", [
             "Attachment" => true
         ]);
-
-
     }
     ///trie
     ///
@@ -90,14 +90,15 @@ class CommandeController extends AbstractController
 
         $rep = $query->getResult();
 
-        return $this->render('commande/index.html.twig',
-            array('commande' => $rep));
-
+        return $this->render(
+            'commande/index.html.twig',
+            array('commande' => $rep)
+        );
     }
     /**
      * @Route("/front/new", name="app_commande_new", methods={"GET", "POST"})
      */
-    public function new(CommandeRepository $commandeRepository , Request $request, EntityManagerInterface $entityManager, \Swift_Mailer $mailer): Response
+    public function new(CommandeRepository $commandeRepository, Request $request, EntityManagerInterface $entityManager, \Swift_Mailer $mailer): Response
     {
         $commandeprod = new Commandeprod();
         $form = $this->createForm(CommandeprodType::class, $commandeprod);
@@ -113,12 +114,11 @@ class CommandeController extends AbstractController
                 ->setTo('slim.derouiche@esprit.tn')
                 ->setBody(
                     'new order'
-                )
-            ;
+                );
             $mailer->send($message);
         }
 
-            $this->addFlash('message', 'le message a bien ete envoye');
+        $this->addFlash('message', 'le message a bien ete envoye');
 
 
         return $this->render('commande/new.html.twig', [
@@ -182,10 +182,9 @@ class CommandeController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Commande::class);
         $commande = $repository->findAll();
 
-        return $this->render('commande/AfficheC.html.twig',
-            ['commande' => $commande]);
-
-
+        return $this->render(
+            'commande/AfficheC.html.twig',
+            ['commande' => $commande]
+        );
     }
-
 }

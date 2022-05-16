@@ -1,9 +1,20 @@
 {% extends 'front/baseFront.html.twig' %}
 
-{% block title %}New Commandeprod{% endblock %}
+{% block title %}New Commandeprod
+{% endblock %}
 
 {% block body %}
-    <h3 style="color: azure">Request your Order</h3>
-  {{ include('commande/_form.html.twig') }}
+	<section style="background-color: #0d0d0d;">
+		<div class="container">
+			<h3 style="color:#e11919; margin-top: 50px;" style="color: azure">Request your Order</h3>
+			{{ include('commande/_form.html.twig') }}
 
+		</div>
+	</section>
+	<style>
+
+		body {
+			align-items: center;
+		}
+	</style>
 {% endblock %}

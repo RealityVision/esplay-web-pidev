@@ -1,50 +1,52 @@
 {% extends 'admin/baseAdmin.html.twig' %}
 
-{% block title %}Products {% endblock %}
+{% block title %}Products
+{% endblock %}
 
 {% block body %}
-    <h1>Produit </h1>
+	<h1>Product
+	</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Idp2</th>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>Categorie</th>
-                <th>Date</th>
-                <th>Image</th>
-                <th>Prix</th>
-                <th>StockProduit</th>
-                <th>Produit2</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for produit2 in produit2s %}
-            <tr>
-                <td>{{ produit2.idp2 }}</td>
-                <td>{{ produit2.nom }}</td>
-                <td>{{ produit2.description }}</td>
-                <td>{{ produit2.categorie }}</td>
-                <td>{{ produit2.date ? produit2.date|date('Y-m-d') : '' }}</td>
-                <td>{{ produit2.imageFile }}</td>
-                <td>{{ produit2.prix }}</td>
-                <td>{{ produit2.stockProduit }}</td>
-                <td>{{ produit2.produit2 }}</td>
-                <td>
-                    <a class="btn btn-primary" href="{{ path('app_produit2_show', {'idp2': produit2.idp2}) }}">show</a>
-                    <a class="btn btn-primary" href="{{ path('app_produit2_edit', {'idp2': produit2.idp2}) }}">edit</a>
-                    <a class="btn btn-primary" href="{{path('ImprimerCommande')}}">Print</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="10">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Idp2</th>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Category</th>
+				<th>Date</th>
+				<th>Image</th>
+				<th>Price</th>
+				<th>Product stock</th>
+				<th>Product</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for produit2 in produit2s %}
+				<tr>
+					<td>{{ produit2.idp2 }}</td>
+					<td>{{ produit2.nom }}</td>
+					<td>{{ produit2.description }}</td>
+					<td>{{ produit2.categorie }}</td>
+					<td>{{ produit2.date ? produit2.date|date('Y-m-d') : '' }}</td>
+					<td>{{ produit2.imageFile }}</td>
+					<td>{{ produit2.prix }}</td>
+					<td>{{ produit2.stockProduit }}</td>
+					<td>{{ produit2.produit2 }}</td>
+					<td>
+						<a class="btn btn-primary" href="{{ path('app_produit2_show', {'idp2': produit2.idp2}) }}">show</a>
+						<a class="btn btn-primary" href="{{ path('app_produit2_edit', {'idp2': produit2.idp2}) }}">edit</a>
+						<a class="btn btn-primary" href="{{path('ImprimerCommande')}}">Print</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="10">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 
-    <a href="{{ path('app_produit2_new') }}">Create new</a>
+	<a href="{{ path('app_produit2_new') }}">Create new</a>
 {% endblock %}

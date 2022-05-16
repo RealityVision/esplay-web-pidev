@@ -70,7 +70,7 @@ class GameController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                return $this->redirectToRoute('app_game_front', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_relationnel_index', [], Response::HTTP_SEE_OTHER);
             }
 
             return $this->render('game/game1.html.twig', [
@@ -82,7 +82,7 @@ class GameController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                return $this->redirectToRoute('app_game_front', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_relationnel_index', [], Response::HTTP_SEE_OTHER);
             }
             return $this->render('game/game2.html.twig', [
                 'game' => $game,
@@ -94,7 +94,7 @@ class GameController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                return $this->redirectToRoute('app_game_front', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_relationnel_index', [], Response::HTTP_SEE_OTHER);
             }
             return $this->render('game/game3.html.twig', [
                 'game' => $game,
@@ -106,7 +106,7 @@ class GameController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                return $this->redirectToRoute('app_game_front', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_relationnel_index', [], Response::HTTP_SEE_OTHER);
             }
             return $this->render('game/game4.html.twig', [
                 'game' => $game,
@@ -118,7 +118,7 @@ class GameController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                return $this->redirectToRoute('app_game_front', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_relationnel_index', [], Response::HTTP_SEE_OTHER);
             }
             return $this->render('game/game5.html.twig', [
                 'game' => $game,
@@ -130,7 +130,7 @@ class GameController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                return $this->redirectToRoute('app_game_front', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_relationnel_index', [], Response::HTTP_SEE_OTHER);
             }
             return $this->render('game/game6.html.twig', [
                 'game' => $game,
@@ -142,6 +142,14 @@ class GameController extends AbstractController
         return $this->render('game/gameinJava.html.twig', [
             'game' => $game,
         ]);
+    }
+
+    /**
+     * @Route("/gameup", name="app_game_up", methods={"GET"})
+     */
+    public function gameup(): Response
+    {
+        return $this->render('devupload/devuploadGame.html.twig');
     }
 
 
@@ -204,7 +212,11 @@ class GameController extends AbstractController
             $game->setDateG($time);
             $entityManager->persist($game);
             $entityManager->flush();
-
+            $file = 'C:\\esplay-web-pidev-Nada-branch\\public\\images\\produits\\' . $game->getImageG();
+            $newfile = 'C:\\wamp64\\www\\' . $game->getImageG();
+            if (!copy($file, $newfile)) {
+                var_dump("failed to copy $file");
+            }
             return $this->redirectToRoute('app_game_index', [], Response::HTTP_SEE_OTHER);
         }
 
