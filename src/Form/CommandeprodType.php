@@ -14,11 +14,11 @@ class CommandeprodType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('idAcheteur')
+
             ->add('quantite')
-            ->add('idProduit',EntityType::class,[
-                'class' => Produit2::class,'choice_label' =>'nom'])
-        ;
+            ->add('idProduit', EntityType::class, [
+                'class' => Produit2::class, 'choice_label' => 'nom'
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

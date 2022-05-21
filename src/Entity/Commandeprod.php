@@ -25,10 +25,11 @@ class Commandeprod
     /**
      * @var int
      *
-     * @ORM\Column(name="id_acheteur", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_Acheteur", referencedColumnName="id_user")
+     * })
      */
-
-
     private $idAcheteur;
 
     /**
@@ -53,14 +54,15 @@ class Commandeprod
         return $this->idCommande;
     }
 
-    public function getIdAcheteur(): ?int
+
+    public function getIdAcheteur(): ?User
     {
         return $this->idAcheteur;
     }
 
-    public function setIdAcheteur(int $idAcheteur): self
+    public function setIdAcheteur(?User $idUser): self
     {
-        $this->idAcheteur = $idAcheteur;
+        $this->idAcheteur = $idUser;
 
         return $this;
     }
@@ -88,6 +90,4 @@ class Commandeprod
 
         return $this;
     }
-
-
 }

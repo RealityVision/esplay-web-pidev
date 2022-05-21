@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Commandeprod;
 use App\Form\CommandeprodType;
 use App\Repository\CommandeRepository;
@@ -105,6 +106,11 @@ class CommandeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $session = $request->getSession();
+            $user = $entityManager
+                ->getRepository(User::class)
+                ->find($session->get('idsession'));
+            $commandeprod->setIdAcheteur($user);
             $entityManager->persist($commandeprod);
             $entityManager->flush();
             $commandeRepository->add($commandeprod);
@@ -116,6 +122,7 @@ class CommandeController extends AbstractController
                     'new order'
                 );
             $mailer->send($message);
+            return $this->redirectToRoute('app_game_front');
         }
 
         $this->addFlash('message', 'le message a bien ete envoye');
